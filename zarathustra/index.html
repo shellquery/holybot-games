@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Thus Spoke Zarathustra | 查拉图斯特拉如是说</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #1a1a2e;
+            --bg2: #16213e;
+            --text: #e0e0e0;
+            --accent: #00d9ff;
+            --accent2: #e94560;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Georgia', 'Songti SC', serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg2);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+        .title {
+            font-size: 1rem;
+            color: var(--accent);
+            cursor: pointer;
+        }
+        .lang-toggle {
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        /* Main content */
+        .main {
+            display: flex;
+            height: 100%;
+            padding-top: 60px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background: var(--bg2);
+            overflow-y: auto;
+            border-right: 1px solid #333;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .sidebar { display: block; }
+        }
+        
+        .part {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+        }
+        .part-title {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .chapter {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #888;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .chapter:hover, .chapter.active {
+            background: rgba(0,217,255,0.1);
+            color: var(--text);
+        }
+        
+        /* Content area */
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-width: 100%;
+        }
+        .content-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .chapter-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .chapter-content {
+            white-space: pre-wrap;
+            text-align: justify;
+        }
+        .chapter-content::first-letter {
+            font-size: 3rem;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: var(--accent2);
+        }
+        
+        /* Copy button */
+        .copy-section {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .copy-btn {
+            padding: 12px 20px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,217,255,0.3);
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,217,255,0.4);
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* Mobile menu */
+        .menu-btn {
+            display: block;
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            background: var(--bg2);
+            border: 1px solid #333;
+            color: var(--accent);
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 99;
+        }
+        @media (min-width: 768px) {
+            .menu-btn { display: none; }
+        }
+        
+        .sidebar.show {
+            display: block;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            z-index: 98;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title" onclick="showToc()">📖 Zarathustra</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+            <button class="lang-btn" onclick="setLang('zh')" id="btn-zh">中文</button>
+        </div>
+    </div>
+    
+    <button class="menu-btn" onclick="toggleSidebar()">☰ 目录</button>
+    
+    <div class="main">
+        <div class="sidebar" id="sidebar">
+            <!-- TOC will be generated here -->
+        </div>
+        
+        <div class="content">
+            <div class="content-inner">
+                <h1 class="chapter-title" id="chapterTitle"></h1>
+                <div class="chapter-content" id="chapterContent"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <button class="copy-btn" onclick="copyCurrentChapter()">📋 复制本章</button>
+    </div>
+    
+    <div class="toast" id="toast">已复制！</div>
+
+    <script src="zarathustra-data.js"></script>
+    <script>
+        let currentLang = 'en';
+        let currentPart = null;
+        let currentChapter = null;
+        
+        // Load data
+        const data = zarathustraData;
+        
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+            document.documentElement.lang = lang;
+            renderToc();
+            if (currentChapter) {
+                renderChapter(currentPart, currentChapter);
+            }
+        }
+        
+        function getTitle(obj) {
+            return obj[currentLang] || obj.en;
+        }
+        
+        function renderToc() {
+            const sidebar = document.getElementById('sidebar');
+            let html = '';
+            
+            data.parts.forEach(part => {
+                html += `<div class="part">
+                    <div class="part-title" onclick="togglePart('${part.id}')">▼ ${getTitle(part.title)}</div>
+                    <div id="part-${part.id}" style="display:block">`;
+                
+                part.chapters.forEach(ch => {
+                    const isActive = currentChapter === ch.id ? 'active' : '';
+                    html += `<div class="chapter ${isActive}" onclick="showChapter('${part.id}', '${ch.id}')">${getTitle(ch.title)}</div>`;
+                });
+                
+                html += `</div></div>`;
+            });
+            
+            sidebar.innerHTML = html;
+        }
+        
+        function togglePart(partId) {
+            const el = document.getElementById(`part-${partId}`);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function showChapter(partId, chapterId) {
+            currentPart = partId;
+            currentChapter = chapterId;
+            renderToc();
+            renderChapter(partId, chapterId);
+            
+            // Close sidebar on mobile
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.remove('show');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function renderChapter(partId, chapterId) {
+            const part = data.parts.find(p => p.id === partId);
+            const chapter = part.chapters.find(c => c.id === chapterId);
+            
+            document.getElementById('chapterTitle').textContent = getTitle(chapter.title);
+            document.getElementById('chapterContent').textContent = getTitle(chapter.content);
+        }
+        
+        function copyCurrentChapter() {
+            if (!currentChapter) return;
+            
+            const part = data.parts.find(p => p.id === currentPart);
+            const chapter = part.chapters.find(c => c.id === currentChapter);
+            
+            const text = `${getTitle(chapter.title)}\n\n${getTitle(chapter.content)}\n\n— Nietzsche, ${getTitle(data.title)}`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(currentLang === 'zh' ? '已复制！' : 'Copied!');
+            });
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+        
+        function showToc() {
+            toggleSidebar();
+        }
+        
+        // Initialize
+        renderToc();
+        showChapter('prologue', 'prologue-1');
+    </script>
+</body>
+</html>
