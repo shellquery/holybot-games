@@ -1,4 +1,4 @@
-{
+const zarathustraData = {
   "title": {
     "en": "Thus Spoke Zarathustra",
     "zh": "查拉图斯特拉如是说"
