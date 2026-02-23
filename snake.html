@@ -2,84 +2,140 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holybot 的贪吃蛇 🐍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>贪吃蛇 🐍</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            touch-action: none;
+        }
         body {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Courier New', monospace;
             color: #fff;
-            overflow: hidden;
+            padding: 10px;
         }
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px #00d9ff, 0 0 40px #00d9ff;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 20px #00d9ff, 0 0 40px #00d9ff; }
-            to { text-shadow: 0 0 30px #e94560, 0 0 60px #e94560; }
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px #00d9ff;
         }
         #gameCanvas {
-            border: 4px solid #00d9ff;
+            border: 3px solid #00d9ff;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5), inset 0 0 50px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
             background: #0a0a1a;
+            max-width: 100%;
+            max-height: 60vh;
         }
         #score {
-            font-size: 1.8rem;
-            margin: 15px 0;
+            font-size: 1.3rem;
+            margin: 8px 0;
             color: #00d9ff;
-            text-shadow: 0 0 10px #00d9ff;
         }
         #message {
-            font-size: 1.2rem;
-            height: 30px;
+            font-size: 1rem;
+            min-height: 24px;
             color: #e94560;
-            text-shadow: 0 0 10px #e94560;
+            text-align: center;
         }
-        .controls {
+        
+        /* 虚拟方向键 - 手机用 */
+        .dpad {
+            display: none;
             margin-top: 15px;
-            font-size: 0.9rem;
-            color: #888;
+            gap: 8px;
         }
-        .key {
-            display: inline-block;
-            background: #333;
-            padding: 4px 10px;
-            border-radius: 5px;
-            margin: 0 3px;
-            border: 1px solid #555;
+        @media (max-width: 768px) {
+            .dpad { display: flex; }
+            body { padding: 5px; }
+            h1 { font-size: 1.5rem; }
+        }
+        .dpad-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        .dpad-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #00d9ff;
+            border-radius: 12px;
+            color: #00d9ff;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        .dpad-btn:active {
+            background: rgba(0,217,255,0.3);
+        }
+        .dpad-center {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .controls-hint {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #666;
         }
     </style>
 </head>
 <body>
     <h1>🐍 贪吃蛇</h1>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <canvas id="gameCanvas"></canvas>
     <div id="score">分数: 0</div>
     <div id="message"></div>
-    <div class="controls">
-        <span class="key">↑</span><span class="key">↓</span><span class="key">←</span><span class="key">→</span> 控制方向 | 
-        <span class="key">空格</span> 暂停 | 
-        <span class="key">R</span> 重新开始
+    
+    <!-- 手机虚拟方向键 -->
+    <div class="dpad">
+        <div class="dpad-row">
+            <div class="dpad-center"></div>
+            <div class="dpad-btn" id="btn-up">⬆️</div>
+            <div class="dpad-center"></div>
+        </div>
+        <div class="dpad-row">
+            <div class="dpad-btn" id="btn-left">⬅️</div>
+            <div class="dpad-center"></div>
+            <div class="dpad-btn" id="btn-right">➡️</div>
+        </div>
+        <div class="dpad-row">
+            <div class="dpad-center"></div>
+            <div class="dpad-btn" id="btn-down">⬇️</div>
+            <div class="dpad-center"></div>
+        </div>
+    </div>
+    
+    <div class="controls-hint">
+        电脑: 方向键 | 手机: 触摸滑动 或 下面的按钮
     </div>
 
     <script>
+        // 自适应画布大小
+        const maxSize = Math.min(window.innerWidth - 20, window.innerHeight * 0.55, 400);
         const canvas = document.getElementById('gameCanvas');
+        canvas.width = maxSize;
+        canvas.height = maxSize;
+        
         const ctx = canvas.getContext('2d');
         const scoreEl = document.getElementById('score');
         const messageEl = document.getElementById('message');
 
         const GRID_SIZE = 20;
         const TILE_COUNT = canvas.width / GRID_SIZE;
-        const SPEED = 100;
+        const SPEED = 120;
 
         let snake = [];
         let food = { x: 5, y: 5 };
@@ -126,30 +182,22 @@
             direction = nextDirection;
             const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
-            // 撞墙
             if (head.x < 0 || head.x >= TILE_COUNT || head.y < 0 || head.y >= TILE_COUNT) {
-                endGame('撞墙了！💥');
+                endGame('撞墙了！💥 点击重新开始');
                 return;
             }
 
-            // 撞自己
             if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                endGame('咬到自己了！🤯');
+                endGame('咬到自己了！🤯 点击重新开始');
                 return;
             }
 
             snake.unshift(head);
 
-            // 吃到食物
             if (head.x === food.x && head.y === food.y) {
                 score += 10;
                 scoreEl.textContent = '分数: ' + score;
                 spawnFood();
-                // 每次吃完加速一点点
-                if (score % 30 === 0) {
-                    clearInterval(gameLoop);
-                    gameLoop = setInterval(update, Math.max(30, SPEED - score));
-                }
             } else {
                 snake.pop();
             }
@@ -159,18 +207,23 @@
 
         function endGame(msg) {
             gameOver = true;
-            messageEl.textContent = msg + ' 按 R 重新开始！';
+            messageEl.textContent = msg;
             clearInterval(gameLoop);
         }
 
+        function setDirection(dx, dy) {
+            if (!(dx === -direction.x && dy === -direction.y)) {
+                nextDirection = { x: dx, y: dy };
+            }
+        }
+
         function draw() {
-            // 清空画布
             ctx.fillStyle = '#0a0a1a';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 画食物（闪烁效果）
+            // 食物
             const glow = Math.sin(Date.now() / 100) * 0.3 + 0.7;
-            ctx.shadowBlur = 20;
+            ctx.shadowBlur = 15;
             ctx.shadowColor = '#e94560';
             ctx.fillStyle = `rgba(233, 69, 96, ${glow})`;
             ctx.beginPath();
@@ -184,12 +237,12 @@
             ctx.fill();
             ctx.shadowBlur = 0;
 
-            // 画蛇
+            // 蛇
             snake.forEach((segment, index) => {
                 const isHead = index === 0;
                 ctx.fillStyle = isHead ? '#00d9ff' : '#0f3460';
                 if (isHead) {
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 10;
                     ctx.shadowColor = '#00d9ff';
                 }
                 ctx.fillRect(
@@ -199,84 +252,56 @@
                     GRID_SIZE - 2
                 );
                 ctx.shadowBlur = 0;
-
-                // 蛇眼睛
-                if (isHead) {
-                    ctx.fillStyle = '#fff';
-                    const eyeSize = 3;
-                    const eyeOffset = 5;
-                    ctx.fillRect(
-                        segment.x * GRID_SIZE + eyeOffset,
-                        segment.y * GRID_SIZE + eyeOffset,
-                        eyeSize,
-                        eyeSize
-                    );
-                    ctx.fillRect(
-                        segment.x * GRID_SIZE + GRID_SIZE - eyeOffset - eyeSize,
-                        segment.y * GRID_SIZE + eyeOffset,
-                        eyeSize,
-                        eyeSize
-                    );
-                }
             });
         }
 
         // 键盘控制
         document.addEventListener('keydown', (e) => {
-            const key = e.key;
-
-            if (key === 'r' || key === 'R') {
-                init();
-                return;
-            }
-
-            if (key === ' ') {
-                paused = !paused;
-                messageEl.textContent = paused ? '已暂停 ⏸️' : '';
-                return;
-            }
-
+            if (gameOver) { init(); return; }
+            
             const keys = {
-                'ArrowUp': { x: 0, y: -1 },
-                'ArrowDown': { x: 0, y: 1 },
-                'ArrowLeft': { x: -1, y: 0 },
-                'ArrowRight': { x: 1, y: 0 }
+                'ArrowUp': () => setDirection(0, -1),
+                'ArrowDown': () => setDirection(0, 1),
+                'ArrowLeft': () => setDirection(-1, 0),
+                'ArrowRight': () => setDirection(1, 0)
             };
-
-            const newDir = keys[key];
-            if (newDir) {
-                // 不能直接掉头
-                if (!(newDir.x === -direction.x && newDir.y === -direction.y)) {
-                    nextDirection = newDir;
-                }
-                e.preventDefault();
-            }
+            
+            if (keys[e.key]) { keys[e.key](); e.preventDefault(); }
+            if (e.key === ' ') { paused = !paused; messageEl.textContent = paused ? '暂停 ⏸️' : ''; }
         });
 
-        // 触摸控制（手机支持）
-        let touchStartX = 0;
-        let touchStartY = 0;
+        // 虚拟按键控制
+        document.getElementById('btn-up').onclick = () => setDirection(0, -1);
+        document.getElementById('btn-down').onclick = () => setDirection(0, 1);
+        document.getElementById('btn-left').onclick = () => setDirection(-1, 0);
+        document.getElementById('btn-right').onclick = () => setDirection(1, 0);
+        
+        // 点击重新开始
+        canvas.onclick = () => { if(gameOver) init(); };
+
+        // 触摸滑动控制
+        let touchStartX = 0, touchStartY = 0;
         canvas.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         });
+        
         canvas.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const dx = touchEndX - touchStartX;
-            const dy = touchEndY - touchStartY;
-
+            if (gameOver) { init(); return; }
+            
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            const minSwipe = 30;
+            
             if (Math.abs(dx) > Math.abs(dy)) {
-                nextDirection = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+                if (dx > minSwipe) setDirection(1, 0);
+                else if (dx < -minSwipe) setDirection(-1, 0);
             } else {
-                nextDirection = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
-            }
-            if (!(nextDirection.x === -direction.x && nextDirection.y === -direction.y)) {
-                direction = nextDirection;
+                if (dy > minSwipe) setDirection(0, 1);
+                else if (dy < -minSwipe) setDirection(0, -1);
             }
         });
 
-        // 开始游戏
         init();
     </script>
 </body>
