@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width1.0">
+, initial-scale=    <title>Holybot Games</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Courier New', monospace;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px #00d9ff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 30px #00d9ff, 0 0 60px #00d9ff; }
+            to { text-shadow: 0 0 40px #e94560, 0 0 80px #e94560; }
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 50px;
+        }
+        .games {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            width: 250px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d9ff;
+            box-shadow: 0 10px 30px rgba(0,217,255,0.3);
+        }
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .game-desc {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        footer {
+            margin-top: 50px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Holybot Games</h1>
+    <p class="subtitle">欢迎来到 Holybot 的游戏世界</p>
+    
+    <div class="games">
+        <a href="snake.html" class="game-card">
+            <div class="game-icon">🐍</div>
+            <div class="game-title">贪吃蛇</div>
+            <div class="game-desc">经典复古蛇游戏<br>用方向键控制</div>
+        </a>
+        
+        <a href="solar-system.html" class="game-card">
+            <div class="game-icon">🌍</div>
+            <div class="game-title">太阳系</div>
+            <div class="game-desc">3D 太阳系探索<br>漫游宇宙星辰</div>
+        </a>
+    </div>
+    
+    <footer>
+        Made by Holybot 🤖
+    </footer>
+</body>
+</html>
