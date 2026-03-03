@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Home Inspection Quiz | 房屋检查题库</title>
+    <style>
+        :root {
+            --primary: #4ade80;
+            --primary-dark: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        h1 { text-align: center; margin-bottom: 30px; color: var(--primary); }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .lang-toggle {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: var(--card);
+            color: var(--text);
+        }
+        
+        .btn:hover { transform: translateY(-2px); }
+        
+        .btn-primary { background: var(--primary); color: #000; font-weight: bold; }
+        .btn-danger { background: var(--danger); color: white; }
+        
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .topic-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .topic-btn.active {
+            background: var(--primary);
+            color: #000;
+        }
+        
+        .quiz-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .question-num {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .question {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .option:hover { background: rgba(255,255,255,0.1); }
+        
+        .option.selected {
+            border-color: var(--info);
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .option.correct {
+            border-color: var(--primary);
+            background: rgba(74, 222, 128, 0.2);
+        }
+        
+        .option.wrong {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.2);
+        }
+        
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--info);
+        }
+        
+        .explanation-title {
+            color: var(--info);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .score-panel {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .score-num {
+            font-size: 64px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .score-label { color: var(--text-muted); margin-bottom: 20px; }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .stat { text-align: center; }
+        .stat-num { font-size: 24px; font-weight: bold; }
+        .stat-label { font-size: 12px; color: var(--text-muted); }
+        
+        .correct-count { color: var(--primary); }
+        .wrong-count { color: var(--danger); }
+        
+        .hidden { display: none !important; }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 600px) {
+            .header { flex-direction: column; }
+            .stats { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Home Inspection Quiz | 房屋检查题库</h1>
+        
+        <div class="header">
+            <div class="lang-toggle">
+                <button class="btn" onclick="setLang('zh')">中文</button>
+                <button class="btn" onclick="setLang('en')">English</button>
+            </div>
+            <button class="btn btn-primary" onclick="showModeSelect()">🔄 New Quiz / 新测验</button>
+        </div>
+        
+        <!-- Mode Selection -->
+        <div id="modeSelect" class="quiz-card">
+            <h2 style="margin-bottom: 20px;">Select Quiz Mode / 选择测验模式</h2>
+            <div class="topics">
+                <button class="topic-btn" onclick="startQuiz('random')">🎲 Random / 随机</button>
+                <button class="topic-btn" onclick="startQuiz('structure')">🏗️ Structure / 结构</button>
+                <button class="topic-btn" onclick="startQuiz('roof')">🏠 Roof / 屋顶</button>
+                <button class="topic-btn" onclick="startQuiz('plumbing')">💧 Plumbing / 水管</button>
+                <button class="topic-btn" onclick="startQuiz('electrical')">⚡ Electrical / 电路</button>
+                <button class="topic-btn" onclick="startQuiz('hvac')">❄️ HVAC / 暖通</button>
+                <button class="topic-btn" onclick="startQuiz('exterior')">🧱 Exterior / 外墙</button>
+                <button class="topic-btn" onclick="startQuiz('safety')">🔥 Safety / 安全</button>
+            </div>
+        </div>
+        
+        <!-- Quiz Area -->
+        <div id="quizArea" class="hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            
+            <div class="quiz-card">
+                <div class="question-num">
+                    <span id="qNum">1</span> / <span id="totalQ">10</span>
+                </div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="explanation hidden" id="explanation">
+                    <div class="explanation-title">📖 Explanation / 解析:</div>
+                    <div id="explanationText"></div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn" id="prevBtn" onclick="prevQuestion()">◀ Prev / 上一题</button>
+                <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuestion()">Next ▶ / 下一题</button>
+                <button class="btn btn-primary hidden" id="showResultBtn" onclick="showResult()">📊 Show Result / 查看结果</button>
+            </div>
+        </div>
+        
+        <!-- Result -->
+        <div id="result" class="quiz-card hidden">
+            <div class="score-panel">
+                <div class="score-label" id="scoreLabel">Your Score / 你的得分</div>
+                <div class="score-num" id="scoreNum">0</div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-num correct-count" id="correctCount">0</div>
+                        <div class="stat-label">Correct / 正确</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num wrong-count" id="wrongCount">0</div>
+                        <div class="stat-label">Wrong / 错误</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="showModeSelect()">🔄 Try Again / 再试一次</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Question Bank
+        const questions = [
+            // Structure
+            {
+                topic: 'structure',
+                zh: {
+                    question: "检查地基时，以下哪种裂缝最需要关注？",
+                    options: [
+                        "A. 头发丝细裂缝",
+                        "B. 垂直裂缝，宽度超过1/4英寸",
+                        "C. 旧裂缝，表面有漆覆盖",
+                        "D. 门框周围的微小裂缝"
+                    ],
+                    correct: 1,
+                    explanation: "垂直裂缝且宽度超过1/4英寸（6mm）可能表示地基结构问题，需要专业评估。水平裂缝或阶梯状裂缝也更危险。"
+                },
+                en: {
+                    question: "When inspecting foundation, which crack is most concerning?",
+                    options: [
+                        "A. Hairline crack",
+                        "B. Vertical crack over 1/4 inch wide",
+                        "C. Old crack with paint on surface",
+                        "D. Small crack around door frame"
+                    ],
+                    correct: 1,
+                    explanation: "Vertical cracks over 1/4 inch (6mm) may indicate structural foundation issues and require professional assessment. Horizontal or stair-step cracks are also more dangerous."
+                }
+            },
+            {
+                topic: 'structure',
+                zh: {
+                    question: "房屋地基检查中，'piers'（桩基）的主要作用是？",
+                    options: [
+                        "A. 美观装饰",
+                        "B. 支撑并将荷载传递到地基",
+                        "C. 防水",
+                        "D. 装饰地面"
+                    ],
+                    correct: 1,
+                    explanation: "桩基(piers)是垂直支撑结构，将建筑物的重量通过柱子传递到地基基础，是结构安全的关键部件。"
+                },
+                en: {
+                    question: "In foundation inspection, what is the main purpose of 'piers'?",
+                    options: [
+                        "A. Decorative",
+                        "B. Support and transfer load to foundation",
+                        "C. Waterproofing",
+                        "D. Floor decoration"
+                    ],
+                    correct: 1,
+                    explanation: "Piers are vertical support structures that transfer the building's weight through columns to the foundation base, key to structural safety."
+                }
+            },
+            // Roof
+            {
+                topic: 'roof',
+                zh: {
+                    question: "检查屋顶时，发现沥青瓦片有3处缺失，应该建议客户？",
+                    options: [
+                        "A. 不需要维修",
+                        "B. 尽快更换受损瓦片",
+                        "C. 更换整个屋顶",
+                        "D. 在缺失处涂胶水"
+                    ],
+                    correct: 1,
+                    explanation: "缺失的瓦片会导致漏水，应尽快更换。通常3处以上缺失建议进行全面检查和维修。"
+                },
+                en: {
+                    question: "During roof inspection, found 3 missing asphalt shingles. Should recommend?",
+                    options: [
+                        "A. No repair needed",
+                        "B. Replace damaged shingles soon",
+                        "C. Replace entire roof",
+                        "D. Apply glue to missing spots"
+                    ],
+                    correct: 1,
+                    explanation: "Missing shingles can cause water leakage and should be replaced promptly. More than 3 missing typically warrants a thorough inspection and repair."
+                }
+            },
+            {
+                topic: 'roof',
+                zh: {
+                    question: "屋顶检查中，什么是'ice dam'（冰坝）？",
+                    options: [
+                        "A. 屋顶上的装饰冰雕",
+                        "B. 屋檐处冰块堆积，阻碍排水导致漏水",
+                        "C. 冷冻仓库",
+                        "D. 屋顶排水系统"
+                    ],
+                    correct: 1,
+                    explanation: "冰坝是屋檐处冰块堆积形成的屏障，会阻碍雨水正常流走，导致水渗入屋内。需要良好的隔热和通风来预防。"
+                },
+                en: {
+                    question: "What is an 'ice dam' in roof inspection?",
+                    options: [
+                        "A. Decorative ice sculpture on roof",
+                        "B. Ice accumulation at eaves blocking drainage causing leaks",
+                        "C. Cold storage warehouse",
+                        "D. Roof drainage system"
+                    ],
+                    correct: 1,
+                    explanation: "Ice dam is ice barrier forming at eaves, blocking rainwater flow and causing water infiltration. Good insulation and ventilation prevents it."
+                }
+            },
+            // Plumbing
+            {
+                topic: 'plumbing',
+                zh: {
+                    question: "检查水管发现'double-tapped' breaker（双螺栓断路器）意味着？",
+                    options: [
+                        "A. 电路过载保护良好",
+                        "B. 安全隐患，可能导致火灾",
+                        "C. 水压正常",
+                        "D. 管道安装正确"
+                    ],
+                    correct: 1,
+                    explanation: "双螺栓断路器是指两个电线接在同一螺丝上，这是电气安全隐患，可能导致过热和火灾。需要专业电工修复。"
+                },
+                en: {
+                    question: "Finding 'double-tapped' breaker during inspection means?",
+                    options: [
+                        "A. Good circuit overload protection",
+                        "B. Safety hazard, may cause fire",
+                        "C. Water pressure normal",
+                        "D. Pipe installation correct"
+                    ],
+                    correct: 1,
+                    explanation: "Double-tapped breaker means two wires under one screw, an electrical safety hazard that can cause overheating and fire. Needs professional electrician to fix."
+                }
+            },
+            {
+                topic: 'plumbing',
+                zh: {
+                    question: "测试水压时，正常住宅水压应该在多少 PSI？",
+                    options: [
+                        "A. 10-20 PSI",
+                        "B. 40-60 PSI",
+                        "C. 80-100 PSI",
+                        "D. 100-150 PSI"
+                    ],
+                    correct: 1,
+                    explanation: "正常住宅水压应在40-60 PSI之间。低于40 PSI可能导致水流不足，高于80 PSI会损坏管道和电器。"
+                },
+                en: {
+                    question: "Normal residential water pressure should be what PSI?",
+                    options: [
+                        "A. 10-20 PSI",
+                        "B. 40-60 PSI",
+                        "C. 80-100 PSI",
+                        "D. 100-150 PSI"
+                    ],
+                    correct: 1,
+                    explanation: "Normal residential water pressure should be 40-60 PSI. Below 40 PSI may cause insufficient flow, above 80 PSI can damage pipes and appliances."
+                }
+            },
+            // Electrical
+            {
+                topic: 'electrical',
+                zh: {
+                    question: "检查配电箱时，发现线路颜色为红色、黑色、白色，请问这是什么类型的接线？",
+                    options: [
+                        "A. 220V 电路",
+                        "B. 110V 标准电路",
+                        "C. 低压电路",
+                        "D. 地暖电路"
+                    ],
+                    correct: 1,
+                    explanation: "红、黑、白三色通常是110V标准电路配色。红色和黑色是热线，白色是中性线，可能还有绿色接地线。"
+                },
+                en: {
+                    question: "In electrical panel, found red, black, white wires. What type of wiring?",
+                    options: [
+                        "A. 220V circuit",
+                        "B. 110V standard circuit",
+                        "C. Low voltage circuit",
+                        "D. Floor heating circuit"
+                    ],
+                    correct: 1,
+                    explanation: "Red, black, white three-color is typical 110V circuit wiring. Red and black are hot wires, white is neutral, green may be ground."
+                }
+            },
+            {
+                topic: 'electrical',
+                zh: {
+                    question: "'GFCI'插座主要用于哪些区域？",
+                    options: [
+                        "A. 客厅",
+                        "B. 卧室",
+                        "C. 厨房和浴室",
+                        "D. 车库"
+                    ],
+                    correct: 2,
+                    explanation: "GFCI（接地故障断路器）主要用于潮湿区域：厨房、浴室、洗衣房、车库、户外等靠近水源的地方。"
+                },
+                en: {
+                    question: "Where are 'GFCI' outlets mainly used?",
+                    options: [
+                        "A. Living room",
+                        "B. Bedroom",
+                        "C. Kitchen and bathroom",
+                        "D. Garage"
+                    ],
+                    correct: 2,
+                    explanation: "GFCI (Ground Fault Circuit Interrupter) is mainly used in wet areas: kitchen, bathroom, laundry room, outdoor, etc near water sources."
+                }
+            },
+            // HVAC
+            {
+                topic: 'hvac',
+                zh: {
+                    question: "检查暖通空调时，空调过滤网应该多久检查/更换一次？",
+                    options: [
+                        "A. 半年",
+                        "B. 一个月",
+                        "C. 一年",
+                        "D. 两年"
+                    ],
+                    correct: 1,
+                    explanation: "空调过滤网应每月检查一次，脏了就应该更换。频繁更换过滤网可以延长空调系统寿命，提高效率。"
+                },
+                en: {
+                    question: "How often should HVAC filter be checked/replaced?",
+                    options: [
+                        "A. Every 6 months",
+                        "B. Every month",
+                        "C. Every year",
+                        "D. Every 2 years"
+                    ],
+                    correct: 1,
+                    explanation: "HVAC filter should be checked monthly and replaced when dirty. Frequent filter changes extend system life and improve efficiency."
+                }
+            },
+            {
+                topic: 'hvac',
+                zh: {
+                    question: "检查空调时，发现冷媒泄漏的常见迹象包括？",
+                    options: [
+                        "A. 制冷效果正常",
+                        "B. 机组附近有油渍/污渍",
+                        "C. 噪音变小",
+                        "D. 电费下降"
+                    ],
+                    correct: 1,
+                    explanation: "冷媒泄漏常伴有油渍（冷冻油），机组附近可见油污/污渍。还会导致制冷效果差、运行时间长、电费增加。"
+                },
+                en: {
+                    question: "Common signs of refrigerant leak in AC inspection?",
+                    options: [
+                        "A. Normal cooling",
+                        "B. Oil stains near unit",
+                        "C. Less noise",
+                        "D. Lower electricity bill"
+                    ],
+                    correct: 1,
+                    explanation: "Refrigerant leak often has oil stains (freeze oil), visible oil stains near unit. Also causes poor cooling, long run time, increased electricity bill."
+                }
+            },
+            // Exterior
+            {
+                topic: 'exterior',
+                zh: {
+                    question: "检查外墙发现'wood rot'（木材腐烂），最可能的原因是什么？",
+                    options: [
+                        "A. 阳光直射",
+                        "B. 潮湿/进水",
+                        "C. 虫害",
+                        "D. 温度变化"
+                    ],
+                    correct: 1,
+                    explanation: "木材腐烂的主要原因是长期潮湿/进水。保持木材干燥、适当密封、定期检查排水系统可以预防。"
+                },
+                en: {
+                    question: "Found 'wood rot' during exterior inspection, most likely cause?",
+                    options: [
+                        "A. Direct sunlight",
+                        "B. Moisture/water intrusion",
+                        "C. Pest infestation",
+                        "D. Temperature changes"
+                    ],
+                    correct: 1,
+                    explanation: "Main cause of wood rot is long-term moisture/water intrusion. Keep wood dry, properly sealed, regularly check drainage to prevent."
+                }
+            },
+            {
+                topic: 'exterior',
+                zh: {
+                    question: "检查房屋外部时，'grading'（坡度）应该朝向哪里？",
+                    options: [
+                        "A. 房子中心",
+                        "B. 远离房屋基础",
+                        "C. 随意",
+                        "D. 与房屋平行"
+                    ],
+                    correct: 1,
+                    explanation: "地面坡度应该从房屋基础向外倾斜，让水远离房屋。一般每英尺应下降1-2英寸。"
+                },
+                en: {
+                    question: "During exterior inspection, where should 'grading' slope toward?",
+                    options: [
+                        "A. House center",
+                        "B. Away from foundation",
+                        "C. Any direction",
+                        "D. Parallel to house"
+                    ],
+                    correct: 1,
+                    explanation: "Grading should slope away from foundation to direct water away. Generally should drop 1-2 inches per foot."
+                }
+            },
+            // Safety
+            {
+                topic: 'safety',
+                zh: {
+                    question: "一氧化碳探测器应该安装在哪里？",
+                    options: [
+                        "A. 车库",
+                        "B. 每个卧室和走廊",
+                        "C. 厨房",
+                        "D. 室外"
+                    ],
+                    correct: 1,
+                    explanation: "一氧化碳探测器应安装在每个卧室和走廊（睡眠区域附近），以便睡眠时也能检测到CO泄漏。"
+                },
+                en: {
+                    question: "Where should carbon monoxide detectors be installed?",
+                    options: [
+                        "A. Garage",
+                        "B. Each bedroom and hallway",
+                        "C. Kitchen",
+                        "D. Outdoors"
+                    ],
+                    correct: 1,
+                    explanation: "CO detectors should be installed in each bedroom and hallway (near sleeping areas) to detect CO leaks during sleep."
+                }
+            },
+            {
+                topic: 'safety',
+                zh: {
+                    question: "检查楼梯时，扶手栏杆的间距不应超过多少英寸？",
+                    options: [
+                        "A. 6英寸",
+                        "B. 4英寸",
+                        "C. 3英寸",
+                        "D. 8英寸"
+                    ],
+                    correct: 1,
+                    explanation: "栏杆间距不应超过4英寸（10cm），以防止儿童头部或身体穿过发生危险。"
+                },
+                en: {
+                    question: "When inspecting stairs, rail spacing should not exceed how many inches?",
+                    options: [
+                        "A. 6 inches",
+                        "B. 4 inches",
+                        "C. 3 inches",
+                        "D. 8 inches"
+                    ],
+                    correct: 1,
+                    explanation: "Rail spacing should not exceed 4 inches (10cm) to prevent children's heads or bodies from passing through."
+                }
+            },
+            // More questions
+            {
+                topic: 'structure',
+                zh: {
+                    question: "房屋结构检查中，'load-bearing wall'（承重墙）的主要特征是？",
+                    options: [
+                        "A. 通常是薄墙",
+                        "B. 垂直于楼层梁",
+                        "C. 与其他墙体垂直",
+                        "D. 可以随意拆除"
+                    ],
+                    correct: 1,
+                    explanation: "承重墙通常是房屋结构的关键支撑，垂直于楼层主梁（joists）。拆除承重墙会严重影响结构安全。"
+                },
+                en: {
+                    question: "In structure inspection, main characteristic of 'load-bearing wall'?",
+                    options: [
+                        "A. Usually thin wall",
+                        "B. Perpendicular to floor joists",
+                        "C. Perpendicular to other walls",
+                        "D. Can be freely removed"
+                    ],
+                    correct: 1,
+                    explanation: "Load-bearing walls are key structural support, typically perpendicular to floor joists. Removing them seriously affects structural safety."
+                }
+            },
+            {
+                topic: 'roof',
+                zh: {
+                    question: "检查屋顶时，'flashing'（泛水）的主要作用是？",
+                    options: [
+                        "A. 美观",
+                        "B. 防水，防止水从缝隙渗入",
+                        "C. 保温",
+                        "D. 装饰"
+                    ],
+                    correct: 1,
+                    explanation: "泛水(flashing)是金属或防水材料，用于屋顶连接处、烟囱周围等，防止水从缝隙渗入屋内。"
+                },
+                en: {
+                    question: "During roof inspection, main purpose of 'flashing'?",
+                    options: [
+                        "A. Aesthetic",
+                        "B. Waterproof, prevent water seepage",
+                        "C. Insulation",
+                        "D. Decoration"
+                    ],
+                    correct: 1,
+                    explanation: "Flashing is metal or waterproof material used at roof junctions, around chimneys, to prevent water seepage into house."
+                }
+            },
+            {
+                topic: 'plumbing',
+                zh: {
+                    question: "检查发现马桶摇晃，可能的原因是？",
+                    options: [
+                        "A. 马桶太大",
+                        "B. 底座密封胶老化/螺丝松动",
+                        "C. 水压太高",
+                        "D. 马桶太旧"
+                    ],
+                    correct: 1,
+                    explanation: "马桶摇晃通常是因为底座密封胶老化或固定螺丝松动。需要重新密封或紧固螺丝。"
+                },
+                en: {
+                    question: "Toilet wobbles, possible cause?",
+                    options: [
+                        "A. Toilet too big",
+                        "B. Base caulk老化/loose bolts",
+                        "C. Water pressure too high",
+                        "D. Toilet too old"
+                    ],
+                    correct: 1,
+                    explanation: "Toilet wobble is usually due to aged base caulk or loose bolts. Needs resealing or bolt tightening."
+                }
+            },
+            {
+                topic: 'electrical',
+                zh: {
+                    question: "检查插座发现插座过热变色，可能的原因包括？",
+                    options: [
+                        "A. 插座太旧",
+                        "B. 电路过载或接触不良",
+                        "C. 电压太低",
+                        "D. 插座品牌不好"
+                    ],
+                    correct: 1,
+                    explanation: "插座过热变色通常是电路过载（连接电器太多）或接线接触不良导致的，是电气火灾隐患。"
+                },
+                en: {
+                    question: "Outlet overheats and discolors, possible causes?",
+                    options: [
+                        "A. Outlet too old",
+                        "B. Circuit overload or poor connection",
+                        "C. Voltage too low",
+                        "D. Poor outlet brand"
+                    ],
+                    correct: 1,
+                    explanation: "Overheated discolored outlet is usually circuit overload (too many appliances) or poor wiring connection, fire hazard."
+                }
+            },
+            {
+                topic: 'hvac',
+                zh: {
+                    question: "空调系统发出霉味，常见原因是？",
+                    options: [
+                        "A. 冷媒不足",
+                        "B. 蒸发器盘管或排水管堵塞发霉",
+                        "C. 电压不稳",
+                        "D. 缺少制冷剂"
+                    ],
+                    correct: 1,
+                    explanation: "霉味通常是蒸发器盘管或排水管堵塞/发霉导致的。需要清洁蒸发器盘管和疏通排水管。"
+                },
+                en: {
+                    question: "HVAC system emits moldy smell, common cause?",
+                    options: [
+                        "A. Low refrigerant",
+                        "B. Evaporator coil or drain pipe clogged with mold",
+                        "C. Unstable voltage",
+                        "D. Missing refrigerant"
+                    ],
+                    correct: 1,
+                    explanation: "Moldy smell is usually from mold in evaporator coil or drain pipe. Need to clean evaporator coil and unclog drain pipe."
+                }
+            },
+            {
+                topic: 'exterior',
+                zh: {
+                    question: "检查发现窗户周围渗水，最可能的原因是什么？",
+                    options: [
+                        "A. 玻璃破损",
+                        "B. 密封胶老化/安装不当",
+                        "C. 窗户太小",
+                        "D. 颜色问题"
+                    ],
+                    correct: 1,
+                    explanation: "窗户周围渗水通常是因为密封胶老化或安装不当。需要重新打密封胶或调整安装。"
+                },
+                en: {
+                    question: "Water infiltration around windows, most likely cause?",
+                    options: [
+                        "A. Glass damaged",
+                        "B. Caulk老化/improper installation",
+                        "C. Window too small",
+                        "D. Color issue"
+                    ],
+                    correct: 1,
+                    explanation: "Water infiltration around windows is usually due to aged caulk or improper installation. Need to reseal or adjust installation."
+                }
+            },
+            {
+                topic: 'safety',
+                zh: {
+                    question: "烟雾探测器应该安装在哪里？",
+                    options: [
+                        "A. 仅客厅",
+                        "B. 每个卧室、走廊每层",
+                        "C. 仅厨房",
+                        "D. 仅车库"
+                    ],
+                    correct: 1,
+                    explanation: "烟雾探测器应安装在每个卧室、走廊和每层楼，以便早期发现火灾。"
+                },
+                en: {
+                    question: "Where should smoke detectors be installed?",
+                    options: [
+                        "A. Living room only",
+                        "B. Every bedroom, hallway per floor",
+                        "C. Kitchen only",
+                        "D. Garage only"
+                    ],
+                    correct: 1,
+                    explanation: "Smoke detectors should be installed in every bedroom, hallway and each floor for early fire detection."
+                }
+            }
+        ];
+
+        // State
+        let currentLang = 'zh';
+        let quizQuestions = [];
+        let currentIndex = 0;
+        let answers = [];
+        let mode = 'random';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
+            if (quizQuestions.length > 0) {
+                renderQuestion();
+            }
+        }
+
+        function startQuiz(topic) {
+            mode = topic;
+            if (topic === 'random') {
+                quizQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10);
+            } else {
+                quizQuestions = questions.filter(q => q.topic === topic);
+                quizQuestions = quizQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
+                if (quizQuestions.length < 5) {
+                    // Add more from other topics if not enough
+                    const more = questions.filter(q => q.topic !== topic)
+                        .sort(() => Math.random() - 0.5)
+                        .slice(0, 10 - quizQuestions.length);
+                    quizQuestions = [...quizQuestions, ...more];
+                }
+            }
+            currentIndex = 0;
+            answers = [];
+            
+            document.getElementById('modeSelect').classList.add('hidden');
+            document.getElementById('quizArea').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('totalQ').textContent = quizQuestions.length;
+            
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizQuestions[currentIndex];
+            const langData = q[currentLang];
+            
+            document.getElementById('qNum').textContent = currentIndex + 1;
+            document.getElementById('progressFill').style.width = ((currentIndex + 1) / quizQuestions.length * 100) + '%';
+            document.getElementById('question').textContent = langData.question;
+            
+            const optionsEl = document.getElementById('options');
+            optionsEl.innerHTML = '';
+            
+            langData.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = opt;
+                div.onclick = () => selectOption(i);
+                
+                if (answers[currentIndex] !== undefined) {
+                    div.classList.add('disabled');
+                    if (i === langData.correct) {
+                        div.classList.add('correct');
+                    } else if (i === answers[currentIndex]) {
+                        div.classList.add('wrong');
+                    }
+                }
+                
+                optionsEl.appendChild(div);
+            });
+            
+            const expEl = document.getElementById('explanation');
+            if (answers[currentIndex] !== undefined) {
+                expEl.classList.remove('hidden');
+                document.getElementById('explanationText').textContent = langData.explanation;
+                
+                document.getElementById('nextBtn').classList.remove('hidden');
+                if (currentIndex === quizQuestions.length - 1) {
+                    document.getElementById('nextBtn').classList.add('hidden');
+                    document.getElementById('showResultBtn').classList.remove('hidden');
+                }
+            } else {
+                expEl.classList.add('hidden');
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('showResultBtn').classList.add('hidden');
+            }
+            
+            document.getElementById('prevBtn').classList.toggle('hidden', currentIndex === 0);
+        }
+
+        function selectOption(i) {
+            if (answers[currentIndex] !== undefined) return;
+            
+            answers[currentIndex] = i;
+            renderQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex < quizQuestions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+
+        function showResult() {
+            let correct = 0;
+            answers.forEach((ans, i) => {
+                if (ans === quizQuestions[i][currentLang].correct) {
+                    correct++;
+                }
+            });
+            
+            const total = quizQuestions.length;
+            const percentage = Math.round((correct / total) * 100);
+            
+            document.getElementById('quizArea').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            document.getElementById('scoreNum').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('wrongCount').textContent = total - correct;
+        }
+
+        function showModeSelect() {
+            document.getElementById('modeSelect').classList.remove('hidden');
+            document.getElementById('quizArea').classList.add('hidden');
+            document.getElementById('result').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
