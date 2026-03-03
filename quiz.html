@@ -205,7 +205,17 @@
                 <button class="btn" onclick="setLang('zh')">中文</button>
                 <button class="btn" onclick="setLang('en')">English</button>
             </div>
+            <button class="btn" onclick="showBrowseMode()">📚 Browse All / 浏览全部</button>
             <button class="btn btn-primary" onclick="showModeSelect()">🔄 New Quiz / 新测验</button>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="quiz-card" style="margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="搜索题目... (中英文)" 
+                   style="width: 100%; padding: 12px; border-radius: 8px; border: none; 
+                          background: var(--bg); color: var(--text); font-size: 16px;"
+                   oninput="searchQuestions(this.value)">
+            <div id="searchResults" style="margin-top: 10px; color: var(--text-muted);"></div>
         </div>
         
         <!-- Mode Selection -->
@@ -265,6 +275,14 @@
                 </div>
                 <button class="btn btn-primary" onclick="showModeSelect()">🔄 Try Again / 再试一次</button>
             </div>
+        </div>
+        
+        <!-- Browse All Questions -->
+        <div id="browseArea" class="quiz-card hidden">
+            <h2 style="margin-bottom: 20px;">📚 题库浏览 / Browse All Questions</h2>
+            <div class="topics" id="browseTopics"></div>
+            <div id="browseList" style="margin-top: 20px;"></div>
+            <div class="pagination" id="pagination" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;"></div>
         </div>
     </div>
 
@@ -860,6 +878,144 @@
         
         function getTopicCount(topic) {
             return topicCounts[topic] || 0;
+        }
+        
+        // ===== SEARCH FUNCTIONS =====
+        function searchQuestions(query) {
+            const resultsDiv = document.getElementById('searchResults');
+            if (!query || query.length < 2) {
+                resultsDiv.innerHTML = '';
+                return;
+            }
+            
+            query = query.toLowerCase();
+            const results = questions.filter(q => {
+                const zh = q.zh.question.toLowerCase().includes(query);
+                const en = q.en.question.toLowerCase().includes(query);
+                const zhOpts = q.zh.options.some(o => o.toLowerCase().includes(query));
+                const enOpts = q.en.options.some(o => o.toLowerCase().includes(query));
+                return zh || en || zhOpts || enOpts;
+            });
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '未找到匹配题目 / No matching questions found';
+            } else {
+                resultsDiv.innerHTML = `找到 ${results.length} 道题 / Found ${results.length} questions`;
+                resultsDiv.onclick = () => showSearchResults(results);
+                resultsDiv.style.cursor = 'pointer';
+                resultsDiv.style.color = 'var(--primary)';
+            }
+        }
+        
+        function showSearchResults(results) {
+            browseQuestions = results;
+            currentBrowsePage = 0;
+            showBrowseArea();
+            renderBrowsePage();
+        }
+        
+        // ===== BROWSE FUNCTIONS =====
+        let browseQuestions = [];
+        let currentBrowsePage = 0;
+        const ITEMS_PER_PAGE = 10;
+        
+        function showBrowseMode() {
+            // Show all questions initially
+            browseQuestions = [...questions];
+            currentBrowsePage = 0;
+            
+            // Show topic filter buttons
+            const topicsDiv = document.getElementById('browseTopics');
+            topicsDiv.innerHTML = `
+                <button class="topic-btn active" onclick="filterBrowse('all')">全部 All</button>
+                <button class="topic-btn" onclick="filterBrowse('structure')">🏗️ 结构</button>
+                <button class="topic-btn" onclick="filterBrowse('roof')">🏠 屋顶</button>
+                <button class="topic-btn" onclick="filterBrowse('plumbing')">💧 水管</button>
+                <button class="topic-btn" onclick="filterBrowse('electrical')">⚡ 电路</button>
+                <button class="topic-btn" onclick="filterBrowse('hvac')">❄️ 暖通</button>
+                <button class="topic-btn" onclick="filterBrowse('exterior')">🧱 外墙</button>
+                <button class="topic-btn" onclick="filterBrowse('safety')">🔥 安全</button>
+            `;
+            
+            showBrowseArea();
+            renderBrowsePage();
+        }
+        
+        function filterBrowse(topic) {
+            if (topic === 'all') {
+                browseQuestions = [...questions];
+            } else {
+                browseQuestions = questions.filter(q => q.topic === topic);
+            }
+            currentBrowsePage = 0;
+            
+            // Update active button
+            document.querySelectorAll('#browseTopics .topic-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(topic) || (topic === 'all' && btn.textContent.includes('全部'))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderBrowsePage();
+        }
+        
+        function showBrowseArea() {
+            document.getElementById('modeSelect').classList.add('hidden');
+            document.getElementById('quizArea').classList.add('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('browseArea').classList.remove('hidden');
+        }
+        
+        function renderBrowsePage() {
+            const listDiv = document.getElementById('browseList');
+            const start = currentBrowsePage * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageItems = browseQuestions.slice(start, end);
+            
+            let html = '';
+            pageItems.forEach((q, idx) => {
+                const actualIdx = start + idx;
+                const topicIcon = {'structure':'🏗️','roof':'🏠','plumbing':'💧','electrical':'⚡','hvac':'❄️','exterior':'🧱','safety':'🔥'}[q.topic];
+                const qData = q[currentLang];
+                
+                html += `
+                    <div class="quiz-card" style="margin-bottom: 15px; padding: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="color: var(--primary);">${topicIcon} ${q.topic.toUpperCase()}</span>
+                            <span style="color: var(--text-muted);">#${actualIdx + 1}</span>
+                        </div>
+                        <div style="font-size: 16px; margin-bottom: 10px;">${qData.question}</div>
+                        <div style="font-size: 14px; color: var(--text-muted);">
+                            ${qData.options.map((o, i) => `<div>${o}</div>`).join('')}
+                        </div>
+                        <div style="margin-top: 10px; padding: 10px; background: var(--bg); border-radius: 8px;">
+                            <div style="color: var(--primary); font-weight: bold;">✅ ${qData.options[qData.correct]}</div>
+                            <div style="margin-top: 8px; color: var(--text-muted); font-size: 14px;">📖 ${qData.explanation}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            listDiv.innerHTML = html;
+            
+            // Render pagination
+            const totalPages = Math.ceil(browseQuestions.length / ITEMS_PER_PAGE);
+            let paginationHtml = '';
+            if (currentBrowsePage > 0) {
+                paginationHtml += `<button class="btn" onclick="changePage(-1)">◀ Prev</button>`;
+            }
+            paginationHtml += `<span style="padding: 10px;">${currentBrowsePage + 1} / ${totalPages} (${browseQuestions.length}题)</span>`;
+            if (currentBrowsePage < totalPages - 1) {
+                paginationHtml += `<button class="btn" onclick="changePage(1)">Next ▶</button>`;
+            }
+            document.getElementById('pagination').innerHTML = paginationHtml;
+        }
+        
+        function changePage(delta) {
+            currentBrowsePage += delta;
+            renderBrowsePage();
+            window.scrollTo(0, 0);
         }
         
         function startQuiz(topic) {
