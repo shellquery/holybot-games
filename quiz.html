@@ -884,25 +884,27 @@
             }
         }
 
-        // Count questions by topic
-        const topicCounts = {};
-        questions.forEach(q => {
-            topicCounts[q.topic] = (topicCounts[q.topic] || 0) + 1;
+        // Count questions by topic - run after DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCounts = {};
+            questions.forEach(q => {
+                topicCounts[q.topic] = (topicCounts[q.topic] || 0) + 1;
+            });
+            
+            // Display counts
+            document.getElementById('total-count').textContent = questions.length;
+            document.getElementById('count-structure').textContent = topicCounts['structure'] || 0;
+            document.getElementById('count-roof').textContent = topicCounts['roof'] || 0;
+            document.getElementById('count-plumbing').textContent = topicCounts['plumbing'] || 0;
+            document.getElementById('count-electrical').textContent = topicCounts['electrical'] || 0;
+            document.getElementById('count-hvac').textContent = topicCounts['hvac'] || 0;
+            document.getElementById('count-exterior').textContent = topicCounts['exterior'] || 0;
+            document.getElementById('count-safety').textContent = topicCounts['safety'] || 0;
+            document.getElementById('count-infrared').textContent = topicCounts['infrared'] || 0;
+            document.getElementById('count-radon').textContent = topicCounts['radon'] || 0;
+            document.getElementById('count-mold').textContent = topicCounts['mold'] || 0;
+            document.getElementById('count-asbestos').textContent = topicCounts['asbestos'] || 0;
         });
-        
-        // Display counts
-        document.getElementById('total-count').textContent = questions.length;
-        document.getElementById('count-structure').textContent = topicCounts['structure'] || 0;
-        document.getElementById('count-roof').textContent = topicCounts['roof'] || 0;
-        document.getElementById('count-plumbing').textContent = topicCounts['plumbing'] || 0;
-        document.getElementById('count-electrical').textContent = topicCounts['electrical'] || 0;
-        document.getElementById('count-hvac').textContent = topicCounts['hvac'] || 0;
-        document.getElementById('count-exterior').textContent = topicCounts['exterior'] || 0;
-        document.getElementById('count-safety').textContent = topicCounts['safety'] || 0;
-        document.getElementById('count-infrared').textContent = topicCounts['infrared'] || 0;
-        document.getElementById('count-radon').textContent = topicCounts['radon'] || 0;
-        document.getElementById('count-mold').textContent = topicCounts['mold'] || 0;
-        document.getElementById('count-asbestos').textContent = topicCounts['asbestos'] || 0;
         
         function getTopicCount(topic) {
             return topicCounts[topic] || 0;
