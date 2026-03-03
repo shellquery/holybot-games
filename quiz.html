@@ -212,14 +212,14 @@
         <div id="modeSelect" class="quiz-card">
             <h2 style="margin-bottom: 20px;">Select Quiz Mode / 选择测验模式</h2>
             <div class="topics">
-                <button class="topic-btn" onclick="startQuiz('random')">🎲 Random / 随机</button>
-                <button class="topic-btn" onclick="startQuiz('structure')">🏗️ Structure / 结构</button>
-                <button class="topic-btn" onclick="startQuiz('roof')">🏠 Roof / 屋顶</button>
-                <button class="topic-btn" onclick="startQuiz('plumbing')">💧 Plumbing / 水管</button>
-                <button class="topic-btn" onclick="startQuiz('electrical')">⚡ Electrical / 电路</button>
-                <button class="topic-btn" onclick="startQuiz('hvac')">❄️ HVAC / 暖通</button>
-                <button class="topic-btn" onclick="startQuiz('exterior')">🧱 Exterior / 外墙</button>
-                <button class="topic-btn" onclick="startQuiz('safety')">🔥 Safety / 安全</button>
+                <button class="topic-btn" onclick="startQuiz('random')">🎲 Random / 随机 (<span id="total-count">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('structure')">🏗️ Structure / 结构 (<span id="count-structure">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('roof')">🏠 Roof / 屋顶 (<span id="count-roof">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('plumbing')">💧 Plumbing / 水管 (<span id="count-plumbing">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('electrical')">⚡ Electrical / 电路 (<span id="count-electrical">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('hvac')">❄️ HVAC / 暖通 (<span id="count-hvac">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('exterior')">🧱 Exterior / 外墙 (<span id="count-exterior">0</span>)</button>
+                <button class="topic-btn" onclick="startQuiz('safety')">🔥 Safety / 安全 (<span id="count-safety">0</span>)</button>
             </div>
         </div>
         
@@ -842,6 +842,26 @@
             }
         }
 
+        // Count questions by topic
+        const topicCounts = {};
+        questions.forEach(q => {
+            topicCounts[q.topic] = (topicCounts[q.topic] || 0) + 1;
+        });
+        
+        // Display counts
+        document.getElementById('total-count').textContent = questions.length;
+        document.getElementById('count-structure').textContent = topicCounts['structure'] || 0;
+        document.getElementById('count-roof').textContent = topicCounts['roof'] || 0;
+        document.getElementById('count-plumbing').textContent = topicCounts['plumbing'] || 0;
+        document.getElementById('count-electrical').textContent = topicCounts['electrical'] || 0;
+        document.getElementById('count-hvac').textContent = topicCounts['hvac'] || 0;
+        document.getElementById('count-exterior').textContent = topicCounts['exterior'] || 0;
+        document.getElementById('count-safety').textContent = topicCounts['safety'] || 0;
+        
+        function getTopicCount(topic) {
+            return topicCounts[topic] || 0;
+        }
+        
         function startQuiz(topic) {
             mode = topic;
             if (topic === 'random') {
