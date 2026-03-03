@@ -1023,15 +1023,11 @@
             if (topic === 'random') {
                 quizQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10);
             } else {
+                // Strictly use only questions from selected topic
                 quizQuestions = questions.filter(q => q.topic === topic);
-                quizQuestions = quizQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
-                if (quizQuestions.length < 5) {
-                    // Add more from other topics if not enough
-                    const more = questions.filter(q => q.topic !== topic)
-                        .sort(() => Math.random() - 0.5)
-                        .slice(0, 10 - quizQuestions.length);
-                    quizQuestions = [...quizQuestions, ...more];
-                }
+                // Shuffle but keep all from this topic
+                quizQuestions = quizQuestions.sort(() => Math.random() - 0.5);
+                // Show ALL questions from this topic (no limit)
             }
             currentIndex = 0;
             answers = [];
@@ -1039,6 +1035,7 @@
             document.getElementById('modeSelect').classList.add('hidden');
             document.getElementById('quizArea').classList.remove('hidden');
             document.getElementById('result').classList.add('hidden');
+            document.getElementById('browseArea').classList.add('hidden');
             document.getElementById('totalQ').textContent = quizQuestions.length;
             
             renderQuestion();
