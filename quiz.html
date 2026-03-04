@@ -305,13 +305,13 @@ const questions = [
             question: "Which crack most concerning?",
             options: ["A. Hairline crack","B. Vertical crack over 1/4 inch","C. Old crack with paint","D. Small crack around door"],
             correct: 1,
-            explanation: "Vertical cracks over 1/4 inch may indicate structural foundation issues."
+            explanation: "Vertical cracks over 1/4 inch may indicate structural issues."
         }
     },
     {
         topic: "structure",
         zh: {
-            question: "房屋地基检查中，piers（桩基）的主要作用是？",
+            question: "piers（桩基）的主要作用是？",
             options: ["A. 美观装饰","B. 支撑并将荷载传递到地基","C. 防水","D. 装饰地面"],
             correct: 1,
             explanation: "桩基是垂直支撑结构。"
@@ -326,14 +326,14 @@ const questions = [
     {
         topic: "structure",
         zh: {
-            question: "房屋结构检查中，承重墙的主要特征是？",
+            question: "承重墙的主要特征是？",
             options: ["A. 通常是薄墙","B. 垂直于楼层梁","C. 与其他墙体垂直","D. 可以随意拆除"],
             correct: 1,
-            explanation: "承重墙垂直于楼层梁。"
+            explanation: "垂直于楼层梁。"
         },
         en: {
-            question: "Load-bearing wall characteristic?",
-            options: ["A. Usually thin","B. Perpendicular to joists","C. Perpendicular walls","D. Can be removed"],
+            question: "Load-bearing wall?",
+            options: ["A. Usually thin","B. Perpendicular to joists","C. Perpendicular walls","D. Can remove"],
             correct: 1,
             explanation: "Perpendicular to floor joists."
         }
@@ -341,29 +341,74 @@ const questions = [
     {
         topic: "structure",
         zh: {
-            question: "检查楼板间距标准是？",
+            question: "楼板间距标准是？",
             options: ["A. 任意","B. 16英寸或24英寸","C. 12英寸","D. 36英寸"],
             correct: 1,
             explanation: "楼板间距通常为16或24英寸。"
         },
         en: {
-            question: "Floor joist spacing standard?",
+            question: "Floor joist spacing?",
             options: ["A. Any","B. 16 or 24 inches","C. 12 inches","D. 36 inches"],
             correct: 1,
             explanation: "Typically 16 or 24 inches."
         }
     },
     {
+        topic: "structure",
+        zh: {
+            question: "A joist below a bearing wall should be?",
+            options: ["A. doubled","B. split","C. tripled"],
+            correct: 0,
+            explanation: "A joist below a bearing wall should be doubled."
+        },
+        en: {
+            question: "A joist below a bearing wall should be?",
+            options: ["A. doubled","B. split","C. tripled"],
+            correct: 0,
+            explanation: "A joist below a bearing wall should be doubled."
+        }
+    },
+    {
+        topic: "structure",
+        zh: {
+            question: "Gypsum board can be used as bracing?",
+            options: ["A. True","B. False"],
+            correct: 0,
+            explanation: "Gypsum board can be used as bracing."
+        },
+        en: {
+            question: "Gypsum board can be used as bracing?",
+            options: ["A. True","B. False"],
+            correct: 0,
+            explanation: "Gypsum board can be used as bracing."
+        }
+    },
+    {
+        topic: "structure",
+        zh: {
+            question: "Lintels and headers are the same things?",
+            options: ["A. True","B. False"],
+            correct: 1,
+            explanation: "Lintels and headers are different components."
+        },
+        en: {
+            question: "Lintels and headers are the same things?",
+            options: ["A. True","B. False"],
+            correct: 1,
+            explanation: "Lintels and headers are different."
+        }
+    },
+    {
         topic: "roof",
         zh: {
-            question: "发现沥青瓦片有3处缺失，应该？",
-            options: ["A. 不需要维修","B. 尽快更换受损瓦片","C. 更换整个屋顶","D. 涂胶水"],
+            question: "沥青瓦片缺失，应该？",
+            options: ["A. 不需要维修","B. 尽快更换","C. 更换整个屋顶","D. 涂胶水"],
             correct: 1,
             explanation: "缺失瓦片会导致漏水。"
         },
         en: {
             question: "Missing shingles?",
-            options: ["A. No repair","B. Replace damaged","C. Replace all","D. Glue"],
+            options: ["A. No repair","B. Replace","C. Replace all","D. Glue"],
             correct: 1,
             explanation: "Missing causes leakage."
         }
@@ -371,22 +416,22 @@ const questions = [
     {
         topic: "roof",
         zh: {
-            question: "什么是ice dam（冰坝）？",
-            options: ["A. 屋顶装饰冰雕","B. 屋檐冰块堆积阻碍排水","C. 冷冻仓库","D. 排水系统"],
+            question: "什么是冰坝？",
+            options: ["A. 装饰冰雕","B. 屋檐冰块阻碍排水","C. 冷冻仓库","D. 排水系统"],
             correct: 1,
             explanation: "冰坝阻碍排水导致漏水。"
         },
         en: {
             question: "What is ice dam?",
-            options: ["A. Decorative ice","B. Ice at eaves blocking drainage","C. Cold storage","D. Drainage system"],
+            options: ["A. Decorative ice","B. Ice at eaves","C. Cold storage","D. Drainage"],
             correct: 1,
-            explanation: "Ice dam blocks drainage causing leaks."
+            explanation: "Ice dam blocks drainage."
         }
     },
     {
         topic: "roof",
         zh: {
-            question: "flashing（泛水）的主要作用是？",
+            question: "泛水的作用是？",
             options: ["A. 美观","B. 防水","C. 保温","D. 装饰"],
             correct: 1,
             explanation: "泛水用于防水。"
@@ -401,14 +446,14 @@ const questions = [
     {
         topic: "roof",
         zh: {
-            question: "金属屋顶的优点？",
+            question: "金属屋顶优点？",
             options: ["A. 便宜","B. 耐久防火轻便","C. 重","D. 难安装"],
             correct: 1,
             explanation: "耐久防火重量轻。"
         },
         en: {
-            question: "Metal roof advantages?",
-            options: ["A. Cheap","B. Durable fire-resistant light","C. Heavy","D. Hard to install"],
+            question: "Metal roof?",
+            options: ["A. Cheap","B. Durable","C. Heavy","D. Hard"],
             correct: 1,
             explanation: "Durable and lightweight."
         }
@@ -416,22 +461,22 @@ const questions = [
     {
         topic: "plumbing",
         zh: {
-            question: "发现double-tapped breaker意味着？",
+            question: "double-tapped breaker意味？",
             options: ["A. 保护良好","B. 安全隐患","C. 水压正常","D. 安装正确"],
             correct: 1,
             explanation: "双螺栓断路器是电气安全隐患。"
         },
         en: {
             question: "Double-tapped breaker?",
-            options: ["A. Good protection","B. Safety hazard","C. Normal","D. Correct"],
+            options: ["A. Good","B. Hazard","C. Normal","D. Correct"],
             correct: 1,
-            explanation: "Double-tapped is safety hazard."
+            explanation: "Safety hazard."
         }
     },
     {
         topic: "plumbing",
         zh: {
-            question: "正常住宅水压是多少PSI？",
+            question: "正常住宅水压？",
             options: ["A. 10-20 PSI","B. 40-60 PSI","C. 80-100 PSI","D. 100-150 PSI"],
             correct: 1,
             explanation: "正常水压40-60 PSI。"
@@ -446,14 +491,14 @@ const questions = [
     {
         topic: "plumbing",
         zh: {
-            question: "马桶摇晃可能原因？",
+            question: "马桶摇晃原因？",
             options: ["A. 马桶太大","B. 密封胶老化/螺丝松动","C. 水压太高","D. 太旧"],
             correct: 1,
             explanation: "密封胶老化或螺丝松。"
         },
         en: {
-            question: "Toilet wobble cause?",
-            options: ["A. Too big","B. Caulk/bolt issue","C. Pressure high","D. Too old"],
+            question: "Toilet wobble?",
+            options: ["A. Too big","B. Caulk issue","C. Pressure high","D. Too old"],
             correct: 1,
             explanation: "Caulk or loose bolts."
         }
@@ -461,29 +506,29 @@ const questions = [
     {
         topic: "plumbing",
         zh: {
-            question: "热水器TPR阀作用是？",
+            question: "TPR阀作用？",
             options: ["A. 节能","B. 释放过高压力","C. 防水垢","D. 过滤"],
             correct: 1,
-            explanation: "TPR阀释放过高压力防止爆炸。"
+            explanation: "TPR阀释放过高压力。"
         },
         en: {
-            question: "TPR valve purpose?",
+            question: "TPR valve?",
             options: ["A. Energy saving","B. Release pressure","C. Prevent scale","D. Filter"],
             correct: 1,
-            explanation: "TPR releases excess pressure."
+            explanation: "Releases excess pressure."
         }
     },
     {
         topic: "electrical",
         zh: {
-            question: "红黑色白线是什么电路？",
+            question: "红黑色白线？",
             options: ["A. 220V","B. 110V标准","C. 低压","D. 地暖"],
             correct: 1,
             explanation: "110V标准电路。"
         },
         en: {
             question: "Red black white wires?",
-            options: ["A. 220V","B. 110V standard","C. Low voltage","D. Floor heat"],
+            options: ["A. 220V","B. 110V","C. Low voltage","D. Floor heat"],
             correct: 1,
             explanation: "110V standard circuit."
         }
@@ -491,7 +536,7 @@ const questions = [
     {
         topic: "electrical",
         zh: {
-            question: "GFCI插座主要用于？",
+            question: "GFCI主要用于？",
             options: ["A. 客厅","B. 卧室","C. 厨房浴室","D. 车库"],
             correct: 2,
             explanation: "GFCI用于潮湿区域。"
@@ -506,14 +551,14 @@ const questions = [
     {
         topic: "electrical",
         zh: {
-            question: "插座过热变色原因？",
+            question: "插座过热原因？",
             options: ["A. 太旧","B. 过载或接触不良","C. 电压低","D. 品牌差"],
             correct: 1,
             explanation: "过载或接触不良。"
         },
         en: {
             question: "Outlet overheats?",
-            options: ["A. Too old","B. Overload/poor connection","C. Voltage low","D. Bad brand"],
+            options: ["A. Too old","B. Overload","C. Voltage low","D. Bad brand"],
             correct: 1,
             explanation: "Overload or poor connection."
         }
@@ -521,14 +566,14 @@ const questions = [
     {
         topic: "electrical",
         zh: {
-            question: "铝线接线需要使用？",
-            options: ["A. 普通接线器","B. CO/ALR兼容接线器","C. 任何都可以","D. 胶带"],
+            question: "铝线需要？",
+            options: ["A. 普通接线器","B. CO/ALR兼容","C. 任何都可以","D. 胶带"],
             correct: 1,
-            explanation: "铝线需要CO/ALR兼容接线器。"
+            explanation: "需要CO/ALR兼容接线器。"
         },
         en: {
-            question: "Aluminum wiring needs?",
-            options: ["A. Regular","B. CO/ALR compatible","C. Any works","D. Tape"],
+            question: "Aluminum wiring?",
+            options: ["A. Regular","B. CO/ALR","C. Any","D. Tape"],
             correct: 1,
             explanation: "Needs CO/ALR connectors."
         }
@@ -536,13 +581,13 @@ const questions = [
     {
         topic: "hvac",
         zh: {
-            question: "过滤网应该多久检查？",
+            question: "过滤网多久检查？",
             options: ["A. 半年","B. 一个月","C. 一年","D. 两年"],
             correct: 1,
             explanation: "应每月检查。"
         },
         en: {
-            question: "Filter check frequency?",
+            question: "Filter check?",
             options: ["A. 6 months","B. 1 month","C. 1 year","D. 2 years"],
             correct: 1,
             explanation: "Check monthly."
@@ -557,7 +602,7 @@ const questions = [
             explanation: "冷媒泄漏伴有油渍。"
         },
         en: {
-            question: "Refrigerant leak signs?",
+            question: "Refrigerant leak?",
             options: ["A. Normal","B. Oil stains","C. Less noise","D. Lower bill"],
             correct: 1,
             explanation: "Leak has oil stains."
@@ -566,13 +611,13 @@ const questions = [
     {
         topic: "hvac",
         zh: {
-            question: "空调发出霉味原因？",
+            question: "空调霉味原因？",
             options: ["A. 冷媒不足","B. 蒸发器发霉","C. 电压不稳","D. 缺制冷剂"],
             correct: 1,
             explanation: "蒸发器发霉。"
         },
         en: {
-            question: "Moldy smell cause?",
+            question: "Moldy smell?",
             options: ["A. Low refrigerant","B. Evaporator mold","C. Voltage issue","D. Missing refrigerant"],
             correct: 1,
             explanation: "Evaporator coil mold."
@@ -581,13 +626,13 @@ const questions = [
     {
         topic: "hvac",
         zh: {
-            question: "暖通风量不足原因？",
+            question: "风量不足原因？",
             options: ["A. 过滤器太干净","B. 管道堵塞或风扇问题","C. 制冷剂太多","D. 电压太高"],
             correct: 1,
             explanation: "管道堵塞或风扇问题。"
         },
         en: {
-            question: "Low air flow cause?",
+            question: "Low air flow?",
             options: ["A. Filter too clean","B. Duct/fan issue","C. Too much refrigerant","D. Voltage high"],
             correct: 1,
             explanation: "Duct or fan issues."
@@ -602,7 +647,7 @@ const questions = [
             explanation: "潮湿是主因。"
         },
         en: {
-            question: "Wood rot cause?",
+            question: "Wood rot?",
             options: ["A. Sun","B. Moisture","C. Pests","D. Temp"],
             correct: 1,
             explanation: "Moisture is main cause."
@@ -611,13 +656,13 @@ const questions = [
     {
         topic: "exterior",
         zh: {
-            question: "坡度应该朝向？",
+            question: "坡度朝向？",
             options: ["A. 房子中心","B. 远离房屋","C. 随意","D. 平行"],
             correct: 1,
             explanation: "坡度应远离房屋。"
         },
         en: {
-            question: "Grading slope?",
+            question: "Grading?",
             options: ["A. To center","B. Away from house","C. Any","D. Parallel"],
             correct: 1,
             explanation: "Slope away from house."
@@ -632,7 +677,7 @@ const questions = [
             explanation: "密封胶老化。"
         },
         en: {
-            question: "Window water infiltration?",
+            question: "Window leak?",
             options: ["A. Glass broken","B. Caulk aging","C. Window small","D. Color"],
             correct: 1,
             explanation: "Caulk aging."
@@ -644,10 +689,10 @@ const questions = [
             question: "落水管距离？",
             options: ["A. 任意","B. 至少6英尺","C. 靠近房子","D. 水平"],
             correct: 1,
-            explanation: "应至少6英尺远离房屋。"
+            explanation: "应至少6英尺。"
         },
         en: {
-            question: "Downspout distance?",
+            question: "Downspout?",
             options: ["A. Any","B. 6 feet","C. Close to house","D. Level"],
             correct: 1,
             explanation: "At least 6 feet away."
@@ -662,7 +707,7 @@ const questions = [
             explanation: "卧室和走廊。"
         },
         en: {
-            question: "CO detector location?",
+            question: "CO detector?",
             options: ["A. Garage","B. Bedroom hall","C. Kitchen","D. Outdoor"],
             correct: 1,
             explanation: "Bedroom and hallway."
@@ -671,7 +716,7 @@ const questions = [
     {
         topic: "safety",
         zh: {
-            question: "扶手间距不超过？",
+            question: "扶手间距？",
             options: ["A. 6寸","B. 4寸","C. 3寸","D. 8寸"],
             correct: 1,
             explanation: "不超过4英寸。"
@@ -686,7 +731,7 @@ const questions = [
     {
         topic: "safety",
         zh: {
-            question: "烟雾探测器安装？",
+            question: "烟雾探测器？",
             options: ["A. 仅客厅","B. 每层每卧室","C. 仅厨房","D. 仅车库"],
             correct: 1,
             explanation: "每层每卧室。"
@@ -704,10 +749,10 @@ const questions = [
             question: "燃气壁炉检查？",
             options: ["A. 火焰颜色","B. 通风燃气连接","C. 外观","D. 价格"],
             correct: 1,
-            explanation: "必须检查通风和燃气连接。"
+            explanation: "检查通风和燃气。"
         },
         en: {
-            question: "Gas fireplace check?",
+            question: "Gas fireplace?",
             options: ["A. Flame color","B. Venting/gas","C. Appearance","D. Price"],
             correct: 1,
             explanation: "Check venting and gas."
@@ -716,13 +761,13 @@ const questions = [
     {
         topic: "infrared",
         zh: {
-            question: "红外热成像主要用于？",
+            question: "红外热成像用于？",
             options: ["A. 检测颜色","B. 发现温度异常","C. 测量距离","D. 检测声音"],
             correct: 1,
-            explanation: "发现温度异常、热泄漏等。"
+            explanation: "发现温度异常。"
         },
         en: {
-            question: "Thermal imaging for?",
+            question: "Thermal imaging?",
             options: ["A. Detect color","B. Temperature anomalies","C. Measure distance","D. Detect sound"],
             correct: 1,
             explanation: "Finds temperature anomalies."
@@ -731,29 +776,29 @@ const questions = [
     {
         topic: "infrared",
         zh: {
-            question: "窗户周围温度低说明？",
+            question: "窗户周围低温？",
             options: ["A. 隔热好","B. 密封不良","C. 正常","D. 室内太热"],
             correct: 1,
             explanation: "密封不良或热桥。"
         },
         en: {
-            question: "Low temp around windows?",
+            question: "Low temp windows?",
             options: ["A. Good insulation","B. Poor sealing","C. Normal","D. Too hot inside"],
             correct: 1,
-            explanation: "Poor sealing or thermal bridge."
+            explanation: "Poor sealing."
         }
     },
     {
         topic: "infrared",
         zh: {
-            question: "电气柜热点说明？",
+            question: "电气柜热点？",
             options: ["A. 正常","B. 过载","C. 电压低","D. 设备太旧"],
             correct: 1,
-            explanation: "过载或接触不良，火灾隐患。"
+            explanation: "过载，火灾隐患。"
         },
         en: {
-            question: "Hot spots in panel?",
-            options: ["A. Normal","B. Overload","C. Voltage low","D. Old equipment"],
+            question: "Hot spots panel?",
+            options: ["A. Normal","B. Overload","C. Voltage low","D. Old"],
             correct: 1,
             explanation: "Overload, fire hazard."
         }
@@ -761,25 +806,25 @@ const questions = [
     {
         topic: "infrared",
         zh: {
-            question: "屋顶低温区域表示？",
+            question: "屋顶低温表示？",
             options: ["A. 屋顶完好","B. 保温缺失或漏水","C. 室内温度低","D. 天气太冷"],
             correct: 1,
             explanation: "保温缺失或漏水。"
         },
         en: {
-            question: "Cold spots on roof?",
+            question: "Cold spots roof?",
             options: ["A. Roof OK","B. Missing insulation","C. Inside cold","D. Weather cold"],
             correct: 1,
-            explanation: "Missing insulation or leak."
+            explanation: "Missing insulation."
         }
     },
     {
         topic: "radon",
         zh: {
-            question: "氡气主要来源？",
+            question: "氡气来源？",
             options: ["A. 油漆","B. 土壤岩石","C. 家具","D. 水"],
             correct: 1,
-            explanation: "来自土壤和岩石中的铀。"
+            explanation: "来自土壤和岩石。"
         },
         en: {
             question: "Radon source?",
@@ -809,10 +854,10 @@ const questions = [
             question: "氡气安全水平？",
             options: ["A. 10 pCi/L","B. 4 pCi/L以下","C. 20 pCi/L","D. 50 pCi/L"],
             correct: 1,
-            explanation: "EPA建议低于4 pCi/L。"
+            explanation: "低于4 pCi/L。"
         },
         en: {
-            question: "Safe radon level?",
+            question: "Safe radon?",
             options: ["A. 10","B. Below 4","C. 20","D. 50"],
             correct: 1,
             explanation: "Below 4 pCi/L."
@@ -822,9 +867,9 @@ const questions = [
         topic: "radon",
         zh: {
             question: "降低氡气方法？",
-            options: ["A. 开窗通风","B. 安装通风系统","C. 密封缝隙","D. 所有都是"],
+            options: ["A. 开窗通风","B. 安装通风","C. 密封缝隙","D. 所有都是"],
             correct: 3,
-            explanation: "需要多种方法综合。"
+            explanation: "需要多种方法。"
         },
         en: {
             question: "Reduce radon?",
@@ -854,19 +899,19 @@ const questions = [
             question: "发现霉菌首先？",
             options: ["A. 喷漂白水","B. 找出水源","C. 忽略","D. 刷漆覆盖"],
             correct: 1,
-            explanation: "先找出并修复水源。"
+            explanation: "先找出水源。"
         },
         en: {
-            question: "Found mold first?",
+            question: "Found mold?",
             options: ["A. Spray bleach","B. Find water source","C. Ignore","D. Paint over"],
             correct: 1,
-            explanation: "Find and fix water source."
+            explanation: "Find water source first."
         }
     },
     {
         topic: "mold",
         zh: {
-            question: "有害霉菌包括？",
+            question: "有害霉菌？",
             options: ["A. 黑霉","B. 曲霉","C. 链格孢属","D. 所有都是"],
             correct: 3,
             explanation: "都是常见有害霉菌。"
@@ -884,13 +929,13 @@ const questions = [
             question: "检测霉菌方法？",
             options: ["A. 温度计","B. 检测仪","C. 湿度计","D. 望远镜"],
             correct: 1,
-            explanation: "使用检测仪或采样培养。"
+            explanation: "使用检测仪。"
         },
         en: {
             question: "Detect mold?",
             options: ["A. Thermometer","B. Tester","C. Hygrometer","D. Telescope"],
             correct: 1,
-            explanation: "Use tester or culture."
+            explanation: "Use tester."
         }
     },
     {
@@ -902,7 +947,7 @@ const questions = [
             explanation: "曾广泛用于多种材料。"
         },
         en: {
-            question: "Asbestos used in?",
+            question: "Asbestos used?",
             options: ["A. Insulation","B. Roofing","C. Fireproof","D. All"],
             correct: 3,
             explanation: "Used in many materials."
@@ -917,7 +962,7 @@ const questions = [
             explanation: "送EPA认可实验室。"
         },
         en: {
-            question: "Asbestos samples where?",
+            question: "Asbestos samples?",
             options: ["A. Any lab","B. EPA certified","C. Hospital","D. School"],
             correct: 1,
             explanation: "EPA certified lab."
@@ -941,13 +986,13 @@ const questions = [
     {
         topic: "asbestos",
         zh: {
-            question: "石棉进入人体途径？",
+            question: "石棉进入途径？",
             options: ["A. 食物","B. 呼吸","C. 皮肤","D. 饮水"],
             correct: 1,
-            explanation: "通过呼吸进入肺部。"
+            explanation: "通过呼吸。"
         },
         en: {
-            question: "Asbestos enters via?",
+            question: "Asbestos enters?",
             options: ["A. Food","B. Breathing","C. Skin","D. Drinking"],
             correct: 1,
             explanation: "Through breathing."
@@ -955,227 +1000,6 @@ const questions = [
     }
 ];
 
-        // State
-        let currentLang = 'zh';
-        let quizQuestions = [];
-        let currentIndex = 0;
-        let answers = [];
-        let mode = 'random';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
-            if (quizQuestions.length > 0) {
-                renderQuestion();
-            }
-        }
-
-        // Count questions by topic - run immediately since questions is already defined
-        (function() {
-            const topicCounts = {};
-            questions.forEach(q => {
-                topicCounts[q.topic] = (topicCounts[q.topic] || 0) + 1;
-            });
-            
-            // Display counts
-            const tc = document.getElementById('total-count');
-            if(tc) tc.textContent = questions.length;
-            const cs = document.getElementById('count-structure');
-            if(cs) cs.textContent = topicCounts['structure'] || 0;
-            const cr = document.getElementById('count-roof');
-            if(cr) cr.textContent = topicCounts['roof'] || 0;
-            const cp = document.getElementById('count-plumbing');
-            if(cp) cp.textContent = topicCounts['plumbing'] || 0;
-            const ce = document.getElementById('count-electrical');
-            if(ce) ce.textContent = topicCounts['electrical'] || 0;
-            const ch = document.getElementById('count-hvac');
-            if(ch) ch.textContent = topicCounts['hvac'] || 0;
-            const cex = document.getElementById('count-exterior');
-            if(cex) cex.textContent = topicCounts['exterior'] || 0;
-            const csa = document.getElementById('count-safety');
-            if(csa) csa.textContent = topicCounts['safety'] || 0;
-            const cir = document.getElementById('count-infrared');
-            if(cir) cir.textContent = topicCounts['infrared'] || 0;
-            const crd = document.getElementById('count-radon');
-            if(crd) crd.textContent = topicCounts['radon'] || 0;
-            const cmo = document.getElementById('count-mold');
-            if(cmo) cmo.textContent = topicCounts['mold'] || 0;
-            const cas = document.getElementById('count-asbestos');
-            if(cas) cas.textContent = topicCounts['asbestos'] || 0;
-        })();
-        
-        function getTopicCount(topic) {
-            return topicCounts[topic] || 0;
-        }
-        
-        // ===== SEARCH FUNCTIONS =====
-        function searchQuestions(query) {
-            const resultsDiv = document.getElementById('searchResults');
-            if (!query || query.length < 2) {
-                resultsDiv.innerHTML = '';
-                return;
-            }
-            
-            query = query.toLowerCase();
-            const results = questions.filter(q => {
-                const zh = q.zh.question.toLowerCase().includes(query);
-                const en = q.en.question.toLowerCase().includes(query);
-                const zhOpts = q.zh.options.some(o => o.toLowerCase().includes(query));
-                const enOpts = q.en.options.some(o => o.toLowerCase().includes(query));
-                return zh || en || zhOpts || enOpts;
-            });
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = '未找到匹配题目 / No matching questions found';
-            } else {
-                resultsDiv.innerHTML = `找到 ${results.length} 道题 / Found ${results.length} questions`;
-                resultsDiv.onclick = () => showSearchResults(results);
-                resultsDiv.style.cursor = 'pointer';
-                resultsDiv.style.color = 'var(--primary)';
-            }
-        }
-        
-        function showSearchResults(results) {
-            browseQuestions = results;
-            currentBrowsePage = 0;
-            showBrowseArea();
-            renderBrowsePage();
-        }
-        
-        // ===== BROWSE FUNCTIONS =====
-        let browseQuestions = [];
-        let currentBrowsePage = 0;
-        const ITEMS_PER_PAGE = 10;
-        
-        function showBrowseMode() {
-            // Show all questions initially
-            browseQuestions = [...questions];
-            currentBrowsePage = 0;
-            
-            // Show topic filter buttons
-            const topicsDiv = document.getElementById('browseTopics');
-            topicsDiv.innerHTML = `
-                <button class="topic-btn active" onclick="filterBrowse('all')">全部 All</button>
-                <button class="topic-btn" onclick="filterBrowse('structure')">🏗️ 结构</button>
-                <button class="topic-btn" onclick="filterBrowse('roof')">🏠 屋顶</button>
-                <button class="topic-btn" onclick="filterBrowse('plumbing')">💧 水管</button>
-                <button class="topic-btn" onclick="filterBrowse('electrical')">⚡ 电路</button>
-                <button class="topic-btn" onclick="filterBrowse('hvac')">❄️ 暖通</button>
-                <button class="topic-btn" onclick="filterBrowse('exterior')">🧱 外墙</button>
-                <button class="topic-btn" onclick="filterBrowse('safety')">🔥 安全</button>
-                <button class="topic-btn" onclick="filterBrowse('infrared')">🌡️ 红外检测</button>
-                <button class="topic-btn" onclick="filterBrowse('radon')">☢️ 氡气检测</button>
-                <button class="topic-btn" onclick="filterBrowse('mold')">🍄 霉菌检测</button>
-                <button class="topic-btn" onclick="filterBrowse('asbestos')">⚠️ 石棉检测</button>
-            `;
-            
-            showBrowseArea();
-            renderBrowsePage();
-        }
-        
-        function filterBrowse(topic) {
-            if (topic === 'all') {
-                browseQuestions = [...questions];
-            } else {
-                browseQuestions = questions.filter(q => q.topic === topic);
-            }
-            currentBrowsePage = 0;
-            
-            // Update active button
-            document.querySelectorAll('#browseTopics .topic-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.includes(topic) || (topic === 'all' && btn.textContent.includes('全部'))) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            renderBrowsePage();
-        }
-        
-        function showBrowseArea() {
-            document.getElementById('modeSelect').classList.add('hidden');
-            document.getElementById('quizArea').classList.add('hidden');
-            document.getElementById('result').classList.add('hidden');
-            document.getElementById('browseArea').classList.remove('hidden');
-        }
-        
-        function renderBrowsePage() {
-            const listDiv = document.getElementById('browseList');
-            const start = currentBrowsePage * ITEMS_PER_PAGE;
-            const end = start + ITEMS_PER_PAGE;
-            const pageItems = browseQuestions.slice(start, end);
-            
-            let html = '';
-            pageItems.forEach((q, idx) => {
-                const actualIdx = start + idx;
-                const topicIcon = {'structure':'🏗️','roof':'🏠','plumbing':'💧','electrical':'⚡','hvac':'❄️','exterior':'🧱','safety':'🔥','infrared':'🌡️','radon':'☢️','mold':'🍄','asbestos':'⚠️'}[q.topic];
-                const qData = q[currentLang];
-                
-                html += `
-                    <div class="quiz-card" style="margin-bottom: 15px; padding: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span style="color: var(--primary);">${topicIcon} ${q.topic.toUpperCase()}</span>
-                            <span style="color: var(--text-muted);">#${actualIdx + 1}</span>
-                        </div>
-                        <div style="font-size: 16px; margin-bottom: 10px;">${qData.question}</div>
-                        <div style="font-size: 14px; color: var(--text-muted);">
-                            ${qData.options.map((o, i) => `<div>${o}</div>`).join('')}
-                        </div>
-                        <div style="margin-top: 10px; padding: 10px; background: var(--bg); border-radius: 8px;">
-                            <div style="color: var(--primary); font-weight: bold;">✅ ${qData.options[qData.correct]}</div>
-                            <div style="margin-top: 8px; color: var(--text-muted); font-size: 14px;">📖 ${qData.explanation}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            listDiv.innerHTML = html;
-            
-            // Render pagination
-            const totalPages = Math.ceil(browseQuestions.length / ITEMS_PER_PAGE);
-            let paginationHtml = '';
-            if (currentBrowsePage > 0) {
-                paginationHtml += `<button class="btn" onclick="changePage(-1)">◀ Prev</button>`;
-            }
-            paginationHtml += `<span style="padding: 10px;">${currentBrowsePage + 1} / ${totalPages} (${browseQuestions.length}题)</span>`;
-            if (currentBrowsePage < totalPages - 1) {
-                paginationHtml += `<button class="btn" onclick="changePage(1)">Next ▶</button>`;
-            }
-            document.getElementById('pagination').innerHTML = paginationHtml;
-        }
-        
-        function changePage(delta) {
-            currentBrowsePage += delta;
-            renderBrowsePage();
-            window.scrollTo(0, 0);
-        }
-        
-        function startQuiz(topic) {
-            mode = topic;
-            if (topic === 'random') {
-                quizQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10);
-            } else {
-                // Strictly use only questions from selected topic
-                quizQuestions = questions.filter(q => q.topic === topic);
-                // Shuffle but keep all from this topic
-                quizQuestions = quizQuestions.sort(() => Math.random() - 0.5);
-                // Show ALL questions from this topic (no limit)
-            }
-            currentIndex = 0;
-            answers = [];
-            
-            document.getElementById('modeSelect').classList.add('hidden');
-            document.getElementById('quizArea').classList.remove('hidden');
-            document.getElementById('result').classList.add('hidden');
-            document.getElementById('browseArea').classList.add('hidden');
-            document.getElementById('totalQ').textContent = quizQuestions.length;
-            
-            renderQuestion();
-        }
-
-        function renderQuestion() {
-            const q = quizQuestions[currentIndex];
-            const langData = q[currentLang];
             
             document.getElementById('qNum').textContent = currentIndex + 1;
             document.getElementById('progressFill').style.width = ((currentIndex + 1) / quizQuestions.length * 100) + '%';
