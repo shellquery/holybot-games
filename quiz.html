@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Inspection Quiz</title>
+    <title>Quiz</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 20px; }
+        body { font-family: sans-serif; padding: 20px; background: #0f172a; color: #fff; }
         .container { max-width: 600px; margin: 0 auto; }
-        h1 { color: #4ade80; text-align: center; margin-bottom: 20px; }
-        .quiz-card { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
-        .btn { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; margin: 5px; font-size: 16px; }
-        .btn-primary { background: #4ade80; color: #0f172a; }
-        .btn:hover { opacity: 0.9; }
-        .options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
-        .option { padding: 12px; background: #334155; border-radius: 8px; cursor: pointer; }
-        .option:hover { background: #475569; }
+        h1 { color: #4ade80; text-align: center; }
+        .btn { padding: 10px 20px; margin: 5px; cursor: pointer; background: #4ade80; border: none; border-radius: 8px; }
+        .topic-btn { padding: 10px; margin: 5px; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .quiz-card { background: #1e293b; padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .option { padding: 12px; background: #334155; margin: 8px 0; border-radius: 8px; cursor: pointer; }
         .option.correct { background: #22c55e; }
         .option.wrong { background: #ef4444; }
-        .hidden { display: none; }
-        .topic-btn { padding: 10px 15px; margin: 5px; background: #334155; border: none; border-radius: 8px; color: white; cursor: pointer; }
-        .header { display: flex; justify-content: space-between; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏠 Home Inspection Quiz</h1>
-        <div class="header">
-            <button class="btn" onclick="setLang('zh')">中文</button>
-            <button class="btn" onclick="setLang('en')">English</button>
-        </div>
-        <div id="count">Total: <span id="total-count">0</span> questions</div>
-        <div class="topics" style="margin: 20px 0;">
+        <h1>Home Inspection Quiz</h1>
+        <div>Total: <span id="total">0</span> questions</div>
+        <div style="margin: 20px 0;">
             <button class="topic-btn" onclick="startQuiz('random')">Random</button>
             <button class="topic-btn" onclick="startQuiz('structure')">Structure</button>
             <button class="topic-btn" onclick="startQuiz('roof')">Roof</button>
@@ -40,76 +28,47 @@
         </div>
         <div id="quiz" class="hidden">
             <div class="quiz-card">
-                <div id="question"></div>
-                <div id="options" class="options"></div>
+                <div id="q" style="font-size: 18px; margin-bottom: 15px;"></div>
+                <div id="opts"></div>
             </div>
-            <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+            <button class="btn" onclick="next()">Next</button>
         </div>
     </div>
     <script>
-const questions = [
-    {topic:"structure",zh:{question:"检查地基时最需要关注哪种裂缝？",options:["A. 头发丝细裂缝","B. 垂直裂缝超过1/4英寸","C. 旧裂缝有漆覆盖","D. 门框周围裂缝"],correct:1,explanation:"垂直裂缝且宽度超过1/4英寸可能表示地基结构问题。"},en:{question:"Which foundation crack is most concerning?",options:["A. Hairline crack","B. Vertical crack over 1/4 inch","C. Old crack with paint","D. Crack around door"],correct:1,explanation:"Vertical cracks over 1/4 inch may indicate structural issues."}},
-    {topic:"roof",zh:{question:"沥青瓦片缺失应该？",options:["A. 不需要维修","B. 尽快更换","C. 更换整个屋顶","D. 涂胶水"],correct:1,explanation:"缺失瓦片会导致漏水。"},en:{question:"Missing asphalt shingles should be?",options:["A. No repair","B. Replace soon","C. Replace entire roof","D. Apply glue"],correct:1,explanation:"Missing causes leakage."}},
-    {topic:"plumbing",zh:{question:"double-tapped breaker意味着？",options:["A. 保护良好","B. 安全隐患","C. 水压正常","D. 安装正确"],correct:1,explanation:"双螺栓断路器是电气安全隐患。"},en:{question:"Double-tapped breaker means?",options:["A. Good protection","B. Safety hazard","C. Normal pressure","D. Correct install"],correct:1,explanation:"Safety hazard - fire risk."}},
-    {topic:"electrical",zh:{question:"GFCI插座主要用于？",options:["A. 客厅","B. 卧室","C. 厨房浴室","D. 车库"],correct:2,explanation:"GFCI用于潮湿区域。"},en:{question:"GFCI outlets mainly for?",options:["A. Living room","B. Bedroom","C. Kitchen bathroom","D. Garage"],correct:2,explanation:"GFCI for wet areas."}},
-    {topic:"hvac",zh:{question:"过滤网应该多久检查？",options:["A. 半年","B. 一个月","C. 一年","D. 两年"],correct:1,explanation:"应每月检查。"},en:{question:"Filter check frequency?",options:["A. 6 months","B. 1 month","C. 1 year","D. 2 years"],correct:1,explanation:"Check monthly."}},
-    {topic:"exterior",zh:{question:"木材腐烂原因？",options:["A. 阳光","B. 潮湿","C. 虫害","D. 温度"],correct:1,explanation:"潮湿是主因。"},en:{question:"Wood rot cause?",options:["A. Sunlight","B. Moisture","C. Pests","D. Temperature"],correct:1,explanation:"Moisture is main cause."}},
-    {topic:"safety",zh:{question:"CO探测器安装在哪？",options:["A. 车库","B. 卧室走廊","C. 厨房","D. 室外"],correct:1,explanation:"卧室和走廊。"},en:{question:"CO detector location?",options:["A. Garage","B. Bedroom hallway","C. Kitchen","D. Outdoor"],correct:1,explanation:"Bedroom and hallway."}},
-    {topic:"infrared",zh:{question:"红外热成像用于？",options:["A. 检测颜色","B. 发现温度异常","C. 测量距离","D. 检测声音"],correct:1,explanation:"发现温度异常。"},en:{question:"Thermal imaging for?",options:["A. Detect color","B. Temperature anomalies","C. Measure distance","D. Detect sound"],correct:1,explanation:"Finds temperature anomalies."}},
-    {topic:"radon",zh:{question:"氡气来源？",options:["A. 油漆","B. 土壤岩石","C. 家具","D. 水"],correct:1,explanation:"来自土壤和岩石。"},en:{question:"Radon source?",options:["A. Paint","B. Soil rock","C. Furniture","D. Water"],correct:1,explanation":"From soil and rock."}},
-    {topic:"mold",zh:{question":"霉菌生长需要？",options:["A. 阳光","B. 水分","C. 低温","D. 干燥"],correct:1,explanation":"需要水分。"},en:{question:"Mold needs?",options:["A. Sunlight","B. Moisture","C. Cold","D. Dry"],correct:1,explanation":"Needs moisture."}},
-    {topic:"asbestos",zh:{question":"石棉常用材料？",options:["A. 保温","B. 屋面","C. 防火","D. 所有都是"],correct:3,explanation:"曾广泛用于多种材料。"},en:{question:"Asbestos used in?",options:["A. Insulation","B. Roofing","C. Fireproof","D. All"],correct:3,explanation:"Used in many materials."}}
+var questions = [
+    {topic:"structure",q:"Which foundation crack is most concerning?",o:["A. Hairline","B. Vertical >1/4inch","C. Old with paint","D. Around door"],a:1,e:"Vertical cracks may indicate structural issues."},
+    {topic:"roof",q:"Missing asphalt shingles?",o:["A. No repair","B. Replace soon","C. Replace all","D. Apply glue"],a:1,e:"Missing causes leakage."},
+    {topic:"plumbing",q:"Double-tapped breaker means?",o:["A. Good protection","B. Safety hazard","C. Normal","D. Correct"],a:1,e:"Safety hazard - fire risk."},
+    {topic:"electrical",q:"GFCI mainly for?",o:["A. Living room","B. Bedroom","C. Kitchen/bathroom","D. Garage"],a:2,e:"GFCI for wet areas."},
+    {topic:"hvac",q:"Filter check frequency?",o:["A. 6 months","B. 1 month","C. 1 year","D. 2 years"],a:1,e:"Check monthly."},
+    {topic:"exterior",q:"Wood rot cause?",o:["A. Sunlight","B. Moisture","C. Pests","D. Temperature"],a:1,e:"Moisture is main cause."},
+    {topic:"safety",q:"CO detector location?",o:["A. Garage","B. Bedroom hallway","C. Kitchen","D. Outdoor"],a:1,e:"Bedroom and hallway."},
+    {topic:"infrared",q:"Thermal imaging for?",o:["A. Detect color","B. Temperature anomalies","C. Measure distance","D. Detect sound"],a:1,e:"Finds temperature anomalies."},
+    {topic:"radon",q:"Radon source?",o:["A. Paint","B. Soil/rock","C. Furniture","D. Water"],a:1,e:"From soil and rock."},
+    {topic:"mold",q:"Mold needs?",o:["A. Sunlight","B. Moisture","C. Cold","D. Dry"],a:1,e:"Needs moisture."},
+    {topic:"asbestos",q:"Asbestos used in?",o:["A. Insulation","B. Roofing","C. Fireproof","D. All"],a:3,e:"Used in many materials."}
 ];
-        
-        let currentLang = 'zh';
-        let quizQuestions = [];
-        let currentIndex = 0;
-        
-        document.getElementById('total-count').textContent = questions.length;
-        
-        function setLang(lang) { currentLang = lang; }
-        
-        function startQuiz(topic) {
-            if (topic === 'random') {
-                quizQuestions = [...questions].sort(() => Math.random() - 0.5);
-            } else {
-                quizQuestions = questions.filter(q => q.topic === topic);
-            }
-            currentIndex = 0;
-            document.getElementById('quiz').classList.remove('hidden');
-            renderQuestion();
-        }
-        
-        function renderQuestion() {
-            const q = quizQuestions[currentIndex];
-            const data = q[currentLang];
-            document.getElementById('question').textContent = data.question;
-            const opts = document.getElementById('options');
-            opts.innerHTML = data.options.map((o, i) => 
-                `<div class="option" onclick="selectOption(${i})">${o}</div>`
-            ).join('');
-        }
-        
-        function selectOption(i) {
-            const q = quizQuestions[currentIndex];
-            const data = q[currentLang];
-            const opts = document.querySelectorAll('.option');
-            opts.forEach((o, j) => {
-                o.classList.remove('correct', 'wrong');
-                if (j === data.correct) o.classList.add('correct');
-                else if (j === i) o.classList.add('wrong');
-            });
-        }
-        
-        function nextQuestion() {
-            currentIndex++;
-            if (currentIndex < quizQuestions.length) {
-                renderQuestion();
-            } else {
-                alert('Done!');
-                document.getElementById('quiz').classList.add('hidden');
-            }
-        }
+var qs = [], idx = 0;
+document.getElementById('total').textContent = questions.length;
+function startQuiz(t) {
+    qs = t==='random'? [...questions].sort(()=>Math.random()-.5) : questions.filter(q=>q.topic===t);
+    idx = 0;
+    document.getElementById('quiz').classList.remove('hidden');
+    show();
+}
+function show() {
+    var q = qs[idx];
+    document.getElementById('q').textContent = q.q;
+    document.getElementById('opts').innerHTML = q.o.map((o,i)=>'<div class="option" onclick="sel('+i+')">'+o+'</div>').join('');
+}
+function sel(i) {
+    var q = qs[idx], els = document.querySelectorAll('.option');
+    els.forEach((e,j)=>{ e.classList.remove('correct','wrong'); if(j===q.a)e.classList.add('correct'); else if(j===i)e.classList.add('wrong'); });
+}
+function next() {
+    idx++;
+    if(idx<qs.length) show(); else { alert('Done!'); document.getElementById('quiz').classList.add('hidden'); }
+}
     </script>
 </body>
 </html>
