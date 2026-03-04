@@ -293,712 +293,1266 @@
     <script>
         // Question Bank
 const questions = [
-    {
-        topic: "structure",
-        zh: {
-            question: "检查地基时，以下哪种裂缝最需要关注？",
-            options: ["A. 头发丝细裂缝","B. 垂直裂缝，宽度超过1/4英寸","C. 旧裂缝，表面有漆覆盖","D. 门框周围的微小裂缝"],
-            correct: 1,
-            explanation: "垂直裂缝且宽度超过1/4英寸可能表示地基结构问题。"
-        },
-        en: {
-            question: "Which crack most concerning?",
-            options: ["A. Hairline crack","B. Vertical crack over 1/4 inch","C. Old crack with paint","D. Small crack around door"],
-            correct: 1,
-            explanation: "Vertical cracks over 1/4 inch may indicate structural issues."
-        }
+  {
+    "topic": "roof",
+    "en": {
+      "question": "The purpose of gravel on a built-up tar-and-gravel roof is?",
+      "options": [
+        "prevent delamination",
+        "protect from UV",
+        "provide ballast",
+        "all of these"
+      ],
+      "correct": 3,
+      "explanation": "Gravel provides UV protection, ballast."
     },
-    {
-        topic: "structure",
-        zh: {
-            question: "piers（桩基）的主要作用是？",
-            options: ["A. 美观装饰","B. 支撑并将荷载传递到地基","C. 防水","D. 装饰地面"],
-            correct: 1,
-            explanation: "桩基是垂直支撑结构。"
-        },
-        en: {
-            question: "Purpose of piers?",
-            options: ["A. Decorative","B. Support and transfer load","C. Waterproofing","D. Floor decoration"],
-            correct: 1,
-            explanation: "Piers transfer load to foundation."
-        }
-    },
-    {
-        topic: "structure",
-        zh: {
-            question: "承重墙的主要特征是？",
-            options: ["A. 通常是薄墙","B. 垂直于楼层梁","C. 与其他墙体垂直","D. 可以随意拆除"],
-            correct: 1,
-            explanation: "垂直于楼层梁。"
-        },
-        en: {
-            question: "Load-bearing wall?",
-            options: ["A. Usually thin","B. Perpendicular to joists","C. Perpendicular walls","D. Can remove"],
-            correct: 1,
-            explanation: "Perpendicular to floor joists."
-        }
-    },
-    {
-        topic: "structure",
-        zh: {
-            question: "楼板间距标准是？",
-            options: ["A. 任意","B. 16英寸或24英寸","C. 12英寸","D. 36英寸"],
-            correct: 1,
-            explanation: "楼板间距通常为16或24英寸。"
-        },
-        en: {
-            question: "Floor joist spacing?",
-            options: ["A. Any","B. 16 or 24 inches","C. 12 inches","D. 36 inches"],
-            correct: 1,
-            explanation: "Typically 16 or 24 inches."
-        }
-    },
-    {
-        topic: "structure",
-        zh: {
-            question: "A joist below a bearing wall should be?",
-            options: ["A. doubled","B. split","C. tripled"],
-            correct: 0,
-            explanation: "A joist below a bearing wall should be doubled."
-        },
-        en: {
-            question: "A joist below a bearing wall should be?",
-            options: ["A. doubled","B. split","C. tripled"],
-            correct: 0,
-            explanation: "A joist below a bearing wall should be doubled."
-        }
-    },
-    {
-        topic: "structure",
-        zh: {
-            question: "Gypsum board can be used as bracing?",
-            options: ["A. True","B. False"],
-            correct: 0,
-            explanation: "Gypsum board can be used as bracing."
-        },
-        en: {
-            question: "Gypsum board can be used as bracing?",
-            options: ["A. True","B. False"],
-            correct: 0,
-            explanation: "Gypsum board can be used as bracing."
-        }
-    },
-    {
-        topic: "structure",
-        zh: {
-            question: "Lintels and headers are the same things?",
-            options: ["A. True","B. False"],
-            correct: 1,
-            explanation: "Lintels and headers are different components."
-        },
-        en: {
-            question: "Lintels and headers are the same things?",
-            options: ["A. True","B. False"],
-            correct: 1,
-            explanation: "Lintels and headers are different."
-        }
-    },
-    {
-        topic: "roof",
-        zh: {
-            question: "沥青瓦片缺失，应该？",
-            options: ["A. 不需要维修","B. 尽快更换","C. 更换整个屋顶","D. 涂胶水"],
-            correct: 1,
-            explanation: "缺失瓦片会导致漏水。"
-        },
-        en: {
-            question: "Missing shingles?",
-            options: ["A. No repair","B. Replace","C. Replace all","D. Glue"],
-            correct: 1,
-            explanation: "Missing causes leakage."
-        }
-    },
-    {
-        topic: "roof",
-        zh: {
-            question: "什么是冰坝？",
-            options: ["A. 装饰冰雕","B. 屋檐冰块阻碍排水","C. 冷冻仓库","D. 排水系统"],
-            correct: 1,
-            explanation: "冰坝阻碍排水导致漏水。"
-        },
-        en: {
-            question: "What is ice dam?",
-            options: ["A. Decorative ice","B. Ice at eaves","C. Cold storage","D. Drainage"],
-            correct: 1,
-            explanation: "Ice dam blocks drainage."
-        }
-    },
-    {
-        topic: "roof",
-        zh: {
-            question: "泛水的作用是？",
-            options: ["A. 美观","B. 防水","C. 保温","D. 装饰"],
-            correct: 1,
-            explanation: "泛水用于防水。"
-        },
-        en: {
-            question: "Flashing purpose?",
-            options: ["A. Aesthetic","B. Waterproof","C. Insulation","D. Decoration"],
-            correct: 1,
-            explanation: "Flashing is for waterproof."
-        }
-    },
-    {
-        topic: "roof",
-        zh: {
-            question: "金属屋顶优点？",
-            options: ["A. 便宜","B. 耐久防火轻便","C. 重","D. 难安装"],
-            correct: 1,
-            explanation: "耐久防火重量轻。"
-        },
-        en: {
-            question: "Metal roof?",
-            options: ["A. Cheap","B. Durable","C. Heavy","D. Hard"],
-            correct: 1,
-            explanation: "Durable and lightweight."
-        }
-    },
-    {
-        topic: "plumbing",
-        zh: {
-            question: "double-tapped breaker意味？",
-            options: ["A. 保护良好","B. 安全隐患","C. 水压正常","D. 安装正确"],
-            correct: 1,
-            explanation: "双螺栓断路器是电气安全隐患。"
-        },
-        en: {
-            question: "Double-tapped breaker?",
-            options: ["A. Good","B. Hazard","C. Normal","D. Correct"],
-            correct: 1,
-            explanation: "Safety hazard."
-        }
-    },
-    {
-        topic: "plumbing",
-        zh: {
-            question: "正常住宅水压？",
-            options: ["A. 10-20 PSI","B. 40-60 PSI","C. 80-100 PSI","D. 100-150 PSI"],
-            correct: 1,
-            explanation: "正常水压40-60 PSI。"
-        },
-        en: {
-            question: "Normal water pressure?",
-            options: ["A. 10-20","B. 40-60","C. 80-100","D. 100-150"],
-            correct: 1,
-            explanation: "Normal is 40-60 PSI."
-        }
-    },
-    {
-        topic: "plumbing",
-        zh: {
-            question: "马桶摇晃原因？",
-            options: ["A. 马桶太大","B. 密封胶老化/螺丝松动","C. 水压太高","D. 太旧"],
-            correct: 1,
-            explanation: "密封胶老化或螺丝松。"
-        },
-        en: {
-            question: "Toilet wobble?",
-            options: ["A. Too big","B. Caulk issue","C. Pressure high","D. Too old"],
-            correct: 1,
-            explanation: "Caulk or loose bolts."
-        }
-    },
-    {
-        topic: "plumbing",
-        zh: {
-            question: "TPR阀作用？",
-            options: ["A. 节能","B. 释放过高压力","C. 防水垢","D. 过滤"],
-            correct: 1,
-            explanation: "TPR阀释放过高压力。"
-        },
-        en: {
-            question: "TPR valve?",
-            options: ["A. Energy saving","B. Release pressure","C. Prevent scale","D. Filter"],
-            correct: 1,
-            explanation: "Releases excess pressure."
-        }
-    },
-    {
-        topic: "electrical",
-        zh: {
-            question: "红黑色白线？",
-            options: ["A. 220V","B. 110V标准","C. 低压","D. 地暖"],
-            correct: 1,
-            explanation: "110V标准电路。"
-        },
-        en: {
-            question: "Red black white wires?",
-            options: ["A. 220V","B. 110V","C. Low voltage","D. Floor heat"],
-            correct: 1,
-            explanation: "110V standard circuit."
-        }
-    },
-    {
-        topic: "electrical",
-        zh: {
-            question: "GFCI主要用于？",
-            options: ["A. 客厅","B. 卧室","C. 厨房浴室","D. 车库"],
-            correct: 2,
-            explanation: "GFCI用于潮湿区域。"
-        },
-        en: {
-            question: "GFCI mainly for?",
-            options: ["A. Living room","B. Bedroom","C. Kitchen bathroom","D. Garage"],
-            correct: 2,
-            explanation: "GFCI for wet areas."
-        }
-    },
-    {
-        topic: "electrical",
-        zh: {
-            question: "插座过热原因？",
-            options: ["A. 太旧","B. 过载或接触不良","C. 电压低","D. 品牌差"],
-            correct: 1,
-            explanation: "过载或接触不良。"
-        },
-        en: {
-            question: "Outlet overheats?",
-            options: ["A. Too old","B. Overload","C. Voltage low","D. Bad brand"],
-            correct: 1,
-            explanation: "Overload or poor connection."
-        }
-    },
-    {
-        topic: "electrical",
-        zh: {
-            question: "铝线需要？",
-            options: ["A. 普通接线器","B. CO/ALR兼容","C. 任何都可以","D. 胶带"],
-            correct: 1,
-            explanation: "需要CO/ALR兼容接线器。"
-        },
-        en: {
-            question: "Aluminum wiring?",
-            options: ["A. Regular","B. CO/ALR","C. Any","D. Tape"],
-            correct: 1,
-            explanation: "Needs CO/ALR connectors."
-        }
-    },
-    {
-        topic: "hvac",
-        zh: {
-            question: "过滤网多久检查？",
-            options: ["A. 半年","B. 一个月","C. 一年","D. 两年"],
-            correct: 1,
-            explanation: "应每月检查。"
-        },
-        en: {
-            question: "Filter check?",
-            options: ["A. 6 months","B. 1 month","C. 1 year","D. 2 years"],
-            correct: 1,
-            explanation: "Check monthly."
-        }
-    },
-    {
-        topic: "hvac",
-        zh: {
-            question: "冷媒泄漏迹象？",
-            options: ["A. 制冷正常","B. 油渍","C. 噪音变小","D. 电费下降"],
-            correct: 1,
-            explanation: "冷媒泄漏伴有油渍。"
-        },
-        en: {
-            question: "Refrigerant leak?",
-            options: ["A. Normal","B. Oil stains","C. Less noise","D. Lower bill"],
-            correct: 1,
-            explanation: "Leak has oil stains."
-        }
-    },
-    {
-        topic: "hvac",
-        zh: {
-            question: "空调霉味原因？",
-            options: ["A. 冷媒不足","B. 蒸发器发霉","C. 电压不稳","D. 缺制冷剂"],
-            correct: 1,
-            explanation: "蒸发器发霉。"
-        },
-        en: {
-            question: "Moldy smell?",
-            options: ["A. Low refrigerant","B. Evaporator mold","C. Voltage issue","D. Missing refrigerant"],
-            correct: 1,
-            explanation: "Evaporator coil mold."
-        }
-    },
-    {
-        topic: "hvac",
-        zh: {
-            question: "风量不足原因？",
-            options: ["A. 过滤器太干净","B. 管道堵塞或风扇问题","C. 制冷剂太多","D. 电压太高"],
-            correct: 1,
-            explanation: "管道堵塞或风扇问题。"
-        },
-        en: {
-            question: "Low air flow?",
-            options: ["A. Filter too clean","B. Duct/fan issue","C. Too much refrigerant","D. Voltage high"],
-            correct: 1,
-            explanation: "Duct or fan issues."
-        }
-    },
-    {
-        topic: "exterior",
-        zh: {
-            question: "木材腐烂原因？",
-            options: ["A. 阳光","B. 潮湿","C. 虫害","D. 温度"],
-            correct: 1,
-            explanation: "潮湿是主因。"
-        },
-        en: {
-            question: "Wood rot?",
-            options: ["A. Sun","B. Moisture","C. Pests","D. Temp"],
-            correct: 1,
-            explanation: "Moisture is main cause."
-        }
-    },
-    {
-        topic: "exterior",
-        zh: {
-            question: "坡度朝向？",
-            options: ["A. 房子中心","B. 远离房屋","C. 随意","D. 平行"],
-            correct: 1,
-            explanation: "坡度应远离房屋。"
-        },
-        en: {
-            question: "Grading?",
-            options: ["A. To center","B. Away from house","C. Any","D. Parallel"],
-            correct: 1,
-            explanation: "Slope away from house."
-        }
-    },
-    {
-        topic: "exterior",
-        zh: {
-            question: "窗户渗水原因？",
-            options: ["A. 玻璃破","B. 密封胶老化","C. 窗户小","D. 颜色问题"],
-            correct: 1,
-            explanation: "密封胶老化。"
-        },
-        en: {
-            question: "Window leak?",
-            options: ["A. Glass broken","B. Caulk aging","C. Window small","D. Color"],
-            correct: 1,
-            explanation: "Caulk aging."
-        }
-    },
-    {
-        topic: "exterior",
-        zh: {
-            question: "落水管距离？",
-            options: ["A. 任意","B. 至少6英尺","C. 靠近房子","D. 水平"],
-            correct: 1,
-            explanation: "应至少6英尺。"
-        },
-        en: {
-            question: "Downspout?",
-            options: ["A. Any","B. 6 feet","C. Close to house","D. Level"],
-            correct: 1,
-            explanation: "At least 6 feet away."
-        }
-    },
-    {
-        topic: "safety",
-        zh: {
-            question: "CO探测器安装？",
-            options: ["A. 车库","B. 卧室走廊","C. 厨房","D. 室外"],
-            correct: 1,
-            explanation: "卧室和走廊。"
-        },
-        en: {
-            question: "CO detector?",
-            options: ["A. Garage","B. Bedroom hall","C. Kitchen","D. Outdoor"],
-            correct: 1,
-            explanation: "Bedroom and hallway."
-        }
-    },
-    {
-        topic: "safety",
-        zh: {
-            question: "扶手间距？",
-            options: ["A. 6寸","B. 4寸","C. 3寸","D. 8寸"],
-            correct: 1,
-            explanation: "不超过4英寸。"
-        },
-        en: {
-            question: "Rail spacing?",
-            options: ["A. 6 inches","B. 4 inches","C. 3 inches","D. 8 inches"],
-            correct: 1,
-            explanation: "Not exceed 4 inches."
-        }
-    },
-    {
-        topic: "safety",
-        zh: {
-            question: "烟雾探测器？",
-            options: ["A. 仅客厅","B. 每层每卧室","C. 仅厨房","D. 仅车库"],
-            correct: 1,
-            explanation: "每层每卧室。"
-        },
-        en: {
-            question: "Smoke detector?",
-            options: ["A. Living room only","B. Every floor bedroom","C. Kitchen only","D. Garage only"],
-            correct: 1,
-            explanation: "Every floor and bedroom."
-        }
-    },
-    {
-        topic: "safety",
-        zh: {
-            question: "燃气壁炉检查？",
-            options: ["A. 火焰颜色","B. 通风燃气连接","C. 外观","D. 价格"],
-            correct: 1,
-            explanation: "检查通风和燃气。"
-        },
-        en: {
-            question: "Gas fireplace?",
-            options: ["A. Flame color","B. Venting/gas","C. Appearance","D. Price"],
-            correct: 1,
-            explanation: "Check venting and gas."
-        }
-    },
-    {
-        topic: "infrared",
-        zh: {
-            question: "红外热成像用于？",
-            options: ["A. 检测颜色","B. 发现温度异常","C. 测量距离","D. 检测声音"],
-            correct: 1,
-            explanation: "发现温度异常。"
-        },
-        en: {
-            question: "Thermal imaging?",
-            options: ["A. Detect color","B. Temperature anomalies","C. Measure distance","D. Detect sound"],
-            correct: 1,
-            explanation: "Finds temperature anomalies."
-        }
-    },
-    {
-        topic: "infrared",
-        zh: {
-            question: "窗户周围低温？",
-            options: ["A. 隔热好","B. 密封不良","C. 正常","D. 室内太热"],
-            correct: 1,
-            explanation: "密封不良或热桥。"
-        },
-        en: {
-            question: "Low temp windows?",
-            options: ["A. Good insulation","B. Poor sealing","C. Normal","D. Too hot inside"],
-            correct: 1,
-            explanation: "Poor sealing."
-        }
-    },
-    {
-        topic: "infrared",
-        zh: {
-            question: "电气柜热点？",
-            options: ["A. 正常","B. 过载","C. 电压低","D. 设备太旧"],
-            correct: 1,
-            explanation: "过载，火灾隐患。"
-        },
-        en: {
-            question: "Hot spots panel?",
-            options: ["A. Normal","B. Overload","C. Voltage low","D. Old"],
-            correct: 1,
-            explanation: "Overload, fire hazard."
-        }
-    },
-    {
-        topic: "infrared",
-        zh: {
-            question: "屋顶低温表示？",
-            options: ["A. 屋顶完好","B. 保温缺失或漏水","C. 室内温度低","D. 天气太冷"],
-            correct: 1,
-            explanation: "保温缺失或漏水。"
-        },
-        en: {
-            question: "Cold spots roof?",
-            options: ["A. Roof OK","B. Missing insulation","C. Inside cold","D. Weather cold"],
-            correct: 1,
-            explanation: "Missing insulation."
-        }
-    },
-    {
-        topic: "radon",
-        zh: {
-            question: "氡气来源？",
-            options: ["A. 油漆","B. 土壤岩石","C. 家具","D. 水"],
-            correct: 1,
-            explanation: "来自土壤和岩石。"
-        },
-        en: {
-            question: "Radon source?",
-            options: ["A. Paint","B. Soil rock","C. Furniture","D. Water"],
-            correct: 1,
-            explanation: "From uranium in soil."
-        }
-    },
-    {
-        topic: "radon",
-        zh: {
-            question: "氡气检测位置？",
-            options: ["A. 阁楼","B. 地下室","C. 屋顶","D. 室外"],
-            correct: 1,
-            explanation: "地下室或一楼最低处。"
-        },
-        en: {
-            question: "Where test radon?",
-            options: ["A. Attic","B. Basement","C. Roof","D. Outside"],
-            correct: 1,
-            explanation: "Basement or lowest floor."
-        }
-    },
-    {
-        topic: "radon",
-        zh: {
-            question: "氡气安全水平？",
-            options: ["A. 10 pCi/L","B. 4 pCi/L以下","C. 20 pCi/L","D. 50 pCi/L"],
-            correct: 1,
-            explanation: "低于4 pCi/L。"
-        },
-        en: {
-            question: "Safe radon?",
-            options: ["A. 10","B. Below 4","C. 20","D. 50"],
-            correct: 1,
-            explanation: "Below 4 pCi/L."
-        }
-    },
-    {
-        topic: "radon",
-        zh: {
-            question: "降低氡气方法？",
-            options: ["A. 开窗通风","B. 安装通风","C. 密封缝隙","D. 所有都是"],
-            correct: 3,
-            explanation: "需要多种方法。"
-        },
-        en: {
-            question: "Reduce radon?",
-            options: ["A. Open windows","B. Install vent","C. Seal cracks","D. All"],
-            correct: 3,
-            explanation: "Need combined methods."
-        }
-    },
-    {
-        topic: "mold",
-        zh: {
-            question: "霉菌生长条件？",
-            options: ["A. 阳光","B. 水分","C. 低温","D. 干燥"],
-            correct: 1,
-            explanation: "需要水分。"
-        },
-        en: {
-            question: "Mold needs?",
-            options: ["A. Sunlight","B. Moisture","C. Cold","D. Dry"],
-            correct: 1,
-            explanation: "Needs moisture."
-        }
-    },
-    {
-        topic: "mold",
-        zh: {
-            question: "发现霉菌首先？",
-            options: ["A. 喷漂白水","B. 找出水源","C. 忽略","D. 刷漆覆盖"],
-            correct: 1,
-            explanation: "先找出水源。"
-        },
-        en: {
-            question: "Found mold?",
-            options: ["A. Spray bleach","B. Find water source","C. Ignore","D. Paint over"],
-            correct: 1,
-            explanation: "Find water source first."
-        }
-    },
-    {
-        topic: "mold",
-        zh: {
-            question: "有害霉菌？",
-            options: ["A. 黑霉","B. 曲霉","C. 链格孢属","D. 所有都是"],
-            correct: 3,
-            explanation: "都是常见有害霉菌。"
-        },
-        en: {
-            question: "Harmful mold?",
-            options: ["A. Black mold","B. Aspergillus","C. Alternaria","D. All"],
-            correct: 3,
-            explanation: "All are harmful."
-        }
-    },
-    {
-        topic: "mold",
-        zh: {
-            question: "检测霉菌方法？",
-            options: ["A. 温度计","B. 检测仪","C. 湿度计","D. 望远镜"],
-            correct: 1,
-            explanation: "使用检测仪。"
-        },
-        en: {
-            question: "Detect mold?",
-            options: ["A. Thermometer","B. Tester","C. Hygrometer","D. Telescope"],
-            correct: 1,
-            explanation: "Use tester."
-        }
-    },
-    {
-        topic: "asbestos",
-        zh: {
-            question: "石棉常用材料？",
-            options: ["A. 保温","B. 屋面","C. 防火","D. 所有都是"],
-            correct: 3,
-            explanation: "曾广泛用于多种材料。"
-        },
-        en: {
-            question: "Asbestos used?",
-            options: ["A. Insulation","B. Roofing","C. Fireproof","D. All"],
-            correct: 3,
-            explanation: "Used in many materials."
-        }
-    },
-    {
-        topic: "asbestos",
-        zh: {
-            question: "石棉样本送哪？",
-            options: ["A. 任何实验室","B. EPA认可实验室","C. 医院","D. 学校"],
-            correct: 1,
-            explanation: "送EPA认可实验室。"
-        },
-        en: {
-            question: "Asbestos samples?",
-            options: ["A. Any lab","B. EPA certified","C. Hospital","D. School"],
-            correct: 1,
-            explanation: "EPA certified lab."
-        }
-    },
-    {
-        topic: "asbestos",
-        zh: {
-            question: "石棉需要移除？",
-            options: ["A. 破损老化","B. 装修扰动","C. A和B","D. 不需要"],
-            correct: 2,
-            explanation: "破损老化或装修时。"
-        },
-        en: {
-            question: "Remove asbestos?",
-            options: ["A. Damaged aged","B. Renovation","C. A and B","D. No need"],
-            correct: 2,
-            explanation: "When damaged or disturbed."
-        }
-    },
-    {
-        topic: "asbestos",
-        zh: {
-            question: "石棉进入途径？",
-            options: ["A. 食物","B. 呼吸","C. 皮肤","D. 饮水"],
-            correct: 1,
-            explanation: "通过呼吸。"
-        },
-        en: {
-            question: "Asbestos enters?",
-            options: ["A. Food","B. Breathing","C. Skin","D. Drinking"],
-            correct: 1,
-            explanation: "Through breathing."
-        }
+    "zh": {
+      "question": "[\u7ffb\u8bd1] The purpose of gravel on a built-up tar-and-gravel roof is?",
+      "options": [
+        "prevent delamination",
+        "protect from UV",
+        "provide ballast",
+        "all of these"
+      ],
+      "correct": 3,
+      "explanation": "Gravel provides UV protection, ballast."
     }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Ponding water remains how many hours after rain?",
+      "options": [
+        "12",
+        "2",
+        "24",
+        "48"
+      ],
+      "correct": 2,
+      "explanation": "24+ hours."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Ponding water remains how many hours after rain?",
+      "options": [
+        "12",
+        "2",
+        "24",
+        "48"
+      ],
+      "correct": 2,
+      "explanation": "24+ hours."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Purpose of cant strip?",
+      "options": [
+        "prevent membrane cracking",
+        "curb for skylight",
+        "replace reglet",
+        "seal parapet"
+      ],
+      "correct": 0,
+      "explanation": "Prevents membrane cracking."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Purpose of cant strip?",
+      "options": [
+        "prevent membrane cracking",
+        "curb for skylight",
+        "replace reglet",
+        "seal parapet"
+      ],
+      "correct": 0,
+      "explanation": "Prevents membrane cracking."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Common built-up roofing problem except?",
+      "options": [
+        "alligatoring",
+        "blistering",
+        "oil-canning",
+        "ridging"
+      ],
+      "correct": 2,
+      "explanation": "Oil-canning is metal roofing."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Common built-up roofing problem except?",
+      "options": [
+        "alligatoring",
+        "blistering",
+        "oil-canning",
+        "ridging"
+      ],
+      "correct": 2,
+      "explanation": "Oil-canning is metal roofing."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "4-in-12 slope ratio?",
+      "options": [
+        "1/4",
+        "12:4",
+        "4:12",
+        "6:2:4"
+      ],
+      "correct": 2,
+      "explanation": "4 inches rise per 12 inches run."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] 4-in-12 slope ratio?",
+      "options": [
+        "1/4",
+        "12:4",
+        "4:12",
+        "6:2:4"
+      ],
+      "correct": 2,
+      "explanation": "4 inches rise per 12 inches run."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Low slope problem except?",
+      "options": [
+        "asphalt shingles",
+        "fiber-cement",
+        "roll roofing",
+        "wood shakes",
+        "wood shingles"
+      ],
+      "correct": 2,
+      "explanation": "Roll roofing suits low slope."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Low slope problem except?",
+      "options": [
+        "asphalt shingles",
+        "fiber-cement",
+        "roll roofing",
+        "wood shakes",
+        "wood shingles"
+      ],
+      "correct": 2,
+      "explanation": "Roll roofing suits low slope."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Shortest life roofing material?",
+      "options": [
+        "concrete",
+        "fiber cement",
+        "roll roofing",
+        "slate",
+        "wood"
+      ],
+      "correct": 2,
+      "explanation": "Roll roofing shortest."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Shortest life roofing material?",
+      "options": [
+        "concrete",
+        "fiber cement",
+        "roll roofing",
+        "slate",
+        "wood"
+      ],
+      "correct": 2,
+      "explanation": "Roll roofing shortest."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Ice dams form on roofs with?",
+      "options": [
+        "low slope small overhang",
+        "low slope wide overhang",
+        "steep slope small",
+        "steep slope wide"
+      ],
+      "correct": 1,
+      "explanation": "Low slope with wide overhang."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Ice dams form on roofs with?",
+      "options": [
+        "low slope small overhang",
+        "low slope wide overhang",
+        "steep slope small",
+        "steep slope wide"
+      ],
+      "correct": 1,
+      "explanation": "Low slope with wide overhang."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Minimum slope for asphalt shingles?",
+      "options": [
+        "2:12",
+        "4:12",
+        "5:12",
+        "6:12"
+      ],
+      "correct": 0,
+      "explanation": "2:12 minimum."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Minimum slope for asphalt shingles?",
+      "options": [
+        "2:12",
+        "4:12",
+        "5:12",
+        "6:12"
+      ],
+      "correct": 0,
+      "explanation": "2:12 minimum."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Asphalt shingle failure except?",
+      "options": [
+        "cracking blisters",
+        "cupping",
+        "loss of granules",
+        "spalling"
+      ],
+      "correct": 3,
+      "explanation": "Spalling is concrete."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Asphalt shingle failure except?",
+      "options": [
+        "cracking blisters",
+        "cupping",
+        "loss of granules",
+        "spalling"
+      ],
+      "correct": 3,
+      "explanation": "Spalling is concrete."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "4-year roof 25% cracks should be reported as?",
+      "options": [
+        "cosmetic",
+        "foot traffic",
+        "freeze-thaw",
+        "manufacturing defects"
+      ],
+      "correct": 3,
+      "explanation": "May indicate defects."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] 4-year roof 25% cracks should be reported as?",
+      "options": [
+        "cosmetic",
+        "foot traffic",
+        "freeze-thaw",
+        "manufacturing defects"
+      ],
+      "correct": 3,
+      "explanation": "May indicate defects."
+    }
+  },
+  {
+    "topic": "roof",
+    "en": {
+      "question": "Chimney leakage cause?",
+      "options": [
+        "height insufficient",
+        "obstructs drainage",
+        "nails penetrated valley",
+        "used roll roofing"
+      ],
+      "correct": 1,
+      "explanation": "Obstructs drainage."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Chimney leakage cause?",
+      "options": [
+        "height insufficient",
+        "obstructs drainage",
+        "nails penetrated valley",
+        "used roll roofing"
+      ],
+      "correct": 1,
+      "explanation": "Obstructs drainage."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Foundation walls?",
+      "options": [
+        "resist lateral",
+        "underground",
+        "support and connect to footing",
+        "vary with depth"
+      ],
+      "correct": 2,
+      "explanation": "Support structure."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Foundation walls?",
+      "options": [
+        "resist lateral",
+        "underground",
+        "support and connect to footing",
+        "vary with depth"
+      ],
+      "correct": 2,
+      "explanation": "Support structure."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Wall cracks develop because?",
+      "options": [
+        "all reasons",
+        "overloaded",
+        "heaved",
+        "settled"
+      ],
+      "correct": 0,
+      "explanation": "All can cause cracks."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Wall cracks develop because?",
+      "options": [
+        "all reasons",
+        "overloaded",
+        "heaved",
+        "settled"
+      ],
+      "correct": 0,
+      "explanation": "All can cause cracks."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Foundation wall penetration should?",
+      "options": [
+        "repair with cement",
+        "report if leakage",
+        "never below grade",
+        "never below frost"
+      ],
+      "correct": 1,
+      "explanation": "Report if leakage."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Foundation wall penetration should?",
+      "options": [
+        "repair with cement",
+        "report if leakage",
+        "never below grade",
+        "never below frost"
+      ],
+      "correct": 1,
+      "explanation": "Report if leakage."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "A header is?",
+      "options": [
+        "fall from scaffolding",
+        "doubled joist",
+        "extra joist",
+        "transfer loads over openings"
+      ],
+      "correct": 3,
+      "explanation": "Transfers loads."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] A header is?",
+      "options": [
+        "fall from scaffolding",
+        "doubled joist",
+        "extra joist",
+        "transfer loads over openings"
+      ],
+      "correct": 3,
+      "explanation": "Transfers loads."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Water in basement caused by?",
+      "options": [
+        "hydrostatic pressure",
+        "puddles exterior",
+        "pond to one side"
+      ],
+      "correct": 0,
+      "explanation": "Hydrostatic pressure."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Water in basement caused by?",
+      "options": [
+        "hydrostatic pressure",
+        "puddles exterior",
+        "pond to one side"
+      ],
+      "correct": 0,
+      "explanation": "Hydrostatic pressure."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Water removed by?",
+      "options": [
+        "sump pump",
+        "dehumidification",
+        "perimeter drainage",
+        "any method"
+      ],
+      "correct": 3,
+      "explanation": "All methods work."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Water removed by?",
+      "options": [
+        "sump pump",
+        "dehumidification",
+        "perimeter drainage",
+        "any method"
+      ],
+      "correct": 3,
+      "explanation": "All methods work."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Basement stairways need?",
+      "options": [
+        "handrail",
+        "headroom",
+        "lighting",
+        "equal risers",
+        "all"
+      ],
+      "correct": 4,
+      "explanation": "All required."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Basement stairways need?",
+      "options": [
+        "handrail",
+        "headroom",
+        "lighting",
+        "equal risers",
+        "all"
+      ],
+      "correct": 4,
+      "explanation": "All required."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Retaining wall?",
+      "options": [
+        "no openings",
+        "not foundation",
+        "not landform",
+        "prevent soil movement"
+      ],
+      "correct": 3,
+      "explanation": "Prevents soil movement."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Retaining wall?",
+      "options": [
+        "no openings",
+        "not foundation",
+        "not landform",
+        "prevent soil movement"
+      ],
+      "correct": 3,
+      "explanation": "Prevents soil movement."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Paths and walkways should?",
+      "options": [
+        "30 inches wide",
+        "free of tripping hazards",
+        "not above grade",
+        "not inspected",
+        "pitch to driveway"
+      ],
+      "correct": 1,
+      "explanation": "Free of tripping hazards."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Paths and walkways should?",
+      "options": [
+        "30 inches wide",
+        "free of tripping hazards",
+        "not above grade",
+        "not inspected",
+        "pitch to driveway"
+      ],
+      "correct": 1,
+      "explanation": "Free of tripping hazards."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Ponds near house indicate water table?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Ponds near house indicate water table?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Function of footing?",
+      "options": [
+        "lateral support",
+        "support floor",
+        "resist hydrostatic",
+        "transmit weight to soil"
+      ],
+      "correct": 3,
+      "explanation": "Transmits weight to soil."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Function of footing?",
+      "options": [
+        "lateral support",
+        "support floor",
+        "resist hydrostatic",
+        "transmit weight to soil"
+      ],
+      "correct": 3,
+      "explanation": "Transmits weight to soil."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Most common footing failure symptom?",
+      "options": [
+        "bowing walls",
+        "cracking above windows",
+        "cracking foundation",
+        "leaking",
+        "sagging floors"
+      ],
+      "correct": 2,
+      "explanation": "Foundation wall cracking."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Most common footing failure symptom?",
+      "options": [
+        "bowing walls",
+        "cracking above windows",
+        "cracking foundation",
+        "leaking",
+        "sagging floors"
+      ],
+      "correct": 2,
+      "explanation": "Foundation wall cracking."
+    }
+  },
+  {
+    "topic": "structure",
+    "en": {
+      "question": "Future settlement predicted by footing depth?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 1,
+      "explanation": "False."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Future settlement predicted by footing depth?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 1,
+      "explanation": "False."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Plumbing noise not caused by?",
+      "options": [
+        "cold water",
+        "inadequate support",
+        "expansion rubbing",
+        "water hammer",
+        "worn valves"
+      ],
+      "correct": 0,
+      "explanation": "Cold water doesn't cause noise."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Plumbing noise not caused by?",
+      "options": [
+        "cold water",
+        "inadequate support",
+        "expansion rubbing",
+        "water hammer",
+        "worn valves"
+      ],
+      "correct": 0,
+      "explanation": "Cold water doesn't cause noise."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Fixture notorious for leakage?",
+      "options": [
+        "angle stop",
+        "bidet",
+        "lavatory",
+        "shower enclosure",
+        "toilet"
+      ],
+      "correct": 3,
+      "explanation": "Shower enclosure."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Fixture notorious for leakage?",
+      "options": [
+        "angle stop",
+        "bidet",
+        "lavatory",
+        "shower enclosure",
+        "toilet"
+      ],
+      "correct": 3,
+      "explanation": "Shower enclosure."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Galvanic reaction is?",
+      "options": [
+        "dissimilar metals problem",
+        "waste system deterioration",
+        "prevented by ground",
+        "cold water more serious"
+      ],
+      "correct": 0,
+      "explanation": "Dissimilar metals."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Galvanic reaction is?",
+      "options": [
+        "dissimilar metals problem",
+        "waste system deterioration",
+        "prevented by ground",
+        "cold water more serious"
+      ],
+      "correct": 0,
+      "explanation": "Dissimilar metals."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Wet vent is?",
+      "options": [
+        ">6 inches water",
+        "outside pipe",
+        "also acts as drain",
+        "never in bathroom"
+      ],
+      "correct": 2,
+      "explanation": "Also acts as drain."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Wet vent is?",
+      "options": [
+        ">6 inches water",
+        "outside pipe",
+        "also acts as drain",
+        "never in bathroom"
+      ],
+      "correct": 2,
+      "explanation": "Also acts as drain."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Never use for supply due to health?",
+      "options": [
+        "copper",
+        "galvanized steel",
+        "lead",
+        "polybutylene"
+      ],
+      "correct": 2,
+      "explanation": "Lead."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Never use for supply due to health?",
+      "options": [
+        "copper",
+        "galvanized steel",
+        "lead",
+        "polybutylene"
+      ],
+      "correct": 2,
+      "explanation": "Lead."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Double-trapping is?",
+      "options": [
+        "never permitted",
+        "optional",
+        "required solid waste",
+        "required 2+ fixtures"
+      ],
+      "correct": 0,
+      "explanation": "Never permitted."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Double-trapping is?",
+      "options": [
+        "never permitted",
+        "optional",
+        "required solid waste",
+        "required 2+ fixtures"
+      ],
+      "correct": 0,
+      "explanation": "Never permitted."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Vent stacks above roof?",
+      "options": [
+        "10 inches",
+        "18 inches",
+        "24 inches",
+        "6 inches"
+      ],
+      "correct": 3,
+      "explanation": "6 inches minimum."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Vent stacks above roof?",
+      "options": [
+        "10 inches",
+        "18 inches",
+        "24 inches",
+        "6 inches"
+      ],
+      "correct": 3,
+      "explanation": "6 inches minimum."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Traps used to?",
+      "options": [
+        "collect sludge",
+        "prevent heat loss",
+        "prevent sewer gases",
+        "prevent siphoning",
+        "prevent valuables"
+      ],
+      "correct": 2,
+      "explanation": "Prevent sewer gases."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Traps used to?",
+      "options": [
+        "collect sludge",
+        "prevent heat loss",
+        "prevent sewer gases",
+        "prevent siphoning",
+        "prevent valuables"
+      ],
+      "correct": 2,
+      "explanation": "Prevent sewer gases."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Most likely cross-connection?",
+      "options": [
+        "bathtub",
+        "bidet",
+        "laundry tub",
+        "shower",
+        "water heater"
+      ],
+      "correct": 1,
+      "explanation": "Bidet."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Most likely cross-connection?",
+      "options": [
+        "bathtub",
+        "bidet",
+        "laundry tub",
+        "shower",
+        "water heater"
+      ],
+      "correct": 1,
+      "explanation": "Bidet."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Combination sewer?",
+      "options": [
+        "liquid and solid",
+        "storm and sanitary",
+        "new construction",
+        "floor drains"
+      ],
+      "correct": 1,
+      "explanation": "Storm and sanitary."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Combination sewer?",
+      "options": [
+        "liquid and solid",
+        "storm and sanitary",
+        "new construction",
+        "floor drains"
+      ],
+      "correct": 1,
+      "explanation": "Storm and sanitary."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Brass vs copper difference?",
+      "options": [
+        "brass magnetic",
+        "brass bends",
+        "brass threaded",
+        "different solder"
+      ],
+      "correct": 2,
+      "explanation": "Threaded joints."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Brass vs copper difference?",
+      "options": [
+        "brass magnetic",
+        "brass bends",
+        "brass threaded",
+        "different solder"
+      ],
+      "correct": 2,
+      "explanation": "Threaded joints."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Stacks from window?",
+      "options": [
+        "10 feet",
+        "18 feet",
+        "3 feet",
+        "6 feet"
+      ],
+      "correct": 0,
+      "explanation": "10 feet."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Stacks from window?",
+      "options": [
+        "10 feet",
+        "18 feet",
+        "3 feet",
+        "6 feet"
+      ],
+      "correct": 0,
+      "explanation": "10 feet."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Water supply volume is?",
+      "options": [
+        "quality",
+        "flow rate",
+        "pressure",
+        "drain rate"
+      ],
+      "correct": 1,
+      "explanation": "Flow rate."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Water supply volume is?",
+      "options": [
+        "quality",
+        "flow rate",
+        "pressure",
+        "drain rate"
+      ],
+      "correct": 1,
+      "explanation": "Flow rate."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Report plumbing alterations?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Report plumbing alterations?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Main supply belongs to?",
+      "options": [
+        "city",
+        "property owner",
+        "utility",
+        "water company"
+      ],
+      "correct": 1,
+      "explanation": "Property owner."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Main supply belongs to?",
+      "options": [
+        "city",
+        "property owner",
+        "utility",
+        "water company"
+      ],
+      "correct": 1,
+      "explanation": "Property owner."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Minimum main supply size?",
+      "options": [
+        "1 inch",
+        "1/2 inch",
+        "3/4 inch",
+        "7/8 inch"
+      ],
+      "correct": 2,
+      "explanation": "3/4 inch."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Minimum main supply size?",
+      "options": [
+        "1 inch",
+        "1/2 inch",
+        "3/4 inch",
+        "7/8 inch"
+      ],
+      "correct": 2,
+      "explanation": "3/4 inch."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Water hammer fixed by?",
+      "options": [
+        "change pipes",
+        "decrease pressure",
+        "air chambers",
+        "re-fasten pipes",
+        "re-fasten and air chambers"
+      ],
+      "correct": 4,
+      "explanation": "Both."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Water hammer fixed by?",
+      "options": [
+        "change pipes",
+        "decrease pressure",
+        "air chambers",
+        "re-fasten pipes",
+        "re-fasten and air chambers"
+      ],
+      "correct": 4,
+      "explanation": "Both."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Most common supply piping?",
+      "options": [
+        "concrete",
+        "copper",
+        "iron",
+        "plastic",
+        "steel"
+      ],
+      "correct": 1,
+      "explanation": "Copper."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Most common supply piping?",
+      "options": [
+        "concrete",
+        "copper",
+        "iron",
+        "plastic",
+        "steel"
+      ],
+      "correct": 1,
+      "explanation": "Copper."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Health problems from?",
+      "options": [
+        "Copper",
+        "Iron",
+        "Lead",
+        "Polybutylene"
+      ],
+      "correct": 2,
+      "explanation": "Lead."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Health problems from?",
+      "options": [
+        "Copper",
+        "Iron",
+        "Lead",
+        "Polybutylene"
+      ],
+      "correct": 2,
+      "explanation": "Lead."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Anchoring ring to floor is?",
+      "options": [
+        "water closet flange",
+        "lav bolt",
+        "toilet ring",
+        "wax ring"
+      ],
+      "correct": 0,
+      "explanation": "Water closet flange."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Anchoring ring to floor is?",
+      "options": [
+        "water closet flange",
+        "lav bolt",
+        "toilet ring",
+        "wax ring"
+      ],
+      "correct": 0,
+      "explanation": "Water closet flange."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Water heater inspection includes?",
+      "options": [
+        "efficiency",
+        "life expectancy",
+        "connections",
+        "TPR valve",
+        "TPR and connections"
+      ],
+      "correct": 4,
+      "explanation": "TPR and connections."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Water heater inspection includes?",
+      "options": [
+        "efficiency",
+        "life expectancy",
+        "connections",
+        "TPR valve",
+        "TPR and connections"
+      ],
+      "correct": 4,
+      "explanation": "TPR and connections."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Drainage traps prevent?",
+      "options": [
+        "back-siphonage",
+        "sewer gas",
+        "sludge"
+      ],
+      "correct": 1,
+      "explanation": "Sewer gas."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Drainage traps prevent?",
+      "options": [
+        "back-siphonage",
+        "sewer gas",
+        "sludge"
+      ],
+      "correct": 1,
+      "explanation": "Sewer gas."
+    }
+  },
+  {
+    "topic": "plumbing",
+    "en": {
+      "question": "Check for cross-connections?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Check for cross-connections?",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "True."
+    }
+  },
+  {
+    "topic": "electrical",
+    "en": {
+      "question": "Nominal voltage for new houses?",
+      "options": [
+        "110/208",
+        "115/230",
+        "120/208",
+        "120/240",
+        "60/120"
+      ],
+      "correct": 3,
+      "explanation": "120/240 volts."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Nominal voltage for new houses?",
+      "options": [
+        "110/208",
+        "115/230",
+        "120/208",
+        "120/240",
+        "60/120"
+      ],
+      "correct": 3,
+      "explanation": "120/240 volts."
+    }
+  },
+  {
+    "topic": "electrical",
+    "en": {
+      "question": "Electrical resistance?",
+      "options": [
+        "decreases with larger wire",
+        "increases with larger wire",
+        "affected by insulation",
+        "copper higher",
+        "only factor"
+      ],
+      "correct": 0,
+      "explanation": "Decreases with diameter."
+    },
+    "zh": {
+      "question": "[\u7ffb\u8bd1] Electrical resistance?",
+      "options": [
+        "decreases with larger wire",
+        "increases with larger wire",
+        "affected by insulation",
+        "copper higher",
+        "only factor"
+      ],
+      "correct": 0,
+      "explanation": "Decreases with diameter."
+    }
+  }
 ];
+
 
             
             document.getElementById('qNum').textContent = currentIndex + 1;
