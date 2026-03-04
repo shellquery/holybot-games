@@ -292,582 +292,668 @@
 
     <script>
         // Question Bank
-        const questions = [
-            // Structure
-            {
-                topic: 'structure',
-                zh: {
-                    question: "检查地基时，以下哪种裂缝最需要关注？",
-                    options: [
-                        "A. 头发丝细裂缝",
-                        "B. 垂直裂缝，宽度超过1/4英寸",
-                        "C. 旧裂缝，表面有漆覆盖",
-                        "D. 门框周围的微小裂缝"
-                    ],
-                    correct: 1,
-                    explanation: "垂直裂缝且宽度超过1/4英寸（6mm）可能表示地基结构问题，需要专业评估。水平裂缝或阶梯状裂缝也更危险。"
-                },
-                en: {
-                    question: "When inspecting foundation, which crack is most concerning?",
-                    options: [
-                        "A. Hairline crack",
-                        "B. Vertical crack over 1/4 inch wide",
-                        "C. Old crack with paint on surface",
-                        "D. Small crack around door frame"
-                    ],
-                    correct: 1,
-                    explanation: "Vertical cracks over 1/4 inch (6mm) may indicate structural foundation issues and require professional assessment. Horizontal or stair-step cracks are also more dangerous."
-                }
-            },
-            {
-                topic: 'structure',
-                zh: {
-                    question: "房屋地基检查中，'piers'（桩基）的主要作用是？",
-                    options: [
-                        "A. 美观装饰",
-                        "B. 支撑并将荷载传递到地基",
-                        "C. 防水",
-                        "D. 装饰地面"
-                    ],
-                    correct: 1,
-                    explanation: "桩基(piers)是垂直支撑结构，将建筑物的重量通过柱子传递到地基基础，是结构安全的关键部件。"
-                },
-                en: {
-                    question: "In foundation inspection, what is the main purpose of 'piers'?",
-                    options: [
-                        "A. Decorative",
-                        "B. Support and transfer load to foundation",
-                        "C. Waterproofing",
-                        "D. Floor decoration"
-                    ],
-                    correct: 1,
-                    explanation: "Piers are vertical support structures that transfer the building's weight through columns to the foundation base, key to structural safety."
-                }
-            },
-            // Roof
-            {
-                topic: 'roof',
-                zh: {
-                    question: "检查屋顶时，发现沥青瓦片有3处缺失，应该建议客户？",
-                    options: [
-                        "A. 不需要维修",
-                        "B. 尽快更换受损瓦片",
-                        "C. 更换整个屋顶",
-                        "D. 在缺失处涂胶水"
-                    ],
-                    correct: 1,
-                    explanation: "缺失的瓦片会导致漏水，应尽快更换。通常3处以上缺失建议进行全面检查和维修。"
-                },
-                en: {
-                    question: "During roof inspection, found 3 missing asphalt shingles. Should recommend?",
-                    options: [
-                        "A. No repair needed",
-                        "B. Replace damaged shingles soon",
-                        "C. Replace entire roof",
-                        "D. Apply glue to missing spots"
-                    ],
-                    correct: 1,
-                    explanation: "Missing shingles can cause water leakage and should be replaced promptly. More than 3 missing typically warrants a thorough inspection and repair."
-                }
-            },
-            {
-                topic: 'roof',
-                zh: {
-                    question: "屋顶检查中，什么是'ice dam'（冰坝）？",
-                    options: [
-                        "A. 屋顶上的装饰冰雕",
-                        "B. 屋檐处冰块堆积，阻碍排水导致漏水",
-                        "C. 冷冻仓库",
-                        "D. 屋顶排水系统"
-                    ],
-                    correct: 1,
-                    explanation: "冰坝是屋檐处冰块堆积形成的屏障，会阻碍雨水正常流走，导致水渗入屋内。需要良好的隔热和通风来预防。"
-                },
-                en: {
-                    question: "What is an 'ice dam' in roof inspection?",
-                    options: [
-                        "A. Decorative ice sculpture on roof",
-                        "B. Ice accumulation at eaves blocking drainage causing leaks",
-                        "C. Cold storage warehouse",
-                        "D. Roof drainage system"
-                    ],
-                    correct: 1,
-                    explanation: "Ice dam is ice barrier forming at eaves, blocking rainwater flow and causing water infiltration. Good insulation and ventilation prevents it."
-                }
-            },
-            // Plumbing
-            {
-                topic: 'plumbing',
-                zh: {
-                    question: "检查水管发现'double-tapped' breaker（双螺栓断路器）意味着？",
-                    options: [
-                        "A. 电路过载保护良好",
-                        "B. 安全隐患，可能导致火灾",
-                        "C. 水压正常",
-                        "D. 管道安装正确"
-                    ],
-                    correct: 1,
-                    explanation: "双螺栓断路器是指两个电线接在同一螺丝上，这是电气安全隐患，可能导致过热和火灾。需要专业电工修复。"
-                },
-                en: {
-                    question: "Finding 'double-tapped' breaker during inspection means?",
-                    options: [
-                        "A. Good circuit overload protection",
-                        "B. Safety hazard, may cause fire",
-                        "C. Water pressure normal",
-                        "D. Pipe installation correct"
-                    ],
-                    correct: 1,
-                    explanation: "Double-tapped breaker means two wires under one screw, an electrical safety hazard that can cause overheating and fire. Needs professional electrician to fix."
-                }
-            },
-            {
-                topic: 'plumbing',
-                zh: {
-                    question: "测试水压时，正常住宅水压应该在多少 PSI？",
-                    options: [
-                        "A. 10-20 PSI",
-                        "B. 40-60 PSI",
-                        "C. 80-100 PSI",
-                        "D. 100-150 PSI"
-                    ],
-                    correct: 1,
-                    explanation: "正常住宅水压应在40-60 PSI之间。低于40 PSI可能导致水流不足，高于80 PSI会损坏管道和电器。"
-                },
-                en: {
-                    question: "Normal residential water pressure should be what PSI?",
-                    options: [
-                        "A. 10-20 PSI",
-                        "B. 40-60 PSI",
-                        "C. 80-100 PSI",
-                        "D. 100-150 PSI"
-                    ],
-                    correct: 1,
-                    explanation: "Normal residential water pressure should be 40-60 PSI. Below 40 PSI may cause insufficient flow, above 80 PSI can damage pipes and appliances."
-                }
-            },
-            // Electrical
-            {
-                topic: 'electrical',
-                zh: {
-                    question: "检查配电箱时，发现线路颜色为红色、黑色、白色，请问这是什么类型的接线？",
-                    options: [
-                        "A. 220V 电路",
-                        "B. 110V 标准电路",
-                        "C. 低压电路",
-                        "D. 地暖电路"
-                    ],
-                    correct: 1,
-                    explanation: "红、黑、白三色通常是110V标准电路配色。红色和黑色是热线，白色是中性线，可能还有绿色接地线。"
-                },
-                en: {
-                    question: "In electrical panel, found red, black, white wires. What type of wiring?",
-                    options: [
-                        "A. 220V circuit",
-                        "B. 110V standard circuit",
-                        "C. Low voltage circuit",
-                        "D. Floor heating circuit"
-                    ],
-                    correct: 1,
-                    explanation: "Red, black, white three-color is typical 110V circuit wiring. Red and black are hot wires, white is neutral, green may be ground."
-                }
-            },
-            {
-                topic: 'electrical',
-                zh: {
-                    question: "'GFCI'插座主要用于哪些区域？",
-                    options: [
-                        "A. 客厅",
-                        "B. 卧室",
-                        "C. 厨房和浴室",
-                        "D. 车库"
-                    ],
-                    correct: 2,
-                    explanation: "GFCI（接地故障断路器）主要用于潮湿区域：厨房、浴室、洗衣房、车库、户外等靠近水源的地方。"
-                },
-                en: {
-                    question: "Where are 'GFCI' outlets mainly used?",
-                    options: [
-                        "A. Living room",
-                        "B. Bedroom",
-                        "C. Kitchen and bathroom",
-                        "D. Garage"
-                    ],
-                    correct: 2,
-                    explanation: "GFCI (Ground Fault Circuit Interrupter) is mainly used in wet areas: kitchen, bathroom, laundry room, outdoor, etc near water sources."
-                }
-            },
-            // HVAC
-            {
-                topic: 'hvac',
-                zh: {
-                    question: "检查暖通空调时，空调过滤网应该多久检查/更换一次？",
-                    options: [
-                        "A. 半年",
-                        "B. 一个月",
-                        "C. 一年",
-                        "D. 两年"
-                    ],
-                    correct: 1,
-                    explanation: "空调过滤网应每月检查一次，脏了就应该更换。频繁更换过滤网可以延长空调系统寿命，提高效率。"
-                },
-                en: {
-                    question: "How often should HVAC filter be checked/replaced?",
-                    options: [
-                        "A. Every 6 months",
-                        "B. Every month",
-                        "C. Every year",
-                        "D. Every 2 years"
-                    ],
-                    correct: 1,
-                    explanation: "HVAC filter should be checked monthly and replaced when dirty. Frequent filter changes extend system life and improve efficiency."
-                }
-            },
-            {
-                topic: 'hvac',
-                zh: {
-                    question: "检查空调时，发现冷媒泄漏的常见迹象包括？",
-                    options: [
-                        "A. 制冷效果正常",
-                        "B. 机组附近有油渍/污渍",
-                        "C. 噪音变小",
-                        "D. 电费下降"
-                    ],
-                    correct: 1,
-                    explanation: "冷媒泄漏常伴有油渍（冷冻油），机组附近可见油污/污渍。还会导致制冷效果差、运行时间长、电费增加。"
-                },
-                en: {
-                    question: "Common signs of refrigerant leak in AC inspection?",
-                    options: [
-                        "A. Normal cooling",
-                        "B. Oil stains near unit",
-                        "C. Less noise",
-                        "D. Lower electricity bill"
-                    ],
-                    correct: 1,
-                    explanation: "Refrigerant leak often has oil stains (freeze oil), visible oil stains near unit. Also causes poor cooling, long run time, increased electricity bill."
-                }
-            },
-            // Exterior
-            {
-                topic: 'exterior',
-                zh: {
-                    question: "检查外墙发现'wood rot'（木材腐烂），最可能的原因是什么？",
-                    options: [
-                        "A. 阳光直射",
-                        "B. 潮湿/进水",
-                        "C. 虫害",
-                        "D. 温度变化"
-                    ],
-                    correct: 1,
-                    explanation: "木材腐烂的主要原因是长期潮湿/进水。保持木材干燥、适当密封、定期检查排水系统可以预防。"
-                },
-                en: {
-                    question: "Found 'wood rot' during exterior inspection, most likely cause?",
-                    options: [
-                        "A. Direct sunlight",
-                        "B. Moisture/water intrusion",
-                        "C. Pest infestation",
-                        "D. Temperature changes"
-                    ],
-                    correct: 1,
-                    explanation: "Main cause of wood rot is long-term moisture/water intrusion. Keep wood dry, properly sealed, regularly check drainage to prevent."
-                }
-            },
-            {
-                topic: 'exterior',
-                zh: {
-                    question: "检查房屋外部时，'grading'（坡度）应该朝向哪里？",
-                    options: [
-                        "A. 房子中心",
-                        "B. 远离房屋基础",
-                        "C. 随意",
-                        "D. 与房屋平行"
-                    ],
-                    correct: 1,
-                    explanation: "地面坡度应该从房屋基础向外倾斜，让水远离房屋。一般每英尺应下降1-2英寸。"
-                },
-                en: {
-                    question: "During exterior inspection, where should 'grading' slope toward?",
-                    options: [
-                        "A. House center",
-                        "B. Away from foundation",
-                        "C. Any direction",
-                        "D. Parallel to house"
-                    ],
-                    correct: 1,
-                    explanation: "Grading should slope away from foundation to direct water away. Generally should drop 1-2 inches per foot."
-                }
-            },
-            // Safety
-            {
-                topic: 'safety',
-                zh: {
-                    question: "一氧化碳探测器应该安装在哪里？",
-                    options: [
-                        "A. 车库",
-                        "B. 每个卧室和走廊",
-                        "C. 厨房",
-                        "D. 室外"
-                    ],
-                    correct: 1,
-                    explanation: "一氧化碳探测器应安装在每个卧室和走廊（睡眠区域附近），以便睡眠时也能检测到CO泄漏。"
-                },
-                en: {
-                    question: "Where should carbon monoxide detectors be installed?",
-                    options: [
-                        "A. Garage",
-                        "B. Each bedroom and hallway",
-                        "C. Kitchen",
-                        "D. Outdoors"
-                    ],
-                    correct: 1,
-                    explanation: "CO detectors should be installed in each bedroom and hallway (near sleeping areas) to detect CO leaks during sleep."
-                }
-            },
-            {
-                topic: 'safety',
-                zh: {
-                    question: "检查楼梯时，扶手栏杆的间距不应超过多少英寸？",
-                    options: [
-                        "A. 6英寸",
-                        "B. 4英寸",
-                        "C. 3英寸",
-                        "D. 8英寸"
-                    ],
-                    correct: 1,
-                    explanation: "栏杆间距不应超过4英寸（10cm），以防止儿童头部或身体穿过发生危险。"
-                },
-                en: {
-                    question: "When inspecting stairs, rail spacing should not exceed how many inches?",
-                    options: [
-                        "A. 6 inches",
-                        "B. 4 inches",
-                        "C. 3 inches",
-                        "D. 8 inches"
-                    ],
-                    correct: 1,
-                    explanation: "Rail spacing should not exceed 4 inches (10cm) to prevent children's heads or bodies from passing through."
-                }
-            },
-            // More questions
-            {
-                topic: 'structure',
-                zh: {
-                    question: "房屋结构检查中，'load-bearing wall'（承重墙）的主要特征是？",
-                    options: [
-                        "A. 通常是薄墙",
-                        "B. 垂直于楼层梁",
-                        "C. 与其他墙体垂直",
-                        "D. 可以随意拆除"
-                    ],
-                    correct: 1,
-                    explanation: "承重墙通常是房屋结构的关键支撑，垂直于楼层主梁（joists）。拆除承重墙会严重影响结构安全。"
-                },
-                en: {
-                    question: "In structure inspection, main characteristic of 'load-bearing wall'?",
-                    options: [
-                        "A. Usually thin wall",
-                        "B. Perpendicular to floor joists",
-                        "C. Perpendicular to other walls",
-                        "D. Can be freely removed"
-                    ],
-                    correct: 1,
-                    explanation: "Load-bearing walls are key structural support, typically perpendicular to floor joists. Removing them seriously affects structural safety."
-                }
-            },
-            {
-                topic: 'roof',
-                zh: {
-                    question: "检查屋顶时，'flashing'（泛水）的主要作用是？",
-                    options: [
-                        "A. 美观",
-                        "B. 防水，防止水从缝隙渗入",
-                        "C. 保温",
-                        "D. 装饰"
-                    ],
-                    correct: 1,
-                    explanation: "泛水(flashing)是金属或防水材料，用于屋顶连接处、烟囱周围等，防止水从缝隙渗入屋内。"
-                },
-                en: {
-                    question: "During roof inspection, main purpose of 'flashing'?",
-                    options: [
-                        "A. Aesthetic",
-                        "B. Waterproof, prevent water seepage",
-                        "C. Insulation",
-                        "D. Decoration"
-                    ],
-                    correct: 1,
-                    explanation: "Flashing is metal or waterproof material used at roof junctions, around chimneys, to prevent water seepage into house."
-                }
-            },
-            {
-                topic: 'plumbing',
-                zh: {
-                    question: "检查发现马桶摇晃，可能的原因是？",
-                    options: [
-                        "A. 马桶太大",
-                        "B. 底座密封胶老化/螺丝松动",
-                        "C. 水压太高",
-                        "D. 马桶太旧"
-                    ],
-                    correct: 1,
-                    explanation: "马桶摇晃通常是因为底座密封胶老化或固定螺丝松动。需要重新密封或紧固螺丝。"
-                },
-                en: {
-                    question: "Toilet wobbles, possible cause?",
-                    options: [
-                        "A. Toilet too big",
-                        "B. Base caulk老化/loose bolts",
-                        "C. Water pressure too high",
-                        "D. Toilet too old"
-                    ],
-                    correct: 1,
-                    explanation: "Toilet wobble is usually due to aged base caulk or loose bolts. Needs resealing or bolt tightening."
-                }
-            },
-            {
-                topic: 'electrical',
-                zh: {
-                    question: "检查插座发现插座过热变色，可能的原因包括？",
-                    options: [
-                        "A. 插座太旧",
-                        "B. 电路过载或接触不良",
-                        "C. 电压太低",
-                        "D. 插座品牌不好"
-                    ],
-                    correct: 1,
-                    explanation: "插座过热变色通常是电路过载（连接电器太多）或接线接触不良导致的，是电气火灾隐患。"
-                },
-                en: {
-                    question: "Outlet overheats and discolors, possible causes?",
-                    options: [
-                        "A. Outlet too old",
-                        "B. Circuit overload or poor connection",
-                        "C. Voltage too low",
-                        "D. Poor outlet brand"
-                    ],
-                    correct: 1,
-                    explanation: "Overheated discolored outlet is usually circuit overload (too many appliances) or poor wiring connection, fire hazard."
-                }
-            },
-            {
-                topic: 'hvac',
-                zh: {
-                    question: "空调系统发出霉味，常见原因是？",
-                    options: [
-                        "A. 冷媒不足",
-                        "B. 蒸发器盘管或排水管堵塞发霉",
-                        "C. 电压不稳",
-                        "D. 缺少制冷剂"
-                    ],
-                    correct: 1,
-                    explanation: "霉味通常是蒸发器盘管或排水管堵塞/发霉导致的。需要清洁蒸发器盘管和疏通排水管。"
-                },
-                en: {
-                    question: "HVAC system emits moldy smell, common cause?",
-                    options: [
-                        "A. Low refrigerant",
-                        "B. Evaporator coil or drain pipe clogged with mold",
-                        "C. Unstable voltage",
-                        "D. Missing refrigerant"
-                    ],
-                    correct: 1,
-                    explanation: "Moldy smell is usually from mold in evaporator coil or drain pipe. Need to clean evaporator coil and unclog drain pipe."
-                }
-            },
-            {
-                topic: 'exterior',
-                zh: {
-                    question: "检查发现窗户周围渗水，最可能的原因是什么？",
-                    options: [
-                        "A. 玻璃破损",
-                        "B. 密封胶老化/安装不当",
-                        "C. 窗户太小",
-                        "D. 颜色问题"
-                    ],
-                    correct: 1,
-                    explanation: "窗户周围渗水通常是因为密封胶老化或安装不当。需要重新打密封胶或调整安装。"
-                },
-                en: {
-                    question: "Water infiltration around windows, most likely cause?",
-                    options: [
-                        "A. Glass damaged",
-                        "B. Caulk老化/improper installation",
-                        "C. Window too small",
-                        "D. Color issue"
-                    ],
-                    correct: 1,
-                    explanation: "Water infiltration around windows is usually due to aged caulk or improper installation. Need to reseal or adjust installation."
-                }
-            },
-            {
-                topic: 'safety',
-                zh: {
-                    question: "烟雾探测器应该安装在哪里？",
-                    options: [
-                        "A. 仅客厅",
-                        "B. 每个卧室、走廊每层",
-                        "C. 仅厨房",
-                        "D. 仅车库"
-                    ],
-                    correct: 1,
-                    explanation: "烟雾探测器应安装在每个卧室、走廊和每层楼，以便早期发现火灾。"
-                },
-                en: {
-                    question: "Where should smoke detectors be installed?",
-                    options: [
-                        "A. Living room only",
-                        "B. Every bedroom, hallway per floor",
-                        "C. Kitchen only",
-                        "D. Garage only"
-                    ],
-                    correct: 1,
-                    explanation: "Smoke detectors should be installed in every bedroom, hallway and each floor for early fire detection."
-                }
-            },
-            // Extra questions 22-500
-            {"topic":"structure","zh":{"question":"房屋结构检查中，基础沉降不均的迹象包括？","options":["A. 门窗开关困难","B. 地板水平","C. 无裂缝","D. 油漆完好"],"correct":0,"explanation":"门窗开关困难是基础沉降不均的常见迹象。"},"en":{"question":"Signs of uneven foundation settlement?","options":["A. Doors/windows hard to open","B. Level floor","C. No cracks","D. Paint OK"],"correct":0,"explanation":"Doors/windows difficult to open is common sign."}},
-            {"topic":"structure","zh":{"question":"检查剪力墙（shear wall）的目的是？","options":["A. 美观","B. 抗侧向力","C. 隔音","D. 保温"],"correct":1,"explanation":"剪力墙用于抵抗侧向力。"},"en":{"question":"Purpose of shear wall?","options":["A. Aesthetic","B. Resist lateral forces","C. Soundproof","D. Insulation"],"correct":1,"explanation":"Shear walls resist lateral forces."}},
-            {"topic":"roof","zh":{"question":"屋顶通风不足会导致？","options":["A. 温度过低","B. 湿气积聚导致腐烂","C. 能源节省","D. 延长寿命"],"correct":1,"explanation":"通风不足会导致湿气积聚腐烂。"},"en":{"question":"Poor roof ventilation causes?","options":["A. Too cold","B. Moisture rot","C. Energy saving","D. Extended life"],"correct":1,"explanation":"Poor ventilation causes moisture rot."}},
-            {"topic":"roof","zh":{"question":"检查屋顶时，天窗（skylight）最需要关注？","options":["A. 颜色","B. 漏水迹象","C. 尺寸","D. 形状"],"correct":1,"explanation":"天窗最需要检查漏水迹象。"},"en":{"question":"Skylight inspection focus?","options":["A. Color","B. Water leak","C. Size","D. Shape"],"correct":1,"explanation":"Check for water leak signs."}},
-            {"topic":"plumbing","zh":{"question":"热水器的安全阀（TPR）作用是？","options":["A. 节能","B. 释放过高压力","C. 防水垢","D. 过滤"],"correct":1,"explanation":"TPR阀释放过高压力防止爆炸。"},"en":{"question":"TPR valve purpose?","options":["A. Energy saving","B. Release pressure","C. Prevent scale","D. Filter"],"correct":1,"explanation":"TPR releases excess pressure."}},
-            {"topic":"plumbing","zh":{"question":"检查发现水管冻结，应该？","options":["A. 立即用火烤","B. 等待自然融化","C. 敲击水管","D. 加压水流"],"correct":1,"explanation":"应等待自然融化。"},"en":{"question":"Frozen pipes?","options":["A. Use fire","B. Wait to melt","C. Hit pipes","D. Pressurize"],"correct":1,"explanation":"Wait to melt naturally."}},
-            {"topic":"electrical","zh":{"question":"铝线接线需要使用？","options":["A. 普通接线器","B. CO/ALR兼容接线器","C. 任何都可以","D. 胶带"],"correct":1,"explanation":"铝线需要CO/ALR兼容接线器。"},"en":{"question":"Aluminum wiring needs?","options":["A. Regular","B. CO/ALR compatible","C. Any works","D. Tape"],"correct":1,"explanation":"Needs CO/ALR connectors."}},
-            {"topic":"electrical","zh":{"question":"检查电线管（conduit）是为了？","options":["A. 美观","B. 保护电线","C. 减重","D. 散热"],"correct":1,"explanation":"电线管用于保护电线。"},"en":{"question":"Conduit purpose?","options":["A. Aesthetic","B. Protect wires","C. Reduce weight","D. Heat dissipation"],"correct":1,"explanation":"Conduit protects wires."}},
-            {"topic":"hvac","zh":{"question":"暖通系统风量不足的原因？","options":["A. 过滤器太干净","B. 管道堵塞或风扇问题","C. 制冷剂太多","D. 电压太高"],"correct":1,"explanation":"管道堵塞或风扇问题导致风量不足。"},"en":{"question":"Low air flow cause?","options":["A. Filter too clean","B. Duct blocked/fan issue","C. Too much refrigerant","D. Voltage high"],"correct":1,"explanation":"Duct or fan issues."}},
-            {"topic":"hvac","zh":{"question":"检查冷凝水排水管的坡度？","options":["A. 水平即可","B. 向下倾斜","C. 向上倾斜","D. 垂直"],"correct":1,"explanation":"应向下倾斜让水自然流出。"},"en":{"question":"Condensate drain slope?","options":["A. Level","B. Slope down","C. Slope up","D. Vertical"],"correct":1,"explanation":"Should slope downward."}},
-            {"topic":"exterior","zh":{"question":"检查乙烯基壁板（vinyl siding）的目的是？","options":["A. 承重","B. 防水和美观","C. 隔音","D. 防火"],"correct":1,"explanation":"乙烯基壁板主要用于防水和美观。"},"en":{"question":"Vinyl siding purpose?","options":["A. Load bearing","B. Waterproof/aesthetics","C. Soundproof","D. Fire resistant"],"correct":1,"explanation":"Vinyl is for waterproofing."}},
-            {"topic":"exterior","zh":{"question":"门廊（porch）检查重点是？","options":["A. 颜色","B. 结构完整性和排水","C. 装饰","D. 家具"],"correct":1,"explanation":"门廊检查重点是结构完整性和排水。"},"en":{"question":"Porch inspection focus?","options":["A. Color","B. Structure/drainage","C. Decoration","D. Furniture"],"correct":1,"explanation":"Focus on structure/drainage."}},
-            {"topic":"safety","zh":{"question":"燃气壁炉需要检查？","options":["A. 只看火焰颜色","B. 通风和燃气连接","C. 外观","D. 价格"],"correct":1,"explanation":"必须检查通风和燃气连接。"},"en":{"question":"Gas fireplace check?","options":["A. Just flame color","B. Venting/gas connection","C. Appearance","D. Price"],"correct":1,"explanation":"Must check venting/connection."}},
-            {"topic":"safety","zh":{"question":"地下室应急照明要求？","options":["A. 可选","B. 必须有","C. 仅豪华装修","D. 仅商业"],"correct":1,"explanation":"地下室应急照明是安全要求。"},"en":{"question":"Basement emergency lighting?","options":["A. Optional","B. Must have","C. Luxury only","D. Commercial only"],"correct":1,"explanation":"Safety requirement."}},
-            {"topic":"structure","zh":{"question":"检查楼板（floor joist）间距标准是？","options":["A. 任意","B. 16英寸或24英寸","C. 12英寸","D. 36英寸"],"correct":1,"explanation":"楼板间距通常为16或24英寸。"},"en":{"question":"Floor joist spacing?","options":["A. Any","B. 16 or 24 inches","C. 12 inches","D. 36 inches"],"correct":1,"explanation":"Typically 16 or 24 inches."}},
-            {"topic":"roof","zh":{"question":"金属屋顶的优点？","options":["A. 便宜","B. 耐久防火轻便","C. 重","D. 难安装"],"correct":1,"explanation":"耐久防火重量轻。"},"en":{"question":"Metal roof advantages?","options":["A. Cheap","B. Durable/light","C. Heavy","D. Hard to install"],"correct":1,"explanation":"Durable and lightweight."}},
-            {"topic":"plumbing","zh":{"question":"检查水龙头出水颜色异常可能原因？","options":["A. 正常","B. 管道腐蚀或污染","C. 水压太高","D. 水量太大"],"correct":1,"explanation":"水变色表示管道腐蚀或污染。"},"en":{"question":"Water color abnormal?","options":["A. Normal","B. Corrosion/contamination","C. Pressure high","D. Flow high"],"correct":1,"explanation":"Indicates corrosion."}},
-            {"topic":"electrical","zh":{"question":"接地系统测试使用？","options":["A. 温度计","B. 接地电阻测试仪","C. 湿度计","D. 电压表"],"correct":1,"explanation":"用接地电阻测试仪测试。"},"en":{"question":"Grounding test equipment?","options":["A. Thermometer","B. Ground resistance tester","C. Hygrometer","D. Voltmeter"],"correct":1,"explanation":"Ground resistance tester."}},
-            {"topic":"hvac","zh":{"question":"空调系统嗡嗡声原因？","options":["A. 正常","B. 风扇或压缩机问题","C. 制冷太好","D. 节能模式"],"correct":1,"explanation":"嗡嗡声通常是风扇或压缩机问题。"},"en":{"question":"HVAC humming cause?","options":["A. Normal","B. Fan/compressor issue","C. Cooling too good","D. Energy mode"],"correct":1,"explanation":"Fan or compressor issue."}},
-            {"topic":"exterior","zh":{"question":"检查落水管（downspout）的距离？","options":["A. 任意","B. 至少6英尺远离基础","C. 靠近房子","D. 水平"],"correct":1,"explanation":"应至少6英尺远离房屋基础。"},"en":{"question":"Downspout distance?","options":["A. Any","B. 6 feet from foundation","C. Close to house","D. Level"],"correct":1,"explanation":"At least 6 feet away."}},
-            // Infrared / 红外检测
-            {"topic":"infrared","zh":{"question":"红外热成像检测主要用于？","options":["A. 检测颜色","B. 发现温度异常/热损失","C. 测量距离","D. 检测声音"],"correct":1,"explanation":"红外热成像用于发现温度异常、保温缺失、热泄漏等。"},"en":{"question":"Infrared thermal imaging mainly for?","options":["A. Detect color","B. Find temperature anomalies","C. Measure distance","D. Detect sound"],"correct":1,"explanation":"Thermal imaging finds temperature anomalies, heat loss, air leaks."}},
-            {"topic":"infrared","zh":{"question":"红外检测发现窗户周围温度较低说明？","options":["A. 窗户隔热好","B. 密封不良/热桥","C. 正常","D. 室内太热"],"correct":1,"explanation":"温度较低表示热量流失，说明密封不良或存在热桥。"},"en":{"question":"Low temp around windows means?","options":["A. Good insulation","B. Poor sealing/thermal bridge","C. Normal","D. Too hot inside"],"correct":1,"explanation":"Low temp means heat loss, poor sealing or thermal bridge."}},
-            {"topic":"infrared","zh":{"question":"红外检测屋顶发现低温区域可能表示？","options":["A. 屋顶完好","B. 保温缺失或漏水","C. 室内温度低","D. 天气太冷"],"correct":1,"explanation":"低温区域表示热量流失，可能是保温缺失或漏水。"},"en":{"question":"Cold spots on roof mean?","options":["A. Roof OK","B. Missing insulation or leak","C. Inside too cold","D. Weather too cold"],"correct":1,"explanation":"Cold spots indicate heat loss, missing insulation or leak."}},
-            {"topic":"infrared","zh":{"question":"电气柜红外检测发现热点说明？","options":["A. 电路正常","B. 过载或接触不良","C. 电压低","D. 设备太旧"],"correct":1,"explanation":"热点表示过载、接触不良或故障，是火灾隐患。"},"en":{"question":"Hot spots in electrical panel mean?","options":["A. Circuit normal","B. Overload or poor connection","C. Voltage low","D. Equipment old"],"correct":1,"explanation":"Hot spots indicate overload, poor connection or fault, fire hazard."}},
-            // Radon / 氡气检测
-            {"topic":"radon","zh":{"question":"氡气（Radon）主要来源是？","options":["A. 油漆","B. 土壤和岩石","C. 家具","D. 水"],"correct":1,"explanation":"氡气主要来自土壤和岩石中的铀分解。"},"en":{"question":"Radon mainly comes from?","options":["A. Paint","B. Soil and rock","C. Furniture","D. Water"],"correct":1,"explanation":"Radon comes from uranium decay in soil and rock."}},
-            {"topic":"radon","zh":{"question":"氡气检测应该在什么位置？","options":["A. 阁楼","B. 地下室或一楼最低处","C. 屋顶","D. 室外"},"correct":1,"explanation":"氡气比空气重，应在地下室或一楼最低处检测。"},"en":{"question":"Where to test radon?","options":["A. Attic","B. Basement or lowest floor","C. Roof","D. Outside"],"correct":1,"explanation":"Radon is heavier than air, test in basement or lowest floor."}},
-            {"topic":"radon","zh":{"question":"氡气安全水平是多少？","options":["A. 10 pCi/L","B. 4 pCi/L 以下","C. 20 pCi/L","D. 50 pCi/L"],"correct":1,"explanation":"EPA建议氡气水平应低于4 pCi/L。"},"en":{"question":"Safe radon level?","options":["A. 10 pCi/L","B. Below 4 pCi/L","C. 20 pCi/L","D. 50 pCi/L"],"correct":1,"explanation":"EPA recommends radon below 4 pCi/L."}},
-            {"topic":"radon","zh":{"question":"降低氡气的方法包括？","options":["A. 开窗通风","B. 安装地通风系统","C. 密封地板缝隙","D. 所有都是"],"correct":3,"explanation":"需要多种方法综合使用：通风、密封、加压等。"},"en":{"question":"Ways to reduce radon include?","options":["A. Open windows","B. Install sub-slab vent","C. Seal floor cracks","D. All of above"],"correct":3,"explanation":"Need combined methods: ventilation, sealing, pressurization."}},
-            // Mold / 霉菌检测
-            {"topic":"mold","zh":{"question":"霉菌生长的必要条件是？","options":["A. 阳光","B. 水分","C. 低温","D. 干燥"],"correct":1,"explanation":"霉菌生长需要水分、适宜温度和营养源。"},"en":{"question":"Mold growth requires?","options":["A. Sunlight","B. Moisture","C. Low temp","D. Dry conditions"],"correct":1,"explanation":"Mold needs moisture, suitable temperature and food source."}},
-            {"topic":"mold","zh":{"question":"发现霉菌时，首先应该？","options":["A. 喷洒漂白水","B. 找出并修复水源","C. 忽略","D. 刷漆覆盖"],"correct":1,"explanation":"必须先找出并修复水源，否则霉菌会再次生长。"},"en":{"question":"Found mold, first should?","options":["A. Spray bleach","B. Find and fix water source","C. Ignore","D. Paint over"],"correct":1,"explanation":"Must find and fix water source first, or mold returns."}},
-            {"topic":"mold","zh":{"question":"常见的有害霉菌包括？","options":["A. 黑霉","B. 曲霉","C. 链格孢属","D. 所有都是"],"correct":3,"explanation":"黑霉、曲霉、链格孢属等都是常见有害霉菌。"},"en":{"question":"Common harmful mold includes?","options":["A. Black mold","B. Aspergillus","C. Alternaria","D. All of above"],"correct":3,"explanation":"Black mold, Aspergillus, Alternaria are common harmful molds."}},
-            {"topic":"mold","zh":{"question":"检测霉菌除了视觉检查还可以使用？","options":["A. 温度计","B. 霉菌检测仪/采样培养","C. 湿度计","D. 望远镜"],"correct":1,"explanation":"可使用霉菌检测仪或采样送实验室培养分析。"},"en":{"question":"Detect mold besides visual inspection?","options":["A. Thermometer","B. Mold tester/culture","C. Hygrometer","D. Telescope"],"correct":1,"explanation":"Use mold tester or send samples to lab for culture."}},
-            // Asbestos / 石棉检测
-            {"topic":"asbestos","zh":{"question":"石棉常用于哪些建筑材料？","options":["A. 保温材料","B. 屋面材料","C. 防火材料","D. 所有都是"],"correct":3,"explanation":"石棉曾广泛用于保温、屋面、防火等多种材料。"},"en":{"question":"Asbestos commonly used in?","options":["A. Insulation","B. Roofing","C. Fireproofing","D. All of above"],"correct":3,"explanation":"Asbestos was widely used in insulation, roofing, fireproofing."}},
-            {"topic":"asbestos","zh":{"question":"石棉检测应该采集样本送哪里分析？","options":["A. 任何实验室","B. EPA认可实验室","C. 医院","D. 学校"],"correct":1,"explanation":"应送EPA认可的有资质实验室进行分析。"},"en":{"question":"Asbestos samples sent where?","options":["A. Any lab","B. EPA certified lab","C. Hospital","D. School"],"correct":1,"explanation":"Send to EPA certified laboratory for analysis."}},
-            {"topic":"asbestos","zh":{"question":"含石棉材料在什么情况下需要移除？","options":["A. 破损或老化","B. 装修扰动","C. A和B","D. 不需要移除"],"correct":2,"explanation":"材料破损、老化或装修扰动时才需要专业移除。"},"en":{"question":"When remove asbestos material?","options":["A. Damaged/aged","B. Renovation disturbance","C. A and B","D. No need to remove"],"correct":2,"explanation":"Professional removal only when damaged, aged or disturbed."}},
-            {"topic":"asbestos","zh":{"question":"石棉纤维主要通过什么途径进入人体？","options":["A. 食物","B. 呼吸","C. 皮肤接触","D. 饮水"],"correct":1,"explanation":"石棉纤维通过呼吸进入人体肺部。"},"en":{"question":"Asbestos fibers enter body mainly via?","options":["A. Food","B. Breathing","C. Skin contact","D. Drinking water"],"correct":1,"explanation":"Asbestos fibers enter lungs through breathing."}}
-        ];
+const questions = [
+    {
+        topic: "structure",
+        zh: {
+            question: "检查地基时，以下哪种裂缝最需要关注？",
+            options: ["A. 头发丝细裂缝","B. 垂直裂缝，宽度超过1/4英寸","C. 旧裂缝，表面有漆覆盖","D. 门框周围的微小裂缝"],
+            correct: 1,
+            explanation: "垂直裂缝且宽度超过1/4英寸可能表示地基结构问题。"
+        },
+        en: {
+            question: "Which crack most concerning?",
+            options: ["A. Hairline crack","B. Vertical crack over 1/4 inch","C. Old crack with paint","D. Small crack around door"],
+            correct: 1,
+            explanation: "Vertical cracks over 1/4 inch may indicate structural foundation issues."
+        }
+    },
+    {
+        topic: "structure",
+        zh: {
+            question: "房屋地基检查中，piers（桩基）的主要作用是？",
+            options: ["A. 美观装饰","B. 支撑并将荷载传递到地基","C. 防水","D. 装饰地面"],
+            correct: 1,
+            explanation: "桩基是垂直支撑结构。"
+        },
+        en: {
+            question: "Purpose of piers?",
+            options: ["A. Decorative","B. Support and transfer load","C. Waterproofing","D. Floor decoration"],
+            correct: 1,
+            explanation: "Piers transfer load to foundation."
+        }
+    },
+    {
+        topic: "structure",
+        zh: {
+            question: "房屋结构检查中，承重墙的主要特征是？",
+            options: ["A. 通常是薄墙","B. 垂直于楼层梁","C. 与其他墙体垂直","D. 可以随意拆除"],
+            correct: 1,
+            explanation: "承重墙垂直于楼层梁。"
+        },
+        en: {
+            question: "Load-bearing wall characteristic?",
+            options: ["A. Usually thin","B. Perpendicular to joists","C. Perpendicular walls","D. Can be removed"],
+            correct: 1,
+            explanation: "Perpendicular to floor joists."
+        }
+    },
+    {
+        topic: "structure",
+        zh: {
+            question: "检查楼板间距标准是？",
+            options: ["A. 任意","B. 16英寸或24英寸","C. 12英寸","D. 36英寸"],
+            correct: 1,
+            explanation: "楼板间距通常为16或24英寸。"
+        },
+        en: {
+            question: "Floor joist spacing standard?",
+            options: ["A. Any","B. 16 or 24 inches","C. 12 inches","D. 36 inches"],
+            correct: 1,
+            explanation: "Typically 16 or 24 inches."
+        }
+    },
+    {
+        topic: "roof",
+        zh: {
+            question: "发现沥青瓦片有3处缺失，应该？",
+            options: ["A. 不需要维修","B. 尽快更换受损瓦片","C. 更换整个屋顶","D. 涂胶水"],
+            correct: 1,
+            explanation: "缺失瓦片会导致漏水。"
+        },
+        en: {
+            question: "Missing shingles?",
+            options: ["A. No repair","B. Replace damaged","C. Replace all","D. Glue"],
+            correct: 1,
+            explanation: "Missing causes leakage."
+        }
+    },
+    {
+        topic: "roof",
+        zh: {
+            question: "什么是ice dam（冰坝）？",
+            options: ["A. 屋顶装饰冰雕","B. 屋檐冰块堆积阻碍排水","C. 冷冻仓库","D. 排水系统"],
+            correct: 1,
+            explanation: "冰坝阻碍排水导致漏水。"
+        },
+        en: {
+            question: "What is ice dam?",
+            options: ["A. Decorative ice","B. Ice at eaves blocking drainage","C. Cold storage","D. Drainage system"],
+            correct: 1,
+            explanation: "Ice dam blocks drainage causing leaks."
+        }
+    },
+    {
+        topic: "roof",
+        zh: {
+            question: "flashing（泛水）的主要作用是？",
+            options: ["A. 美观","B. 防水","C. 保温","D. 装饰"],
+            correct: 1,
+            explanation: "泛水用于防水。"
+        },
+        en: {
+            question: "Flashing purpose?",
+            options: ["A. Aesthetic","B. Waterproof","C. Insulation","D. Decoration"],
+            correct: 1,
+            explanation: "Flashing is for waterproof."
+        }
+    },
+    {
+        topic: "roof",
+        zh: {
+            question: "金属屋顶的优点？",
+            options: ["A. 便宜","B. 耐久防火轻便","C. 重","D. 难安装"],
+            correct: 1,
+            explanation: "耐久防火重量轻。"
+        },
+        en: {
+            question: "Metal roof advantages?",
+            options: ["A. Cheap","B. Durable fire-resistant light","C. Heavy","D. Hard to install"],
+            correct: 1,
+            explanation: "Durable and lightweight."
+        }
+    },
+    {
+        topic: "plumbing",
+        zh: {
+            question: "发现double-tapped breaker意味着？",
+            options: ["A. 保护良好","B. 安全隐患","C. 水压正常","D. 安装正确"],
+            correct: 1,
+            explanation: "双螺栓断路器是电气安全隐患。"
+        },
+        en: {
+            question: "Double-tapped breaker?",
+            options: ["A. Good protection","B. Safety hazard","C. Normal","D. Correct"],
+            correct: 1,
+            explanation: "Double-tapped is safety hazard."
+        }
+    },
+    {
+        topic: "plumbing",
+        zh: {
+            question: "正常住宅水压是多少PSI？",
+            options: ["A. 10-20 PSI","B. 40-60 PSI","C. 80-100 PSI","D. 100-150 PSI"],
+            correct: 1,
+            explanation: "正常水压40-60 PSI。"
+        },
+        en: {
+            question: "Normal water pressure?",
+            options: ["A. 10-20","B. 40-60","C. 80-100","D. 100-150"],
+            correct: 1,
+            explanation: "Normal is 40-60 PSI."
+        }
+    },
+    {
+        topic: "plumbing",
+        zh: {
+            question: "马桶摇晃可能原因？",
+            options: ["A. 马桶太大","B. 密封胶老化/螺丝松动","C. 水压太高","D. 太旧"],
+            correct: 1,
+            explanation: "密封胶老化或螺丝松。"
+        },
+        en: {
+            question: "Toilet wobble cause?",
+            options: ["A. Too big","B. Caulk/bolt issue","C. Pressure high","D. Too old"],
+            correct: 1,
+            explanation: "Caulk or loose bolts."
+        }
+    },
+    {
+        topic: "plumbing",
+        zh: {
+            question: "热水器TPR阀作用是？",
+            options: ["A. 节能","B. 释放过高压力","C. 防水垢","D. 过滤"],
+            correct: 1,
+            explanation: "TPR阀释放过高压力防止爆炸。"
+        },
+        en: {
+            question: "TPR valve purpose?",
+            options: ["A. Energy saving","B. Release pressure","C. Prevent scale","D. Filter"],
+            correct: 1,
+            explanation: "TPR releases excess pressure."
+        }
+    },
+    {
+        topic: "electrical",
+        zh: {
+            question: "红黑色白线是什么电路？",
+            options: ["A. 220V","B. 110V标准","C. 低压","D. 地暖"],
+            correct: 1,
+            explanation: "110V标准电路。"
+        },
+        en: {
+            question: "Red black white wires?",
+            options: ["A. 220V","B. 110V standard","C. Low voltage","D. Floor heat"],
+            correct: 1,
+            explanation: "110V standard circuit."
+        }
+    },
+    {
+        topic: "electrical",
+        zh: {
+            question: "GFCI插座主要用于？",
+            options: ["A. 客厅","B. 卧室","C. 厨房浴室","D. 车库"],
+            correct: 2,
+            explanation: "GFCI用于潮湿区域。"
+        },
+        en: {
+            question: "GFCI mainly for?",
+            options: ["A. Living room","B. Bedroom","C. Kitchen bathroom","D. Garage"],
+            correct: 2,
+            explanation: "GFCI for wet areas."
+        }
+    },
+    {
+        topic: "electrical",
+        zh: {
+            question: "插座过热变色原因？",
+            options: ["A. 太旧","B. 过载或接触不良","C. 电压低","D. 品牌差"],
+            correct: 1,
+            explanation: "过载或接触不良。"
+        },
+        en: {
+            question: "Outlet overheats?",
+            options: ["A. Too old","B. Overload/poor connection","C. Voltage low","D. Bad brand"],
+            correct: 1,
+            explanation: "Overload or poor connection."
+        }
+    },
+    {
+        topic: "electrical",
+        zh: {
+            question: "铝线接线需要使用？",
+            options: ["A. 普通接线器","B. CO/ALR兼容接线器","C. 任何都可以","D. 胶带"],
+            correct: 1,
+            explanation: "铝线需要CO/ALR兼容接线器。"
+        },
+        en: {
+            question: "Aluminum wiring needs?",
+            options: ["A. Regular","B. CO/ALR compatible","C. Any works","D. Tape"],
+            correct: 1,
+            explanation: "Needs CO/ALR connectors."
+        }
+    },
+    {
+        topic: "hvac",
+        zh: {
+            question: "过滤网应该多久检查？",
+            options: ["A. 半年","B. 一个月","C. 一年","D. 两年"],
+            correct: 1,
+            explanation: "应每月检查。"
+        },
+        en: {
+            question: "Filter check frequency?",
+            options: ["A. 6 months","B. 1 month","C. 1 year","D. 2 years"],
+            correct: 1,
+            explanation: "Check monthly."
+        }
+    },
+    {
+        topic: "hvac",
+        zh: {
+            question: "冷媒泄漏迹象？",
+            options: ["A. 制冷正常","B. 油渍","C. 噪音变小","D. 电费下降"],
+            correct: 1,
+            explanation: "冷媒泄漏伴有油渍。"
+        },
+        en: {
+            question: "Refrigerant leak signs?",
+            options: ["A. Normal","B. Oil stains","C. Less noise","D. Lower bill"],
+            correct: 1,
+            explanation: "Leak has oil stains."
+        }
+    },
+    {
+        topic: "hvac",
+        zh: {
+            question: "空调发出霉味原因？",
+            options: ["A. 冷媒不足","B. 蒸发器发霉","C. 电压不稳","D. 缺制冷剂"],
+            correct: 1,
+            explanation: "蒸发器发霉。"
+        },
+        en: {
+            question: "Moldy smell cause?",
+            options: ["A. Low refrigerant","B. Evaporator mold","C. Voltage issue","D. Missing refrigerant"],
+            correct: 1,
+            explanation: "Evaporator coil mold."
+        }
+    },
+    {
+        topic: "hvac",
+        zh: {
+            question: "暖通风量不足原因？",
+            options: ["A. 过滤器太干净","B. 管道堵塞或风扇问题","C. 制冷剂太多","D. 电压太高"],
+            correct: 1,
+            explanation: "管道堵塞或风扇问题。"
+        },
+        en: {
+            question: "Low air flow cause?",
+            options: ["A. Filter too clean","B. Duct/fan issue","C. Too much refrigerant","D. Voltage high"],
+            correct: 1,
+            explanation: "Duct or fan issues."
+        }
+    },
+    {
+        topic: "exterior",
+        zh: {
+            question: "木材腐烂原因？",
+            options: ["A. 阳光","B. 潮湿","C. 虫害","D. 温度"],
+            correct: 1,
+            explanation: "潮湿是主因。"
+        },
+        en: {
+            question: "Wood rot cause?",
+            options: ["A. Sun","B. Moisture","C. Pests","D. Temp"],
+            correct: 1,
+            explanation: "Moisture is main cause."
+        }
+    },
+    {
+        topic: "exterior",
+        zh: {
+            question: "坡度应该朝向？",
+            options: ["A. 房子中心","B. 远离房屋","C. 随意","D. 平行"],
+            correct: 1,
+            explanation: "坡度应远离房屋。"
+        },
+        en: {
+            question: "Grading slope?",
+            options: ["A. To center","B. Away from house","C. Any","D. Parallel"],
+            correct: 1,
+            explanation: "Slope away from house."
+        }
+    },
+    {
+        topic: "exterior",
+        zh: {
+            question: "窗户渗水原因？",
+            options: ["A. 玻璃破","B. 密封胶老化","C. 窗户小","D. 颜色问题"],
+            correct: 1,
+            explanation: "密封胶老化。"
+        },
+        en: {
+            question: "Window water infiltration?",
+            options: ["A. Glass broken","B. Caulk aging","C. Window small","D. Color"],
+            correct: 1,
+            explanation: "Caulk aging."
+        }
+    },
+    {
+        topic: "exterior",
+        zh: {
+            question: "落水管距离？",
+            options: ["A. 任意","B. 至少6英尺","C. 靠近房子","D. 水平"],
+            correct: 1,
+            explanation: "应至少6英尺远离房屋。"
+        },
+        en: {
+            question: "Downspout distance?",
+            options: ["A. Any","B. 6 feet","C. Close to house","D. Level"],
+            correct: 1,
+            explanation: "At least 6 feet away."
+        }
+    },
+    {
+        topic: "safety",
+        zh: {
+            question: "CO探测器安装？",
+            options: ["A. 车库","B. 卧室走廊","C. 厨房","D. 室外"],
+            correct: 1,
+            explanation: "卧室和走廊。"
+        },
+        en: {
+            question: "CO detector location?",
+            options: ["A. Garage","B. Bedroom hall","C. Kitchen","D. Outdoor"],
+            correct: 1,
+            explanation: "Bedroom and hallway."
+        }
+    },
+    {
+        topic: "safety",
+        zh: {
+            question: "扶手间距不超过？",
+            options: ["A. 6寸","B. 4寸","C. 3寸","D. 8寸"],
+            correct: 1,
+            explanation: "不超过4英寸。"
+        },
+        en: {
+            question: "Rail spacing?",
+            options: ["A. 6 inches","B. 4 inches","C. 3 inches","D. 8 inches"],
+            correct: 1,
+            explanation: "Not exceed 4 inches."
+        }
+    },
+    {
+        topic: "safety",
+        zh: {
+            question: "烟雾探测器安装？",
+            options: ["A. 仅客厅","B. 每层每卧室","C. 仅厨房","D. 仅车库"],
+            correct: 1,
+            explanation: "每层每卧室。"
+        },
+        en: {
+            question: "Smoke detector?",
+            options: ["A. Living room only","B. Every floor bedroom","C. Kitchen only","D. Garage only"],
+            correct: 1,
+            explanation: "Every floor and bedroom."
+        }
+    },
+    {
+        topic: "safety",
+        zh: {
+            question: "燃气壁炉检查？",
+            options: ["A. 火焰颜色","B. 通风燃气连接","C. 外观","D. 价格"],
+            correct: 1,
+            explanation: "必须检查通风和燃气连接。"
+        },
+        en: {
+            question: "Gas fireplace check?",
+            options: ["A. Flame color","B. Venting/gas","C. Appearance","D. Price"],
+            correct: 1,
+            explanation: "Check venting and gas."
+        }
+    },
+    {
+        topic: "infrared",
+        zh: {
+            question: "红外热成像主要用于？",
+            options: ["A. 检测颜色","B. 发现温度异常","C. 测量距离","D. 检测声音"],
+            correct: 1,
+            explanation: "发现温度异常、热泄漏等。"
+        },
+        en: {
+            question: "Thermal imaging for?",
+            options: ["A. Detect color","B. Temperature anomalies","C. Measure distance","D. Detect sound"],
+            correct: 1,
+            explanation: "Finds temperature anomalies."
+        }
+    },
+    {
+        topic: "infrared",
+        zh: {
+            question: "窗户周围温度低说明？",
+            options: ["A. 隔热好","B. 密封不良","C. 正常","D. 室内太热"],
+            correct: 1,
+            explanation: "密封不良或热桥。"
+        },
+        en: {
+            question: "Low temp around windows?",
+            options: ["A. Good insulation","B. Poor sealing","C. Normal","D. Too hot inside"],
+            correct: 1,
+            explanation: "Poor sealing or thermal bridge."
+        }
+    },
+    {
+        topic: "infrared",
+        zh: {
+            question: "电气柜热点说明？",
+            options: ["A. 正常","B. 过载","C. 电压低","D. 设备太旧"],
+            correct: 1,
+            explanation: "过载或接触不良，火灾隐患。"
+        },
+        en: {
+            question: "Hot spots in panel?",
+            options: ["A. Normal","B. Overload","C. Voltage low","D. Old equipment"],
+            correct: 1,
+            explanation: "Overload, fire hazard."
+        }
+    },
+    {
+        topic: "infrared",
+        zh: {
+            question: "屋顶低温区域表示？",
+            options: ["A. 屋顶完好","B. 保温缺失或漏水","C. 室内温度低","D. 天气太冷"],
+            correct: 1,
+            explanation: "保温缺失或漏水。"
+        },
+        en: {
+            question: "Cold spots on roof?",
+            options: ["A. Roof OK","B. Missing insulation","C. Inside cold","D. Weather cold"],
+            correct: 1,
+            explanation: "Missing insulation or leak."
+        }
+    },
+    {
+        topic: "radon",
+        zh: {
+            question: "氡气主要来源？",
+            options: ["A. 油漆","B. 土壤岩石","C. 家具","D. 水"],
+            correct: 1,
+            explanation: "来自土壤和岩石中的铀。"
+        },
+        en: {
+            question: "Radon source?",
+            options: ["A. Paint","B. Soil rock","C. Furniture","D. Water"],
+            correct: 1,
+            explanation: "From uranium in soil."
+        }
+    },
+    {
+        topic: "radon",
+        zh: {
+            question: "氡气检测位置？",
+            options: ["A. 阁楼","B. 地下室","C. 屋顶","D. 室外"],
+            correct: 1,
+            explanation: "地下室或一楼最低处。"
+        },
+        en: {
+            question: "Where test radon?",
+            options: ["A. Attic","B. Basement","C. Roof","D. Outside"],
+            correct: 1,
+            explanation: "Basement or lowest floor."
+        }
+    },
+    {
+        topic: "radon",
+        zh: {
+            question: "氡气安全水平？",
+            options: ["A. 10 pCi/L","B. 4 pCi/L以下","C. 20 pCi/L","D. 50 pCi/L"],
+            correct: 1,
+            explanation: "EPA建议低于4 pCi/L。"
+        },
+        en: {
+            question: "Safe radon level?",
+            options: ["A. 10","B. Below 4","C. 20","D. 50"],
+            correct: 1,
+            explanation: "Below 4 pCi/L."
+        }
+    },
+    {
+        topic: "radon",
+        zh: {
+            question: "降低氡气方法？",
+            options: ["A. 开窗通风","B. 安装通风系统","C. 密封缝隙","D. 所有都是"],
+            correct: 3,
+            explanation: "需要多种方法综合。"
+        },
+        en: {
+            question: "Reduce radon?",
+            options: ["A. Open windows","B. Install vent","C. Seal cracks","D. All"],
+            correct: 3,
+            explanation: "Need combined methods."
+        }
+    },
+    {
+        topic: "mold",
+        zh: {
+            question: "霉菌生长条件？",
+            options: ["A. 阳光","B. 水分","C. 低温","D. 干燥"],
+            correct: 1,
+            explanation: "需要水分。"
+        },
+        en: {
+            question: "Mold needs?",
+            options: ["A. Sunlight","B. Moisture","C. Cold","D. Dry"],
+            correct: 1,
+            explanation: "Needs moisture."
+        }
+    },
+    {
+        topic: "mold",
+        zh: {
+            question: "发现霉菌首先？",
+            options: ["A. 喷漂白水","B. 找出水源","C. 忽略","D. 刷漆覆盖"],
+            correct: 1,
+            explanation: "先找出并修复水源。"
+        },
+        en: {
+            question: "Found mold first?",
+            options: ["A. Spray bleach","B. Find water source","C. Ignore","D. Paint over"],
+            correct: 1,
+            explanation: "Find and fix water source."
+        }
+    },
+    {
+        topic: "mold",
+        zh: {
+            question: "有害霉菌包括？",
+            options: ["A. 黑霉","B. 曲霉","C. 链格孢属","D. 所有都是"],
+            correct: 3,
+            explanation: "都是常见有害霉菌。"
+        },
+        en: {
+            question: "Harmful mold?",
+            options: ["A. Black mold","B. Aspergillus","C. Alternaria","D. All"],
+            correct: 3,
+            explanation: "All are harmful."
+        }
+    },
+    {
+        topic: "mold",
+        zh: {
+            question: "检测霉菌方法？",
+            options: ["A. 温度计","B. 检测仪","C. 湿度计","D. 望远镜"],
+            correct: 1,
+            explanation: "使用检测仪或采样培养。"
+        },
+        en: {
+            question: "Detect mold?",
+            options: ["A. Thermometer","B. Tester","C. Hygrometer","D. Telescope"],
+            correct: 1,
+            explanation: "Use tester or culture."
+        }
+    },
+    {
+        topic: "asbestos",
+        zh: {
+            question: "石棉常用材料？",
+            options: ["A. 保温","B. 屋面","C. 防火","D. 所有都是"],
+            correct: 3,
+            explanation: "曾广泛用于多种材料。"
+        },
+        en: {
+            question: "Asbestos used in?",
+            options: ["A. Insulation","B. Roofing","C. Fireproof","D. All"],
+            correct: 3,
+            explanation: "Used in many materials."
+        }
+    },
+    {
+        topic: "asbestos",
+        zh: {
+            question: "石棉样本送哪？",
+            options: ["A. 任何实验室","B. EPA认可实验室","C. 医院","D. 学校"],
+            correct: 1,
+            explanation: "送EPA认可实验室。"
+        },
+        en: {
+            question: "Asbestos samples where?",
+            options: ["A. Any lab","B. EPA certified","C. Hospital","D. School"],
+            correct: 1,
+            explanation: "EPA certified lab."
+        }
+    },
+    {
+        topic: "asbestos",
+        zh: {
+            question: "石棉需要移除？",
+            options: ["A. 破损老化","B. 装修扰动","C. A和B","D. 不需要"],
+            correct: 2,
+            explanation: "破损老化或装修时。"
+        },
+        en: {
+            question: "Remove asbestos?",
+            options: ["A. Damaged aged","B. Renovation","C. A and B","D. No need"],
+            correct: 2,
+            explanation: "When damaged or disturbed."
+        }
+    },
+    {
+        topic: "asbestos",
+        zh: {
+            question: "石棉进入人体途径？",
+            options: ["A. 食物","B. 呼吸","C. 皮肤","D. 饮水"],
+            correct: 1,
+            explanation: "通过呼吸进入肺部。"
+        },
+        en: {
+            question: "Asbestos enters via?",
+            options: ["A. Food","B. Breathing","C. Skin","D. Drinking"],
+            correct: 1,
+            explanation: "Through breathing."
+        }
+    }
+];
 
         // State
         let currentLang = 'zh';
